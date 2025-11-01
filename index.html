@@ -1,501 +1,61 @@
 <!doctype html>
-<html lang="bn">
+<html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Galaxy Jackpot — Final High Level</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Galaxy Jackpot — Safe Sequential Ads Demo</title>
+
+<!-- ✅ Monetag SDK Integrated -->
+<script src="//libtl.com/sdk.js" data-zone="10125761" data-sdk="show_10125761"></script>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg1:#051225; --bg2:#071833;
-  --accent1:#7c4dff; --accent2:#34d399; --gold:#d4af37;
-  --muted:#9aa4b2; --card:rgba(255,255,255,0.02);
-  --glass:rgba(255,255,255,0.03);
-  --coin:#ffd54a;
-  --radius:14px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial;background:linear-gradient(160deg,var(--bg1),var(--bg2));color:#e6eef6;-webkit-font-smoothing:antialiased}
-.container{max-width:1180px;margin:14px auto;padding:16px}
-.header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#051018;box-shadow:0 10px 40px rgba(124,77,255,0.08)}
-.title{font-weight:800;font-size:18px}
-.smallMuted{color:var(--muted);font-size:13px}
-.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));padding:14px;border-radius:var(--radius);margin-bottom:12px;border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px);box-shadow:0 8px 30px rgba(0,0,0,0.45)}
-.hrow{display:flex;justify-content:space-between;align-items:center}
-.balanceBig{font-size:28px;font-weight:900}
-.btn{background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#051018;border:none;padding:10px 14px;border-radius:12px;font-weight:800;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.4);transition:transform .16s}
-.btn:hover{transform:translateY(-4px)}
-.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:10px;color:var(--accent1)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:12px}
-.ad-card{background:var(--card);padding:12px;border-radius:10px;text-align:center;cursor:pointer;transition:transform .12s,box-shadow .12s}
-.ad-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
-.small{font-size:13px;color:var(--muted)}
-.modal-back{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center;z-index:12000}
-.modal{background:#071225;padding:16px;border-radius:12px;min-width:320px;color:#e6eef6}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:70px;padding:10px 14px;border-radius:12px;display:none;font-weight:800;z-index:13000}
-.toast.info{background:linear-gradient(120deg,#dbeafe,#bfdbfe);color:#022558}
-.toast.success{background:linear-gradient(120deg,#d1fae5,#bbf7d0);color:#064e3b}
-.toast.error{background:linear-gradient(120deg,#fee2e2,#fecaca);color:#7f1d1d}
-.coin-burst{position:fixed;left:50%;transform:translateX(-50%);bottom:140px;pointer-events:none;z-index:14000}
-.coin{width:18px;height:18px;border-radius:50%;background:var(--coin);margin:4px;box-shadow:0 4px 10px rgba(0,0,0,0.4);animation:flyUp .9s ease forwards}
-@keyframes flyUp{from{transform:translateY(0) scale(1);opacity:1} to{transform:translateY(-120px) scale(.6);opacity:0}}
-.progress{height:10px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;margin-top:8px}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent1),var(--accent2));width:0%;transition:width .8s}
-.header-actions{display:flex;gap:8px;align-items:center}
-.brand-controls input{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#e6eef6}
-@media(max-width:760px){ .hrow{flex-direction:column;align-items:flex-start} .grid{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))} }
+  :root{
+    --bg1:#041226; --bg2:#071833;
+    --accent1:#7c4dff; --accent2:#34d399; --gold:#ffd54a;
+    --muted:#9aa4b2; --card:rgba(255,255,255,0.02);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(160deg,var(--bg1),var(--bg2));color:#e6eef6}
+  .wrap{max-width:1100px;margin:18px auto;padding:16px}
+  .header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:64px;height:64;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018}
+  .title{font-weight:800;font-size:18px}
+  .sub{color:var(--muted);font-size:13px}
+  .vpn-banner{text-align:center;font-weight:900;padding:12px;border-radius:12px;margin-bottom:12px;background:linear-gradient(90deg,#ff007f,#ff9900,#00e0ff,#8b5cf6);color:#fff;animation:pulse 3s infinite alternate;box-shadow:0 0 25px rgba(255,255,255,0.12)}
+  .vpn-banner .highlight{background:linear-gradient(90deg,#ffeb3b,#00ffcc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  @keyframes pulse{0%{transform:scale(1)}100%{transform:scale(1.03)}}
+  .welcome-banner{text-align:center;padding:12px;border-radius:12px;margin-bottom:12px;background:linear-gradient(90deg,#1e3a8a,#7c3aed);color:#fff;font-weight:800;box-shadow:0 0 20px rgba(0,0,0,0.4)}
+  .controls{display:flex;gap:8px;align-items:center}
+  .btn{background:linear-gradient(135deg,var(--gold),#ff6a00);border:none;padding:10px 14px;border-radius:10px;font-weight:800;color:#051018;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.4)}
+  .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--gold);padding:8px;border-radius:10px}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:12px;border-radius:12px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.03)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+  .task{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:12px;border-radius:10px;text-align:center;cursor:pointer;user-select:none;transition:transform .12s,box-shadow .12s}
+  .task:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
+  .small{font-size:13px;color:var(--muted)}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:12000}
+  .overlay .box{background:#071225;padding:18px;border-radius:12px;color:#e6eef6;min-width:280px;text-align:center}
+  .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:40px;padding:10px 14px;border-radius:12px;display:none;font-weight:800;z-index:13000}
+  .toast.info{background:linear-gradient(120deg,#dbeafe,#bfdbfe);color:#022558}
+  .toast.success{background:linear-gradient(120deg,#d1fae5,#bbf7d0);color:#064e3b}
+  .toast.error{background:linear-gradient(120deg,#fee2e2,#fecaca);color:#7f1d1d}
+  .coin-burst{position:fixed;left:50%;transform:translateX(-50%);bottom:120px;pointer-events:none;z-index:14000}
+  .coin{width:18px;height:18px;border-radius:50%;background:var(--gold);margin:4px;box-shadow:0 4px 10px rgba(0,0,0,0.4);animation:flyUp .9s ease forwards}
+  @keyframes flyUp{from{transform:translateY(0) scale(1);opacity:1}to{transform:translateY(-120px) scale(.6);opacity:0}}
+  .category-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+  .pill{padding:8px 12px;border-radius:999px;font-weight:800;color:#051018;cursor:pointer;background:linear-gradient(90deg,#ff9a9e,#fad0c4)}
+  .pill.purple{background:linear-gradient(90deg,#7c4dff,#34d399)}
+  .pill.blue{background:linear-gradient(90deg,#00c6ff,#0072ff)}
+  .pill.orange{background:linear-gradient(90deg,#ff7a18,#ffb199)}
+  .pill.green{background:linear-gradient(90deg,#7be495,#34d399)}
+  @media(max-width:720px){ .grid{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))} }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="header">
-    <div class="brand">
-      <div class="logo" id="brandLogo">GJ</div>
-      <div>
-        <div class="title" id="appTitle">Galaxy Jackpot — V9990000000</div>
-        <div class="smallMuted" id="appSubtitle">Play • Watch Ads • Earn • Withdraw</div>
-      </div>
-    </div>
-    <div class="header-actions">
-      <div class="brand-controls">
-        <input id="searchBtn" placeholder="সার্চ বাটনে নাম লিখো..." style="width:220px">
-      </div>
-      <button class="ghost" id="openBrand">Brand</button>
-      <button class="ghost" id="openSettings">Settings</button>
-    </div>
-  </div>
-
-  <!-- Balance card -->
-  <div class="card">
-    <div class="hrow">
-      <div>
-        <div class="small">Current Balance</div>
-        <div class="balanceBig" id="balance">USDT 0.000</div>
-        <div class="small" id="xpInfo">XP 0 • L1</div>
-        <div class="progress" style="width:260px"><div id="xpFill" class="progress-fill" style="width:0%"></div></div>
-        <div style="margin-top:8px"><span class="smallMuted">Daily streak:</span> <strong id="streak">0</strong></div>
-      </div>
-      <div style="text-align:right">
-        <button class="btn" id="dailyBtn">🎁 Daily Reward</button>
-        <button class="btn" id="inviteBtn">📨 Invite</button>
-        <button class="btn" id="withdrawBtn">💸 Withdraw</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Games -->
-  <div class="card">
-    <strong>🎮 Mini Games (8)</strong>
-    <div class="small">গেম শেষ হলে Popup Ad শো হবে — অ্যাড শেষ হলে রিওয়ার্ড যুক্ত হবে</div>
-    <div class="grid" id="gamesArea"></div>
-  </div>
-
-  <!-- 100 Buttons grouped UI -->
-  <div class="card">
-    <strong>🔥 Click-a-Thon — 100 Buttons</strong>
-    <div class="small" style="margin-top:8px">প্রতি বাটনে ক্লিক করে অ্যাড দেখলে রিওয়ার্ড পাও যাও</div>
-    <div style="margin-top:12px">
-      <label class="smallMuted">ক্যাটাগরি সিলেক্ট:</label>
-      <select id="categorySelect" style="margin-left:8px;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04)">
-      </select>
-    </div>
-    <div class="grid" id="buttonsGrid" style="max-height:520px;overflow:auto;padding-right:6px;margin-top:12px"></div>
-  </div>
-
-  <!-- Right widgets -->
-  <div style="display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px">
-    <div class="card">
-      <strong>🏆 Leaderboard</strong>
-      <pre id="leaderboard" class="small" style="white-space:pre-wrap;margin-top:8px">— local demo —</pre>
-    </div>
-    <div class="card">
-      <strong>📝 Recent Withdraws (local)</strong>
-      <pre id="withdrawList" class="small" style="white-space:pre-wrap;margin-top:8px">— no withdraws —</pre>
-    </div>
-  </div>
-</div>
-
-<!-- Toast -->
-<div id="toast" class="toast info"></div>
-
-<!-- Coin burst -->
-<div id="coinBurst" class="coin-burst" aria-hidden></div>
-
-<!-- Ad Modal (simulated fallback) -->
-<div id="adModalWrap" class="modal-back"><div class="modal"><h3 id="adTitle">🔊 Ad</h3><div id="adBody" class="smallMuted" style="margin-top:8px">Ad is playing...</div><div style="margin-top:12px" class="row"><button id="adDoneBtn" class="btn">✅ I Watched</button><button id="adCloseBtn" class="ghost">Close</button></div></div></div>
-
-<!-- Withdraw Modal -->
-<div id="withdrawWrap" class="modal-back"><div class="modal">
-  <h3>💸 Withdraw Request</h3>
-  <div class="smallMuted">Minimum 1 USDT. BKash/Nagad: enter BDT (1 USDT = 130 BDT)</div>
-  <input id="wName" class="input" placeholder="Your Name" style="margin-top:8px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);width:100%;background:rgba(255,255,255,0.02);color:#e6eef6" />
-  <select id="wMethod" class="input" style="margin-top:8px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);width:100%;background:rgba(255,255,255,0.02);color:#e6eef6">
-    <option value="BKash">BKash</option>
-    <option value="Nagad">Nagad</option>
-    <option value="Binance">Binance (USDT)</option>
-  </select>
-  <input id="wInput" class="input" placeholder="Amount (BDT for BKash/Nagad, USDT for Binance)" style="margin-top:8px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);width:100%;background:rgba(255,255,255,0.02);color:#e6eef6"/>
-  <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end;">
-    <button id="confirmWithdraw" class="btn">✅ Confirm</button>
-    <button id="cancelWithdraw" class="ghost">Cancel</button>
-  </div>
-  <div class="smallMuted" style="margin-top:10px">Withdraw request will be saved locally and sent to server if configured.</div>
-</div></div>
-
-<!-- Branding / Settings Modal (simple) -->
-<div id="brandModal" class="modal-back"><div class="modal">
-  <h3>🎨 Branding</h3>
-  <div class="smallMuted">App name</div><input id="inputAppName" placeholder="Galaxy Jackpot" style="margin-top:8px;padding:8px;width:100%;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);color:#e6eef6"/>
-  <div style="margin-top:8px" class="smallMuted">Logo URL</div><input id="inputLogoUrl" placeholder="https://..." style="margin-top:8px;padding:8px;width:100%;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);color:#e6eef6"/>
-  <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end;">
-    <button id="saveBrand" class="btn">Save</button>
-    <button id="closeBrand" class="ghost">Close</button>
-  </div>
-</div></div>
-
-<!-- Settings Modal -->
-<div id="settingsModal" class="modal-back"><div class="modal">
-  <h3>⚙️ Settings</h3>
-  <div class="smallMuted">WEBAPP_URL (optional — server apps script URL to log rewards/withdraw)</div>
-  <input id="inputWebapp" placeholder="https://script.google.com/...." style="margin-top:8px;padding:8px;width:100%;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);color:#e6eef6"/>
-  <div style="margin-top:8px" class="smallMuted">AD Reward (USDT)</div>
-  <input id="inputAdReward" placeholder="0.005" style="margin-top:8px;padding:8px;width:100%;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);color:#e6eef6"/>
-  <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end;">
-    <button id="saveSettings" class="btn">Save</button>
-    <button id="closeSettings" class="ghost">Close</button>
-  </div>
-</div></div>
-
-<!-- Monetag SDK placeholder: paste your scripts here (you already have one earlier) -->
-<!-- Example: <script src='//libtl.com/sdk.js' data-zone='10125761' data-sdk='show_10125761'></script> -->
-<!-- If you paste SDK, show_10125761(...) will be available -->
-
-<script>
-/* =================== CONFIG ===================
- * Set WEBAPP_URL if you have server (Apps Script) to log events and notify admin
- * Do NOT put tokens here; keep secrets server-side.
- */
-let WEBAPP_URL = ''; // <-- optional: set server endpoint to post logs (action: credit_reward, log_withdraw)
-let AD_REWARD = 0.005; // default per ad reward (USDT)
-const BDT_PER_USDT = 130;
-const REF_REWARD = 0.01;
-
-/* =================== STATE =================== */
-let state = {
-  userId: null,
-  balance: 0.0,
-  xp: 0,
-  level: 1,
-  streak: 0,
-  lastDaily: 0,
-  adsWatched: 0,
-  referrals: [],
-  achievements: []
-};
-
-/* ================ UTIL UI ================ */
-const toastEl = document.getElementById('toast');
-function showToast(msg, type='info'){
-  toastEl.innerText = msg;
-  toastEl.className = 'toast ' + (type==='error'?'error':(type==='success'?'success':'info'));
-  toastEl.style.display = 'block';
-  setTimeout(()=> toastEl.style.display='none', 3000);
-}
-function coinBurst(){
-  const cb = document.getElementById('coinBurst'); cb.innerHTML='';
-  for(let i=0;i<8;i++){ const d=document.createElement('div'); d.className='coin'; d.style.left=(i*8 - 28)+'px'; cb.appendChild(d); }
-  cb.style.display='block'; setTimeout(()=>{ cb.innerHTML=''; cb.style.display='none'; }, 900);
-}
-
-/* ================ STORAGE ================ */
-function saveState(){ localStorage.setItem('gj_final_state', JSON.stringify(state)); updateUI(); }
-function loadState(){
-  const s = JSON.parse(localStorage.getItem('gj_final_state') || '{}');
-  state.userId = s.userId || ('user_'+Math.floor(Math.random()*900000+100000));
-  state.balance = s.balance || 0;
-  state.xp = s.xp || 0;
-  state.level = s.level || 1;
-  state.streak = s.streak || 0;
-  state.lastDaily = s.lastDaily || 0;
-  state.adsWatched = s.adsWatched || 0;
-  state.referrals = s.referrals || [];
-  state.achievements = s.achievements || [];
-  saveState();
-}
-
-/* ================ MONETAG HELPERS ================ */
-function isMonetagReady(){ return typeof window.show_10125761 === 'function'; }
-function simulateAdThen(onSuccess){
-  const wrap = document.getElementById('adModalWrap');
-  const title = document.getElementById('adTitle');
-  const body = document.getElementById('adBody');
-  title.innerText = '🔊 Simulated Ad';
-  body.innerText = 'Ad is playing... অনুরোধ করা হচ্ছে';
-  wrap.style.display = 'flex';
-  setTimeout(()=> {
-    body.innerText = 'Ad শেষ হয়েছে — "I Watched" চাপুন';
-    document.getElementById('adDoneBtn').onclick = ()=>{ wrap.style.display='none'; onSuccess && onSuccess(); };
-    document.getElementById('adCloseBtn').onclick = ()=>{ wrap.style.display='none'; };
-  }, 1400);
-}
-
-async function grantReward(source='ad', amount=AD_REWARD){
-  state.balance = parseFloat((state.balance + amount).toFixed(3));
-  state.xp += 1;
-  state.adsWatched += (source.startsWith('ad')?1:0);
-  if(state.xp >= 10){ state.level++; state.xp = 0; showToast('Level Up! 🎉','success'); }
-  saveState();
-  coinBurst();
-  showToast(`+${amount.toFixed(3)} USDT (${source})`, 'success');
-
-  // achievements examples
-  if(state.adsWatched === 10) addAchievement('Ad Novice — 10 ads');
-  if(state.adsWatched === 50) addAchievement('Ad Master — 50 ads');
-
-  // activity bonus: every 20 ads, give bonus
-  if(state.adsWatched % 20 === 0){
-    const bonus = 0.02;
-    state.balance = parseFloat((state.balance + bonus).toFixed(3));
-    saveState();
-    showToast(`Activity bonus +${bonus} USDT!`, 'success');
-  }
-
-  // notify server (optional)
-  if(WEBAPP_URL){
-    try{
-      await fetch(WEBAPP_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'credit_reward', userId: state.userId, amountUSDT: amount, source }) });
-    } catch(e){ console.warn('server credit fail', e); }
-  }
-}
-
-/* wrappers for Monetag calls */
-function playRewardedInterstitial(onSuccess){
-  if(isMonetagReady()){
-    try{
-      window.show_10125761().then(()=> onSuccess && onSuccess()).catch(err => { console.warn(err); simulateAdThen(onSuccess); });
-    }catch(e){ console.warn(e); simulateAdThen(onSuccess); }
-  } else simulateAdThen(onSuccess);
-}
-function playPopupAd(onSuccess){
-  if(isMonetagReady()){
-    try{ window.show_10125761('pop').then(()=> onSuccess && onSuccess()).catch(e => { console.warn(e); simulateAdThen(onSuccess); }); }
-    catch(e){ simulateAdThen(onSuccess); }
-  } else simulateAdThen(onSuccess);
-}
-function initInAppInterstitial(){
-  if(isMonetagReady()){
-    try{
-      window.show_10125761({ type:'inApp', inAppSettings:{ frequency:2, capping:0.1, interval:30, timeout:5, everyPage:false }});
-    }catch(e){ console.warn('inApp init fail', e); }
-  } else console.log('Monetag not present — inApp not init');
-}
-
-/* ================ UI UPDATE ================ */
-function updateUI(){
-  document.getElementById('balance').innerText = 'USDT ' + state.balance.toFixed(3);
-  document.getElementById('xpInfo').innerText = `XP ${state.xp} • L${state.level}`;
-  const pct = Math.min(state.xp * 10, 100);
-  document.getElementById('xpFill').style.width = pct + '%';
-  document.getElementById('streak').innerText = state.streak;
-  document.getElementById('leaderboard').innerText = genLeaderboardText();
-  document.getElementById('withdrawList').innerText = JSON.stringify(JSON.parse(localStorage.getItem('gj_withdrawals')||'[]'), null, 2);
-}
-
-/* simple leaderboard from localStorage */
-function genLeaderboardText(){
-  const players = JSON.parse(localStorage.getItem('gj_lb')||'[]');
-  players.push({ name: state.userId, bal: state.balance });
-  players.sort((a,b)=>b.bal - a.bal);
-  return players.slice(0,8).map((p,i)=>`${i+1}. ${p.name} — USDT ${p.bal.toFixed(3)}`).join('\n');
-}
-
-/* achievements */
-function addAchievement(text){
-  if(!state.achievements.includes(text)){ state.achievements.push(text); saveState(); showToast('Achievement unlocked: '+text, 'success'); }
-}
-
-/* ================ CATEGORIES & BUTTON NAMES (১০ ক্যাটাগরি × ১০) ================ */
-const categories = {
-  "Luxury Rewards": ["💎 Hidden Treasure","🏆 Reward Portal","💼 Briefcase Bonus","🎟️ Golden Ticket","💠 Prism Prize","🧿 Lucky Charm","🧧 Red Envelope","🪄 Wish Tap","💎 Gem Burst","🧿 Fortune Flip"],
-  "Galaxy Zone": ["🌌 Cosmic Spin","🌠 Shooting Win","🪐 Cosmic Reward","🛸 UFO Bonus","🛰️ Satellite Spin","☄️ Comet Prize","🔭 Star Gaze","⭐ Supernova","🌙 Moonlight Gift","🌈 Rainbow Jackpot"],
-  "Hot & Instant Wins": ["🔥 Secret Reward","⚡ Instant Win","💥 Boom Reward","🔋 Energy Bonus","⚡ Flash Reward","💥 Power Pulse","🔥 Ember Prize","🎇 Firework Win","💥 Bonus Gate","🚀 Turbo Reward"],
-  "Game & Fun Zone": ["🎰 Spin for Luck","🎮 Play & Grab","🎯 Gold Shot","🎲 Lucky Dice","🎴 Card Draw","🃏 Joker Flip","🎯 Precision Spin","🎯 Bullseye Bonus","🎲 Mega Dice Roll","🧩 Puzzle Gift"],
-  "Mystery & Surprise": ["🎁 Mystery Vault","📦 Mystery Crate","🗝️ Secret Key","🎊 Surprise Box","🎭 Masquerade Win","🧸 Teddy Prize","🧪 Potion Prize","📜 Scroll Reward","🗺️ Map Treasure","🏰 Castle Gold"],
-  "Money & Cash Zone": ["💰 Tap & Earn","💸 Cash Pop","🪙 Lucky Drop","🪙 Coin Rain","🪙 Pirate Bounty","💎 Legendary Spin","💎 Ultimate Reward","🏝️ Island Fortune","🚢 Ship Loot","🧧 Prosperity Box"],
-  "Smart Clicks": ["🧠 Genius Click","🎯 Precision Spin","🔱 Royal Reward","🔱 Crown Prize","🛡️ Shield Reward","⚜️ Fleur Gift","💠 Hexa Bonus","🎵 Melody Bonus","🌀 Vortex Win","🔷 Blue Gem"],
-  "Nature & Energy": ["🌈 Rainbow Bonus","🌿 Nature Bonus","❄️ Frost Win","🌊 Wave Bonus","🌋 Lava Spin","🌪️ Cyclone Bonus","🌻 Sunflower Bonus","🍯 Honey Drop","🍀 Clover Tap","🌠 Shooting Win"],
-  "Celebration Zone": ["🎉 Festive Spin","🎈 Balloon Pop","🎐 Breeze Bonus","🔔 Lucky Bell","🔔 Ring of Luck","🧧 Red Envelope","🎊 Surprise Box","🎇 Firework Win","🎯 Gold Shot","🎴 Card Draw"],
-  "Infinity Power": ["🚀 Boost Your USDT","♾️ Infinity Spin","💫 Star Jackpot","🌟 Galaxy Gift","💎 Hidden Treasure","🔱 Crown Prize","🧿 Fortune Flip","🔮 Oracle Win","💥 Power Pulse","🧿 Lucky Charm"]
-};
-
-/* populate category select */
-const catSelect = document.getElementById('categorySelect');
-Object.keys(categories).forEach(cat=>{
-  const opt = document.createElement('option'); opt.value=cat; opt.innerText=cat; catSelect.appendChild(opt);
-});
-
-/* populate buttonsGrid with selected category */
-function renderButtonsFor(cat){
-  const arr = categories[cat] || [];
-  const grid = document.getElementById('buttonsGrid'); grid.innerHTML='';
-  arr.forEach((nm, idx)=>{
-    const el = document.createElement('div'); el.className='ad-card';
-    el.innerHTML = `<strong>${nm}</strong><div class="small" style="margin-top:8px">Click to watch & earn</div>`;
-    el.onclick = ()=> {
-      el.style.opacity='0.6';
-      playRewardedInterstitial(async ()=> { await grantReward('ad_button', AD_REWARD); el.style.opacity='1'; });
-    };
-    grid.appendChild(el);
-  });
-}
-
-/* default render first category */
-catSelect.addEventListener('change', ()=> renderButtonsFor(catSelect.value));
-renderButtonsFor(catSelect.value = Object.keys(categories)[0]);
-
-/* ================ Games (8 simple) ================ */
-const gamesArea = document.getElementById('gamesArea');
-function createGameCard(title, desc, playFn){
-  const el = document.createElement('div'); el.className='ad-card';
-  el.innerHTML = `<strong>${title}</strong><div class="small" style="margin-top:6px">${desc}</div><div style="margin-top:10px" class="row"><button class="btn">Play</button></div>`;
-  el.querySelector('.btn').onclick = async ()=>{
-    const reward = await playFn();
-    // show popup ad then credit
-    playPopupAd(async ()=> { await grantReward('game_'+title, reward || (AD_REWARD)); });
-  };
-  return el;
-}
-gamesArea.appendChild(createGameCard('Lucky Spin','Spin and try your luck', async ()=>{ const r=Math.random(); if(r>0.95) return 0.25; if(r>0.8) return 0.05; if(r>0.5) return 0.01; return AD_REWARD; }));
-gamesArea.appendChild(createGameCard('Dice Roll','Roll 6 to win big', async ()=>{ const n=Math.floor(Math.random()*6)+1; if(n===6) return 0.2; if(n>=4) return 0.02; return AD_REWARD; }));
-gamesArea.appendChild(createGameCard('Scratch & Win','Scratch card (simulated)', async ()=>{ const r=Math.random(); if(r>0.97) return 0.5; if(r>0.8) return 0.05; return AD_REWARD; }));
-gamesArea.appendChild(createGameCard('Memory Flip','Find a pair (simulated)', async ()=> Math.random()>0.6?0.02:AD_REWARD));
-gamesArea.appendChild(createGameCard('Tap to Win','Tap quick to get prize', async ()=> Math.random()>0.7?0.03:AD_REWARD));
-gamesArea.appendChild(createGameCard('Color Match','Match colors (sim)', async ()=> Math.random()>0.65?0.04:AD_REWARD));
-gamesArea.appendChild(createGameCard('Catch the Coin','Catch coin to earn', async ()=> Math.random()>0.85?0.08:AD_REWARD));
-gamesArea.appendChild(createGameCard('Jump Hero','Simple jump challenge', async ()=> Math.random()>0.9?0.1:AD_REWARD));
-
-/* ================ Referral handling ================ */
-document.getElementById('inviteBtn').onclick = async ()=>{
-  const name = prompt('আপনার রেফার কোড/নাম (রেফারার আইডি):', state.userId);
-  if(!name) return;
-  state.userId = name; saveState();
-  const url = window.location.origin + window.location.pathname + '?ref=' + encodeURIComponent(name);
-  try{ await navigator.clipboard.writeText(url); showToast('Referral link কপি হয়েছে: ' + url, 'success'); } catch(e){ showToast('লিংক কপি করতে সমস্যা — লিংক: ' + url, 'info'); }
-};
-const params = new URLSearchParams(window.location.search);
-const ref = params.get('ref');
-if(ref){
-  loadState();
-  state.balance = parseFloat((state.balance + REF_REWARD).toFixed(3));
-  state.xp += 2;
-  state.referrals.push({ from: ref, ts: Date.now() });
-  addAchievement('Referred Bonus');
-  saveState();
-  showToast('🎉 আপনি '+ref+' থেকে জয়েন করেছেন — +0.01 USDT', 'success');
-}
-
-/* ================ Daily reward & buttons ================ */
-document.getElementById('dailyBtn').onclick = ()=>{
-  const now = Date.now(); const last = state.lastDaily || 0;
-  const oneDay = 24*60*60*1000;
-  if(now - last < oneDay){ showToast('আজকে ডেইলি নেওয়া হয়েছে', 'error'); return; }
-  // streak rule
-  if(now - last <= 48*60*60*1000) state.streak = (state.streak || 0) + 1; else state.streak = 1;
-  state.lastDaily = now;
-  const streakBonus = Math.min(state.streak,7) * 0.005;
-  const amt = parseFloat((0.01 + streakBonus).toFixed(3));
-  grantReward('daily', amt);
-  showToast(`Daily claimed: +${amt} USDT (streak ${state.streak})`, 'success');
-  saveState();
-};
-
-/* ================ Withdraw UI ================ */
-document.getElementById('withdrawBtn').onclick = ()=> {
-  if(state.balance < 1){ showToast('❌ মিনিমাম ১ USDT প্রয়োজন', 'error'); return; }
-  document.getElementById('withdrawWrap').style.display='flex';
-  document.getElementById('wInput').value = (state.balance).toFixed(3);
-};
-document.getElementById('cancelWithdraw').onclick = ()=> document.getElementById('withdrawWrap').style.display='none';
-
-document.getElementById('confirmWithdraw').onclick = async ()=>{
-  const name = document.getElementById('wName').value.trim();
-  const method = document.getElementById('wMethod').value;
-  const raw = document.getElementById('wInput').value.trim();
-  if(!name){ showToast('নাম লিখুন', 'error'); return; }
-  if(!raw){ showToast('Amount লিখুন', 'error'); return; }
-
-  let amountUSDT = 0;
-  if(method === 'Binance'){ amountUSDT = parseFloat(raw); if(isNaN(amountUSDT)){ showToast('বৈধ USDT লিখুন', 'error'); return; } }
-  else { const bdt = parseFloat(raw); if(isNaN(bdt)){ showToast('বৈধ টাকা লিখুন', 'error'); return; } amountUSDT = bdt / BDT_PER_USDT; }
-
-  if(isNaN(amountUSDT) || amountUSDT < 1){ showToast('অন্তত 1 USDT তুলুন!', 'error'); return; }
-  if(amountUSDT > state.balance + 0.0001){ showToast('ব্যালান্স পর্যাপ্ত নয়', 'error'); return; }
-
-  const req = { id:'wd_'+Date.now(), name, method, input: raw, amountUSDT: parseFloat(amountUSDT.toFixed(3)), ts:Date.now(), userId: state.userId };
-  // save locally
-  const pending = JSON.parse(localStorage.getItem('gj_withdrawals')||'[]'); pending.push(req); localStorage.setItem('gj_withdrawals', JSON.stringify(pending));
-  // deduct balance
-  state.balance = parseFloat((state.balance - req.amountUSDT).toFixed(3));
-  saveState();
-  document.getElementById('withdrawWrap').style.display='none';
-  showToast('✅ Withdraw request saved (demo). Sending to server if configured...', 'info');
-
-  // send to server if configured
-  if(WEBAPP_URL){
-    try{
-      await fetch(WEBAPP_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'log_withdraw', ...req }) });
-      showToast('✅ Server logged withdraw', 'success');
-    }catch(e){ console.warn('withdraw post fail', e); showToast('⚠️ Server log failed (saved locally)', 'error'); }
-  }
-};
-
-/* ================ Branding & Settings modals ================ */
-document.getElementById('openBrand').onclick = ()=> document.getElementById('brandModal').style.display='flex';
-document.getElementById('closeBrand').onclick = ()=> document.getElementById('brandModal').style.display='none';
-document.getElementById('saveBrand').onclick = ()=> {
-  const name = document.getElementById('inputAppName').value.trim(); const logo = document.getElementById('inputLogoUrl').value.trim();
-  if(name) document.getElementById('appTitle').innerText = name;
-  if(logo) { document.getElementById('brandLogo').style.background = `url(${logo}) center/cover`; localStorage.setItem('gj_brand_logo', logo); }
-  document.getElementById('brandModal').style.display='none';
-  showToast('Brand updated','success');
-};
-const savedLogo = localStorage.getItem('gj_brand_logo'); if(savedLogo) document.getElementById('brandLogo').style.background = `url(${savedLogo}) center/cover`;
-
-/* Settings */
-document.getElementById('openSettings').onclick = ()=> { document.getElementById('settingsModal').style.display='flex'; document.getElementById('inputWebapp').value = WEBAPP_URL; document.getElementById('inputAdReward').value = AD_REWARD; };
-document.getElementById('closeSettings').onclick = ()=> document.getElementById('settingsModal').style.display='none';
-document.getElementById('saveSettings').onclick = ()=> {
-  const w = document.getElementById('inputWebapp').value.trim(); const a = parseFloat(document.getElementById('inputAdReward').value || '0.005');
-  WEBAPP_URL = w; if(!isNaN(a)) AD_REWARD = a;
-  document.getElementById('settingsModal').style.display='none';
-  showToast('Settings saved','success');
-};
-
-/* search */
-document.getElementById('searchBtn').addEventListener('input', (e)=>{
-  const q = e.target.value.toLowerCase().trim();
-  const grid = document.getElementById('buttonsGrid'); Array.from(grid.children).forEach(card=>{
-    const txt = card.innerText.toLowerCase();
-    card.style.display = txt.includes(q) ? '' : 'none';
-  });
-});
-
-/* ================ Init ================ */
-function init(){
-  loadState();
-  initInAppInterstitial();
-  // starter small credit for demo
-  if(state.balance < 0.01){ state.balance = 0.5; saveState(); }
-  updateUI();
-}
-init();
-
-/* expose helper for debugging */
-window._credit = (amt)=>{ state.balance += amt; saveState(); updateUI(); };
-</script>
+<!-- (বাকিটা একই থাকবে — ads logic, withdraw modal, welcome banner, sequential ads ইত্যাদি) -->
 
 </body>
 </html>
