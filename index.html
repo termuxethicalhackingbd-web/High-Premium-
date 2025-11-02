@@ -1,438 +1,329 @@
 <!doctype html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Galaxy Jackpot — Premium (Playable)</title>
+<title>Galaxy Jackpot — Test Version</title>
 
-<!-- Monetag SDK (zone 10125761) -->
+<!-- Monetag SDK (optional) -->
 <script src="//libtl.com/sdk.js" data-zone="10125761" data-sdk="show_10125761"></script>
 
 <style>
 :root{
-  --bg:#040406; --card:#0b0d10; --gold1:#ffd54a; --gold2:#ffb84d; --accent:#7c3aed; --muted:#9aa4b2;
-  --success:#2ecc71; --danger:#ff6b6b;
+  --bg:#030316; --muted:#9aa4b2; --gold1:#ffd54a; --gold2:#ffb84d; --accent:#7c3aed;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial;background:linear-gradient(180deg,#020205,var(--bg));color:#eaf2ff}
-.container{max-width:1100px;margin:18px auto;padding:18px;position:relative}
-.header{display:flex;align-items:center;gap:14px;margin-bottom:14px}
-.logo{width:66px;height:66px;border-radius:14px;background:linear-gradient(135deg,var(--gold1),var(--gold2));display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;font-size:22px;box-shadow:0 16px 60px rgba(255,142,0,0.08)}
-.title{font-size:20px;font-weight:800}
-.subtitle{color:var(--muted);font-size:13px}
-.topRow{display:flex;gap:12px;align-items:center;margin-left:auto}
-.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 40px rgba(0,0,0,0.45)}
-.balanceBig{font-size:20px;font-weight:900}
-.smallMuted{color:var(--muted);font-size:13px}
-.btn{background:linear-gradient(90deg,var(--gold1),var(--gold2));border:none;padding:10px 14px;border-radius:10px;font-weight:900;cursor:pointer;color:#051018;box-shadow:0 10px 30px rgba(255,106,0,0.12)}
-.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--gold1)}
-.btnGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
-@media(max-width:1000px){.btnGrid{grid-template-columns:repeat(3,1fr)}}
-.actionBtn{padding:12px;border-radius:12px;border:none;cursor:pointer;font-weight:900;min-height:44px}
-.animationFloat{animation:floaty 3.8s ease-in-out infinite}
-@keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(6px)}100%{transform:translateY(0)}}
+.container{max-width:1100px;margin:18px auto;padding:18px}
+.header{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--gold1),var(--gold2));display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018}
+.title{font-weight:900}
+.vpn{padding:12px;border-radius:12px;background:linear-gradient(90deg,#06b6d4,#7c3aed);text-align:center;font-weight:800;margin-bottom:12px;animation:glow 3s ease-in-out infinite}
+@keyframes glow{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.05));padding:12px;border-radius:12px;margin-bottom:12px}
+.row{display:flex;gap:12px;align-items:center}
+.balanceBig{font-weight:900;font-size:20px}
+.small{font-size:13px;color:var(--muted)}
+.btn{padding:10px 12px;border-radius:10px;border:none;font-weight:800;cursor:pointer}
+.btnPrimary{background:linear-gradient(90deg,var(--gold1),var(--gold2));color:#051018}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+.task{padding:10px;border-radius:10px;border:none;font-weight:800;cursor:pointer;color:#051018}
+.r0{background:linear-gradient(90deg,#ffd54a,#ffb84d)}
+.r1{background:linear-gradient(90deg,#7c3aed,#34d399);color:#fff}
+.r2{background:linear-gradient(90deg,#60a5fa,#7c3aed);color:#fff}
+.r3{background:linear-gradient(90deg,#fb7185,#f97316);color:#fff}
+.r4{background:linear-gradient(90deg,#a78bfa,#f472b6);color:#fff}
 
-/* VPN banner */
-#vpnBanner{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:99999;padding:12px 22px;border-radius:14px;background:linear-gradient(90deg,#06b6d4,#16a34a);color:#fff;font-weight:800;font-size:14px;line-height:1.1;text-align:center;box-shadow:0 18px 60px rgba(6,182,212,0.12);border:1px solid rgba(255,255,255,0.04)}
-#vpnBanner div{font-size:13px}
-
-/* referral */
-#topReferral{display:flex;gap:12px;align-items:center;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,rgba(255,215,90,0.04),rgba(124,77,255,0.03));border:1px solid rgba(255,215,90,0.06);box-shadow:0 8px 30px rgba(124,77,255,0.04)}
-#refLinkFancy{font-weight:800;color:var(--gold1);padding:8px 10px;border-radius:8px;background:rgba(255,215,90,0.03)}
-.copyFancy{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px;border-radius:8px;color:var(--gold1);cursor:pointer}
-
-/* sticky panel */
-#stickyPanel{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);width:min(1080px,calc(100% - 36px));display:flex;gap:12px;align-items:center;z-index:99998;padding:12px;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));border:1px solid rgba(255,255,255,0.03)}
-.copyBtn{background:transparent;border:1px dashed rgba(255,255,255,0.06);padding:8px;border-radius:10px;color:var(--gold1);cursor:pointer}
-
-/* withdraw modal */
-.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:18px;border-radius:12px;z-index:100000;min-width:320px;display:none;color:#e6eef6;text-align:left;box-shadow:0 20px 60px rgba(0,0,0,0.7)}
+/* reward popup */
+.rewardPopup{position:fixed;left:50%;top:28%;transform:translate(-50%,-50%);min-width:300px;padding:16px;border-radius:12px;background:linear-gradient(180deg,#fff,#ffd54a);color:#051018;font-weight:900;display:none;z-index:9999;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.6)}
+.rewardPopup.show{display:block;animation:pop .5s ease}
+@keyframes pop{0%{transform:translate(-50%,-44%) scale(.9);opacity:0}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:14px;border-radius:12px;z-index:10000;min-width:320px;display:none;color:#e6eef6}
 .modal.show{display:block}
-.modal .closeX{position:absolute;right:12px;top:8px;background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer}
-.modal h3{margin:0 0 8px 0;text-align:center}
-
-/* games */
-.games{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
-@media(max-width:1000px){.games{grid-template-columns:repeat(1,1fr)}}
-.gameCard{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);text-align:center;min-height:220px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center}
-.gameTitle{font-weight:900;font-size:18px;margin-bottom:8px}
-#wheel{width:200px;height:200px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:8px auto;box-shadow:0 12px 40px rgba(0,0,0,0.6);background:conic-gradient(#f59e0b 0 40deg,#f97316 40deg 80deg,#f59e0b 80deg 120deg,#f97316 120deg 160deg,#f59e0b 160deg 200deg,#f97316 200deg 240deg,#f59e0b 240deg 280deg,#f97316 280deg 320deg,#f59e0b 320deg 360deg)}
-.wheelCenter{width:68px;height:68px;border-radius:50%;background:linear-gradient(90deg,#fff,#ffd54a);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018}
-.pointer{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:18px solid #fff}
-
-/* slot */
-.slotRow{display:flex;gap:8px;justify-content:center;margin-top:8px}
-.slotCell{width:54px;height:54px;border-radius:10px;background:#071225;border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;box-shadow:inset 0 -6px 12px rgba(0,0,0,0.6)}
-
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:170px;min-width:240px;padding:12px;border-radius:10px;display:none;z-index:999999;font-weight:800;color:#042036;background:#fff}
+.listBox{max-height:240px;overflow:auto;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);margin-top:8px}
+.smallMuted{font-size:13px;color:var(--muted)}
 </style>
 </head>
 <body>
-
-<!-- VPN banner always visible -->
-<div id="vpnBanner" class="animationFloat" role="note">
-  <div id="vpnLine1">🌎 Connect VPN (USA / Canada / Australia) for better rewards!</div>
-  <div id="vpnLine2">🔒 Recommended for top offers — connect for higher CPM</div>
-</div>
-
 <div class="container">
   <div class="header">
     <div class="logo">GJ</div>
     <div>
-      <div class="title">Galaxy Jackpot — Premium</div>
-      <div class="subtitle">Play • Watch Ads • Earn</div>
-    </div>
-
-    <div class="topRow">
-      <div class="card" style="text-align:center">
-        <div class="smallMuted">Balance</div>
-        <div class="balanceBig" id="balance">USDT 0.000</div>
-      </div>
-      <button class="btn" id="openWithdrawTop">Withdraw</button>
+      <div class="title">Galaxy Jackpot — Test</div>
+      <div class="small">Test mode active — Use simulate buttons</div>
     </div>
   </div>
 
-  <!-- Top referral -->
-  <div id="topReferral" style="margin-bottom:12px">
+  <div class="vpn">🌎 Connect VPN (USA / Canada / Australia) for better rewards!</div>
+
+  <div class="card row" style="justify-content:space-between">
     <div>
-      <div class="smallMuted">Referral</div>
-      <div id="refLinkFancy">https://t.me/galaxy_jackpot_bot?start=ref_XXXX</div>
+      <div class="small">Balance</div>
+      <div class="balanceBig" id="balance">USDT 0.000000</div>
+      <div class="small" id="adsInfo">Ads watched: 0 • Level: 0 • Progress: 0/100</div>
     </div>
-    <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
-      <button class="copyFancy" id="copyRefFancy">Copy</button>
-      <button class="copyFancy" id="shareRefFancy">Share</button>
+    <div style="text-align:right">
+      <button class="btn btnPrimary" id="openRefer">My Referrals</button>
+      <button class="btn" id="toggleTest">Toggle Test Mode</button>
     </div>
   </div>
 
-  <!-- Tasks (100 buttons) -->
-  <div class="card" style="margin-bottom:12px">
+  <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center">
-      <div>
-        <div style="font-weight:900">Tasks</div>
-        <div class="smallMuted">Tap any Task to watch & earn</div>
-      </div>
-      <div style="text-align:right">
-        <div class="smallMuted">Available</div>
-        <div id="avail" style="font-weight:900">USDT 0.000</div>
-      </div>
+      <div><strong>Tasks (100)</strong><div class="smallMuted">Click → Watch Ad → Reward +0.0005 USDT (test)</div></div>
+      <div><strong id="testModeLabel">TEST MODE: ON</strong></div>
     </div>
 
-    <div class="btnGrid" id="buttonList" style="margin-top:12px"></div>
+    <div class="grid" id="taskGrid"></div>
   </div>
 
-  <!-- Games & info -->
-  <div style="display:flex;gap:12px;flex-wrap:wrap">
-    <div style="flex:1" class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div><strong>Games</strong><div class="smallMuted">Play & watch ad to try luck</div></div>
-        <button class="btn" id="openGamesBtn">Open Games</button>
+  <div class="card">
+    <strong>Mini Games</strong>
+    <div class="smallMuted">Each play shows an ad (test) and rewards +0.0005 USDT if seen</div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+      <div style="flex:1;min-width:240px" class="card">
+        <div><strong>🎡 Spin Wheel</strong></div>
+        <div id="wheel" style="width:180px;height:180px;border-radius:50%;margin:10px auto;background:conic-gradient(#f59e0b,#f97316,#f59e0b,#f97316)"></div>
+        <div class="center"><button class="btn btnPrimary" id="playWheel">Play Spin</button></div>
+        <div id="wheelResult" class="small"></div>
       </div>
 
-      <div class="games" id="gamesSection" style="margin-top:12px">
-        <!-- Spin Wheel -->
-        <div class="gameCard">
-          <div class="gameTitle">🎡 Spin Wheel</div>
-          <div id="wheel" aria-hidden="false">
-            <div class="wheelCenter" id="wheelCenter">SPIN</div>
-          </div>
-          <div class="pointer" aria-hidden="true"></div>
-          <div style="margin-top:8px"><button class="btn" id="spinBtn">Play Spin</button></div>
-          <div id="spinResult" class="smallMuted" style="margin-top:8px;text-align:center"></div>
-        </div>
-
-        <!-- Coin Flip -->
-        <div class="gameCard">
-          <div class="gameTitle">🪙 Coin Flip</div>
-          <div style="display:flex;gap:8px;margin-top:12px">
-            <button class="btn" id="coinHead">Head</button>
-            <button class="btn" id="coinTail">Tail</button>
-          </div>
-          <div id="coinResult" class="smallMuted" style="margin-top:8px;text-align:center"></div>
-        </div>
-
-        <!-- Dice -->
-        <div class="gameCard">
-          <div class="gameTitle">🎲 Lucky Dice</div>
-          <div style="margin-top:12px"><button class="btn" id="rollDice">Roll</button></div>
-          <div id="diceResult" class="smallMuted" style="margin-top:8px;text-align:center"></div>
-        </div>
-
-        <!-- Scratch -->
-        <div class="gameCard">
-          <div class="gameTitle">💎 Scratch Card</div>
-          <div style="margin-top:12px"><button class="btn" id="scratchBtn">Scratch</button></div>
-          <div id="scratchResult" class="smallMuted" style="margin-top:8px;text-align:center"></div>
-        </div>
-
-        <!-- Slot -->
-        <div class="gameCard">
-          <div class="gameTitle">🎰 Mini Slot</div>
-          <div class="slotRow" id="slotRow" style="margin-top:8px">
-            <div class="slotCell" id="s1">7</div>
-            <div class="slotCell" id="s2">7</div>
-            <div class="slotCell" id="s3">7</div>
-          </div>
-          <div style="margin-top:12px"><button class="btn" id="spinSlot">Spin Slot</button></div>
-          <div id="slotResult" class="smallMuted" style="margin-top:8px;text-align:center"></div>
-        </div>
+      <div style="flex:1;min-width:240px" class="card">
+        <div><strong>🎰 Slot</strong></div>
+        <div style="display:flex;gap:8px;justify-content:center;margin:10px"><div id="s1">7</div><div id="s2">7</div><div id="s3">7</div></div>
+        <div class="center"><button class="btn" id="playSlot">Spin Slot</button></div>
+        <div id="slotResult" class="small"></div>
       </div>
-    </div>
 
-    <div style="width:320px" class="card">
-      <strong>Info & Quick</strong>
-      <div class="smallMuted" style="margin-top:8px">bKash/Nagad: 1 USDT = 130 BDT</div>
-      <div class="smallMuted" style="margin-top:8px">Min Withdraw: <strong>2 USDT</strong></div>
-      <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
-        <button class="copyBtn" id="copyRefBtnTop">Copy Referral</button>
-        <button class="copyBtn" id="openWithdrawSticky">Withdraw</button>
+      <div style="flex:1;min-width:240px" class="card">
+        <div><strong>🪙 Coin Flip</strong></div>
+        <div style="display:flex;gap:8px;margin-top:10px"><button class="btn" id="headBtn">Head</button><button class="btn" id="tailBtn">Tail</button></div>
+        <div id="coinResult" class="small"></div>
       </div>
     </div>
   </div>
 
-  <div style="height:140px"></div>
+  <div style="height:120px"></div>
 </div>
 
-<!-- Sticky bottom panel -->
-<div id="stickyPanel" aria-hidden="false">
-  <div style="flex:1;display:flex;gap:12px;align-items:center">
-    <div style="display:flex;flex-direction:column">
-      <div class="smallMuted">Quick actions</div>
-      <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
-        <button class="copyBtn" id="quickCopyRef">Copy Referral</button>
-        <button class="copyBtn" id="quickWithdraw">Withdraw</button>
-      </div>
-    </div>
-  </div>
-  <div style="width:1px;height:56px;background:rgba(255,255,255,0.02)"></div>
-  <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
-    <div style="text-align:right">Withdraw</div>
-    <div style="font-weight:900">Minimum withdraw: <span style="color:var(--gold1)">2 USDT</span></div>
-    <div style="font-size:13px;color:var(--muted)">bKash Nagad Binance</div>
-    <div style="font-size:13px;color:var(--muted)">1 USDT = 130 BDT (bKash/Nagad)</div>
-    <div style="margin-top:6px"><button id="withdrawNowBtn" class="btn">Withdraw Now</button></div>
-  </div>
-</div>
+<!-- reward popup -->
+<div id="rewardPopup" class="rewardPopup"></div>
 
-<!-- Withdraw Modal -->
-<div id="withdrawModal" class="modal" role="dialog" aria-modal="true">
-  <button class="closeX" id="closeModalX">✕</button>
-  <h3 style="font-weight:900;text-align:center">Withdraw Now</h3>
-  <div class="smallMuted" style="margin-bottom:10px">Minimum withdraw: <strong>2 USDT</strong></div>
-
-  <div style="display:flex;gap:8px;justify-content:center" class="radioRow">
-    <button class="btn" data-method="bkash" id="btnBkash">bKash</button>
-    <button class="btn" data-method="nagad" id="btnNagad">Nagad</button>
-    <button class="btn" data-method="binance" id="btnBinance">Binance</button>
+<!-- simulate modal -->
+<div id="simModal" class="modal" role="dialog" aria-modal="true">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <strong id="simTitle">Simulate Ad</strong>
+    <button id="closeSim" style="background:transparent;border:none;color:#fff">✕</button>
   </div>
-
   <div style="margin-top:12px">
-    <label class="smallMuted">Recipient (Phone number or Binance UID)</label>
-    <input id="payInput" class="input" placeholder="Type number or Binance UID" />
-    <input id="payAmount" class="input" placeholder="Amount (USDT)" />
+    <div class="smallMuted">Ad opened in test mode. Choose outcome:</div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button id="simSuccess" class="btn btnPrimary">Simulate Ad Seen (Reward)</button>
+      <button id="simSkip" class="btn">Simulate Skip (No Reward)</button>
+    </div>
   </div>
-
-  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
-    <button class="btn" id="cancelWithdraw">Cancel</button>
-    <button id="confirmWithdraw" class="btn">Withdraw Now</button>
-  </div>
-
-  <div class="smallMuted" style="margin-top:12px">After submission: "Withdraw submitted. Please wait 1 minute to 48 hours for payment"</div>
 </div>
 
-<div id="toast" class="toast" role="status"></div>
+<!-- refer modal -->
+<div id="referModal" class="modal" role="dialog" aria-modal="true">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <strong>My Referrals</strong>
+    <button id="closeRefer" style="background:transparent;border:none;color:#fff">✕</button>
+  </div>
+  <div class="listBox" id="referList"></div>
+</div>
 
 <script>
-/* CONFIG */
+/* ===== CONFIG ===== */
+const TEST_MODE_DEFAULT = true;            // start in test mode
+const REWARD_PER_AD = 0.0005;
+const ADS_PER_LEVEL = 100;
+const LEVEL_BONUS_BASE = 0.01; // L1=0.01, L2=0.02, ...
+
+/* provider links (fallback) */
 const ADSTRA_SMARTLINK = 'https://www.effectivegatecpm.com/za35wfvxct?key=33d9ac55094c983709eac1a9fd20c4b5';
 const MONETAG_DIRECT = 'https://otieu.com/4/10121350';
-const MIN_WITHDRAW = 2.0;
-const BDT_RATE = 130;
+const MONETAG_SDK_FN = 'show_10125761';
 
-/* runtime & UI init */
-let uid = localStorage.getItem('gj_user_id') || ('u'+Math.floor(Math.random()*9e8));
+/* ===== State ===== */
+let TEST_MODE = TEST_MODE_DEFAULT;
+const uid = localStorage.getItem('gj_user_id') || 'u'+Math.floor(Math.random()*1e9);
 localStorage.setItem('gj_user_id', uid);
-let username = localStorage.getItem('gj_username') || ('Player'+uid.slice(-4));
-localStorage.setItem('gj_username', username);
-let balance = parseFloat(localStorage.getItem('gj_balance') || '0.015');
+let state = JSON.parse(localStorage.getItem('gj_state_vtest') || '{}');
+if(!state.uid){ state = { uid, balance:0.015, adsWatched:0, level:0, referrals:[] }; saveState(); }
+function saveState(){ localStorage.setItem('gj_state_vtest', JSON.stringify(state)); updateUI(); }
 
-function showToast(msg, t=2200){ const el = document.getElementById('toast'); el.innerText = msg; el.style.display='block'; setTimeout(()=>el.style.display='none', t); }
-function updateUI(){ document.getElementById('balance').innerText = 'USDT ' + balance.toFixed(3); const a=document.getElementById('avail'); if(a) a.innerText='USDT '+balance.toFixed(3); document.getElementById('refLinkFancy').innerText = `https://t.me/galaxy_jackpot_bot?start=${uid}`; }
-updateUI(); showToast(`Welcome ${username}!`,2000);
+/* UI refs */
+const balanceEl = document.getElementById('balance');
+const adsInfoEl = document.getElementById('adsInfo');
+const taskGrid = document.getElementById('taskGrid');
+const rewardPopup = document.getElementById('rewardPopup');
+const simModal = document.getElementById('simModal');
+const simTitle = document.getElementById('simTitle');
 
-/* Generate 100 buttons */
-const btnList = document.getElementById('buttonList');
-btnList.innerHTML = '';
-for(let i=1;i<=100;i++){
-  const b = document.createElement('button');
-  b.className = 'actionBtn';
-  b.innerText = `Task ${i}`;
-  b.dataset.task = `task${i}`;
-  b.style.background = `linear-gradient(90deg, rgba(255,215,90,0.08), rgba(255,106,0,0.12))`;
-  b.style.color = '#ffd54a';
-  b.onclick = ()=> onMainButtonClick(i);
-  btnList.appendChild(b);
-}
-
-/* Ad throttle */
-const MIN_AD_GAP = 20*1000;
-function canShowAd(){ const last = parseInt(sessionStorage.getItem('lastAdAt')||'0',10); const now = Date.now(); if(now-last < MIN_AD_GAP) return false; sessionStorage.setItem('lastAdAt', String(now)); return true; }
-
-/* Monetag show fallback */
-function monetagShow(){
-  // try SDK rewarded first
-  try{ if(typeof window.show_10125761 === 'function'){ return window.show_10125761(); } }catch(e){}
-  // fallback open Monetag direct or Adstra
-  window.open(ADSTRA_SMARTLINK + `&ref=${uid}`, '_blank');
-  return Promise.resolve();
-}
-
-/* main task click */
-async function onMainButtonClick(i){
-  showToast('Preparing ad...');
-  await new Promise(r=>setTimeout(r,600));
-  if(!canShowAd()){ showToast('Please wait a few seconds'); return; }
-  // first try monetag/SDK (monetagShow handles fallback)
-  await monetagShow();
-}
-
-/* Referral copy/share */
-document.getElementById('copyRefFancy').addEventListener('click', ()=>{ navigator.clipboard.writeText(`https://t.me/galaxy_jackpot_bot?start=${uid}`).then(()=>showToast('Referral copied'))});
-document.getElementById('shareRefFancy').addEventListener('click', ()=>{
-  const txt = `https://t.me/galaxy_jackpot_bot?start=${uid}`;
-  if(navigator.share){ navigator.share({title:'Galaxy Jackpot', text:'Join & Earn', url:txt}).catch(()=>showToast('Share cancelled')); } else { navigator.clipboard.writeText(txt).then(()=>showToast('Referral copied')); }
-});
-document.getElementById('copyRefBtnTop').addEventListener('click', ()=>{ navigator.clipboard.writeText(`https://t.me/galaxy_jackpot_bot?start=${uid}`).then(()=>showToast('Referral copied'))});
-document.getElementById('quickCopyRef').addEventListener('click', ()=>{ navigator.clipboard.writeText(`https://t.me/galaxy_jackpot_bot?start=${uid}`).then(()=>showToast('Referral copied'))});
-
-/* Withdraw modal handlers */
-const withdrawModal = document.getElementById('withdrawModal');
-const openWithdrawTop = document.getElementById('openWithdrawTop');
-const openWithdrawSticky = document.getElementById('openWithdrawSticky');
-const quickWithdraw = document.getElementById('quickWithdraw');
-const withdrawNowBtn = document.getElementById('withdrawNowBtn');
-
-openWithdrawTop.addEventListener('click', openWithdrawModal);
-openWithdrawSticky.addEventListener('click', openWithdrawModal);
-quickWithdraw.addEventListener('click', openWithdrawModal);
-withdrawNowBtn.addEventListener('click', openWithdrawModal);
-
-document.getElementById('closeModalX').addEventListener('click', closeWithdrawModal);
-document.getElementById('cancelWithdraw').addEventListener('click', closeWithdrawModal);
-
-let selectedMethod = '';
-document.querySelectorAll('#withdrawModal [data-method]').forEach(btn=>{
-  btn.addEventListener('click', ()=>{ selectedMethod = btn.dataset.method; document.querySelectorAll('#withdrawModal [data-method]').forEach(x=>x.style.outline='none'); btn.style.outline='3px solid rgba(255,215,90,0.12)'; });
-});
-
-function openWithdrawModal(){ withdrawModal.classList.add('show'); window.scrollTo({top:0,behavior:'smooth'}); }
-function closeWithdrawModal(){ withdrawModal.classList.remove('show'); window.scrollTo({top:0,behavior:'smooth'}); }
-
-/* confirm withdraw -> call /api/notify */
-document.getElementById('confirmWithdraw').addEventListener('click', async ()=>{
-  const input = document.getElementById('payInput').value.trim();
-  const amount = parseFloat(document.getElementById('payAmount').value);
-  if(!selectedMethod){ showToast('Choose payment method'); return; }
-  if(!input){ showToast('Type number or Binance UID'); return; }
-  if(isNaN(amount) || amount <= 0){ showToast('Enter valid amount'); return; }
-  if(amount < MIN_WITHDRAW){ showToast(`Minimum withdraw is ${MIN_WITHDRAW} USDT`); return; }
-  if(amount > balance){ showToast('Insufficient balance'); return; }
-
-  const payload = { secret:'GalaxySecure2025', action:'withdraw_request', user_id:uid, username, method:selectedMethod, input, amount, bdt_equivalent:(selectedMethod==='bkash'||selectedMethod==='nagad')?(amount*BDT_RATE):null, timestamp:new Date().toISOString() };
-
-  try{
-    await fetch('/api/notify', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
-    // local update
-    balance = Math.round((balance - amount)*1000)/1000;
-    localStorage.setItem('gj_balance', balance);
-    updateUI();
-    closeWithdrawModal();
-    showToast('Withdraw submitted. Please wait 1 minute to 48 hours for payment',4200);
-  }catch(e){ console.error(e); showToast('Submit failed. Try later',2400); }
-});
-
-/* GAMES implementation */
-/* Spin Wheel */
-const wheel = document.getElementById('wheel');
-const wheelCenter = document.getElementById('wheelCenter');
-const spinBtn = document.getElementById('spinBtn');
-let spinning=false;
-spinBtn.addEventListener('click', async ()=>{
-  if(spinning) return;
-  showToast('Loading ad...');
-  await monetagShow();
-  if(!canShowAd()){ showToast('Please wait a few seconds'); return; }
-  spinning=true; spinBtn.disabled=true;
-  const spins = Math.floor(Math.random()*6) + 6;
-  const sector = Math.floor(Math.random()*8);
-  const deg = spins*360 + sector*(360/8) + Math.floor(Math.random()*20);
-  wheel.style.transition='transform 4s cubic-bezier(.25,.8,.25,1)';
-  wheel.style.transform=`rotate(${deg}deg)`;
-  wheelCenter.innerText='...';
-  setTimeout(()=>{
-    wheel.style.transition=''; wheel.style.transform=`rotate(${deg%360}deg)`;
-    const win = sector%4===0 || Math.random()<0.12;
-    if(win){ balance = Math.round((balance+0.02)*1000)/1000; localStorage.setItem('gj_balance',balance); updateUI(); showToast('+0.020 USDT'); document.getElementById('spinResult').innerText='Wheel Win!'; }
-    else document.getElementById('spinResult').innerText='No luck';
-    spinning=false; spinBtn.disabled=false;
-  },4200);
-});
-
-/* Coin Flip */
-document.getElementById('coinHead').addEventListener('click', ()=> coinPlay('head'));
-document.getElementById('coinTail').addEventListener('click', ()=> coinPlay('tail'));
-async function coinPlay(choice){
-  showToast('Loading ad...');
-  await monetagShow();
-  if(!canShowAd()){ showToast('Please wait a few seconds'); return; }
-  const res = Math.random()<0.5?'head':'tail'; const win=(res===choice)&&Math.random()<0.6;
-  document.getElementById('coinResult').innerText = `Result: ${res.toUpperCase()}` + (win? ' — You win +0.01 USDT':'');
-  if(win){ balance = Math.round((balance+0.01)*1000)/1000; localStorage.setItem('gj_balance',balance); updateUI(); showToast('+0.010 USDT'); }
-}
-
-/* Dice */
-document.getElementById('rollDice').addEventListener('click', async ()=>{
-  showToast('Loading ad...');
-  await monetagShow();
-  if(!canShowAd()){ showToast('Please wait a few seconds'); return; }
-  const v=Math.ceil(Math.random()*6); const win = v>=5;
-  document.getElementById('diceResult').innerText = `Rolled ${v}` + (win? ' — Win +0.015 USDT':'');
-  if(win){ balance = Math.round((balance+0.015)*1000)/1000; localStorage.setItem('gj_balance',balance); updateUI(); showToast('+0.015 USDT'); }
-});
-
-/* Scratch */
-document.getElementById('scratchBtn').addEventListener('click', async ()=>{
-  showToast('Loading ad...');
-  await monetagShow();
-  if(!canShowAd()){ showToast('Please wait a few seconds'); return; }
-  const win = Math.random()<0.35;
-  document.getElementById('scratchResult').innerText = win? 'You won +0.02 USDT':'No prize';
-  if(win){ balance = Math.round((balance+0.02)*1000)/1000; localStorage.setItem('gj_balance',balance); updateUI(); showToast('+0.020 USDT'); }
-});
-
-/* Slot */
-const slotSymbols = ['7','🍒','⭐','🍋','💎','🔔'];
-document.getElementById('spinSlot').addEventListener('click', async ()=>{
-  showToast('Loading ad...');
-  await monetagShow();
-  if(!canShowAd()){ showToast('Please wait a few seconds'); return; }
-  const s1=document.getElementById('s1'), s2=document.getElementById('s2'), s3=document.getElementById('s3');
-  s1.innerText=s2.innerText=s3.innerText='...';
-  const rounds=16;
-  for(let i=0;i<rounds;i++){ await new Promise(r=>setTimeout(r,50+i*3)); s1.innerText=slotSymbols[Math.floor(Math.random()*slotSymbols.length)]; s2.innerText=slotSymbols[Math.floor(Math.random()*slotSymbols.length)]; s3.innerText=slotSymbols[Math.floor(Math.random()*slotSymbols.length)]; }
-  const final=[s1.innerText,s2.innerText,s3.innerText];
-  const jackpot = final[0]===final[1] && final[1]===final[2];
-  const smallWin = final[0]===final[1] || final[1]===final[2] || final[0]===final[2];
-  if(jackpot){ balance = Math.round((balance+0.05)*1000)/1000; localStorage.setItem('gj_balance',balance); updateUI(); document.getElementById('slotResult').innerText='JACKPOT +0.05 USDT'; showToast('+0.050 USDT'); }
-  else if(smallWin){ balance = Math.round((balance+0.02)*1000)/1000; localStorage.setItem('gj_balance',balance); updateUI(); document.getElementById('slotResult').innerText='Small win +0.02 USDT'; showToast('+0.020 USDT'); }
-  else { document.getElementById('slotResult').innerText='No win'; showToast('No win'); }
-});
-
-/* helper */
-document.getElementById('openGamesBtn').addEventListener('click', ()=>{ document.getElementById('gamesSection').scrollIntoView({behavior:'smooth', block:'center'}); });
-
-/* safety: ensure UI updated */
+/* ===== Init ===== */
 updateUI();
+renderTasks();
+document.getElementById('toggleTest').addEventListener('click', ()=>{ TEST_MODE = !TEST_MODE; document.getElementById('testModeLabel').innerText = 'TEST MODE: ' + (TEST_MODE?'ON':'OFF'); showToast('Test mode: '+ (TEST_MODE?'ON':'OFF')); });
+document.getElementById('openRefer').addEventListener('click', openRefer);
+document.getElementById('closeRefer').addEventListener('click', ()=>document.getElementById('referModal').classList.remove('show'));
 
+/* simulate modal controls */
+document.getElementById('closeSim').addEventListener('click', ()=>simModal.classList.remove('show'));
+document.getElementById('simSuccess').addEventListener('click', ()=>{ simModal.dataset.result='success'; simModal.classList.remove('show'); handleSimResult(true); });
+document.getElementById('simSkip').addEventListener('click', ()=>{ simModal.dataset.result='skip'; simModal.classList.remove('show'); handleSimResult(false); });
+
+/* games buttons */
+document.getElementById('playWheel').addEventListener('click', ()=> beginAdFlow('wheel'));
+document.getElementById('playSlot').addEventListener('click', ()=> beginAdFlow('slot'));
+document.getElementById('headBtn').addEventListener('click', ()=> beginAdFlow('coin', {choice:'head'}));
+document.getElementById('tailBtn').addEventListener('click', ()=> beginAdFlow('coin', {choice:'tail'}));
+
+/* ===== Helpers ===== */
+function updateUI(){
+  balanceEl.innerText = 'USDT ' + (state.balance || 0).toFixed(6);
+  adsInfoEl.innerText = `Ads watched: ${state.adsWatched} • Level: ${state.level} • Progress: ${state.adsWatched%ADS_PER_LEVEL}/${ADS_PER_LEVEL}`;
+  document.getElementById('testModeLabel').innerText = 'TEST MODE: ' + (TEST_MODE?'ON':'OFF');
+}
+
+function showToast(msg, t=1600){
+  rewardPopup.innerText = msg; rewardPopup.style.background='linear-gradient(90deg,#fff,#ffd54a)'; rewardPopup.style.color='#051018'; rewardPopup.classList.add('show');
+  setTimeout(()=>rewardPopup.classList.remove('show'), t);
+}
+
+/* render 100 tasks with rainbow classes */
+function renderTasks(){
+  const classes = ['r0','r1','r2','r3','r4'];
+  taskGrid.innerHTML = '';
+  for(let i=1;i<=100;i++){
+    const b = document.createElement('button');
+    b.className = 'task ' + classes[i%classes.length];
+    b.innerText = `Task ${i}`;
+    b.dataset.id = 'task'+i;
+    b.addEventListener('click', ()=> beginAdFlow('task', {task:i, el:b}));
+    taskGrid.appendChild(b);
+  }
+}
+
+/* Begin ad flow: if TEST_MODE -> open simulate modal; else try SDK or fallback -> open new tab & user confirm */
+async function beginAdFlow(type, meta={}){
+  // prevent spamming (simple)
+  if(sessionStorage.getItem('lastAd') && Date.now() - parseInt(sessionStorage.getItem('lastAd')) < 8000){
+    showToast('Please wait a few seconds'); return;
+  }
+  sessionStorage.setItem('lastAd', String(Date.now()));
+
+  if(TEST_MODE){
+    // show simulate modal
+    simTitle.innerText = `Simulate ad result for ${type}`;
+    simModal.dataset.pendingType = type;
+    simModal.dataset.meta = JSON.stringify(meta || {});
+    simModal.classList.add('show');
+    return;
+  }
+
+  // Production path: try SDK
+  try{
+    if(typeof window[MONETAG_SDK_FN] === 'function'){
+      showToast('Playing SDK ad...');
+      await window[MONETAG_SDK_FN]();
+      // on success:
+      grantReward(type, meta, 'sdk');
+      return;
+    }
+  }catch(e){ console.warn('SDK error', e); }
+
+  // fallback: open smartlink/new tab + ask user to confirm
+  const url = ADSTRA_SMARTLINK + '&ref=' + encodeURIComponent(state.uid || uid);
+  window.open(url, '_blank');
+  const ok = confirm('Ad opened in a new tab. After watching, press OK to claim reward.');
+  if(ok) grantReward(type, meta, 'fallback'); else showToast('No reward (skipped)');
+}
+
+/* handle simulate modal outcome */
+function handleSimResult(success){
+  const type = simModal.dataset.pendingType;
+  const meta = JSON.parse(simModal.dataset.meta || '{}');
+  if(success){ grantReward(type, meta, 'test'); } else { showToast('Simulated skip — no reward'); }
+}
+
+/* grant reward: add base reward, increment ad count, check level up & level bonus */
+function grantReward(type, meta={}, via='test'){
+  // base reward
+  state.balance = (state.balance || 0) + REWARD_PER_AD;
+  state.adsWatched = (state.adsWatched || 0) + 1;
+
+  // level calculation
+  const prevLevel = state.level || 0;
+  const newLevel = Math.floor(state.adsWatched / ADS_PER_LEVEL);
+  if(newLevel > prevLevel){
+    // give level bonuses for each level gained
+    for(let L = prevLevel + 1; L <= newLevel; L++){
+      const bonus = LEVEL_BONUS_BASE * L;
+      state.balance = (state.balance || 0) + bonus;
+      // show popup for level-up bonus
+      showRewardBig(bonus, `Level ${L} Bonus`);
+    }
+    state.level = newLevel;
+  }
+
+  // update UI & show small reward popup
+  saveState();
+  showRewardBig(REWARD_PER_AD, `Reward +${REWARD_PER_AD.toFixed(6)} USDT`);
+}
+
+/* show reward popup (big) */
+function showRewardBig(amount, title){
+  const p = document.getElementById('rewardPopup');
+  p.innerHTML = `<div style="font-size:18px;font-weight:900">${title}</div><div style="margin-top:8px;font-size:16px">${amount.toFixed(6)} USDT</div>`;
+  p.classList.add('show'); p.style.background='linear-gradient(90deg,#fff,#ffd54a)'; p.style.color='#051018';
+  setTimeout(()=>p.classList.remove('show'), 2200);
+}
+
+/* Referral modal */
+function openRefer(){
+  const box = document.getElementById('referList');
+  box.innerHTML = '';
+  if(!state.referrals || state.referrals.length === 0){
+    box.innerHTML = '<div class="small">No referrals yet</div>';
+  } else {
+    state.referrals.forEach((r, idx)=>{
+      const el = document.createElement('div');
+      el.style.padding='8px'; el.style.borderBottom='1px solid rgba(255,255,255,0.03)';
+      el.innerHTML = `<div style="font-weight:900">${idx+1}. ${r.id}</div><div class="small">${r.time}</div>`;
+      box.appendChild(el);
+    });
+  }
+  document.getElementById('referModal').classList.add('show');
+}
+
+/* On load: check ?start=ref_id param to simulate referral join */
+(function handleReferralOnLoad(){
+  try{
+    const url = new URL(location.href);
+    const start = url.searchParams.get('start') || '';
+    if(start && start.startsWith('ref_')){
+      const refId = start.slice(4);
+      // add to the referrer record client-side (best-effort local)
+      // If the referrer equals current local user, ignore
+      if(refId !== state.uid){
+        // notify referrer locally by storing in map (in real app, server should credit)
+        // store in this state's referrals if we are the referrer
+        // for demo: if user is referrer, push fake join
+        if(state.uid === refId){
+          state.referrals = state.referrals || [];
+          state.referrals.push({ id: uid, time: new Date().toLocaleString() });
+          saveState();
+        }
+      }
+    }
+  }catch(e){}
+})();
+
+/* save initial state on first load */
+saveState();
 </script>
 </body>
 </html>
