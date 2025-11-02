@@ -1,433 +1,81 @@
-l<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>High Level Galaxy Bot V9990000000 — Final</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galaxy Jackpot</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at center, #1a1a2e, #000);
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
 
-<!-- small inline favicon to avoid /favicon.ico 404 -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22%237c4dff%22 rx=%224%22/></svg>">
+    h1 {
+      font-size: 2.2rem;
+      margin-top: 70px;
+      animation: glow 2s infinite alternate;
+    }
 
-<!-- ============================
-  Monetag SDK — your Monetag script (you provided earlier)
-  Keep this script tag exactly as provided by Monetag to enable show_10125761()
-================================= -->
-<script src="//libtl.com/sdk.js" data-zone="10125761" data-sdk="show_10125761"></script>
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff00c8; }
+      to { text-shadow: 0 0 20px #00fff2, 0 0 30px #ff0080; }
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg1:#041226; --bg2:#071833;
-    --accent1:#7c4dff; --accent2:#34d399; --gold:#ffd54a;
-    --muted:#9aa4b2; --card:rgba(255,255,255,0.02);
-    --glass: rgba(255,255,255,0.03);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(160deg,var(--bg1),var(--bg2));color:#e6eef6;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1180px;margin:18px auto;padding:16px}
-  .header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
-  .brand{display:flex;gap:12px;align-items:center}
-  .logo{width:64px;height:64;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;box-shadow:0 8px 30px rgba(124,77,255,0.06)}
-  .title{font-weight:800;font-size:18px}
-  .sub{color:var(--muted);font-size:13px}
-  /* Welcome & VPN banners */
-  .welcome-banner{
-    text-align:center;padding:14px;border-radius:12px;margin-bottom:12px;
-    background:linear-gradient(90deg,#1e3a8a,#7c3aed);color:#fff;font-weight:800;box-shadow:0 0 22px rgba(124,77,255,0.12);
-    transform-origin:center; animation: welcomePop .45s ease;
-  }
-  @keyframes welcomePop{from{transform:scale(.98);opacity:0}to{transform:scale(1);opacity:1}}
-  .vpn-banner{
-    text-align:center;font-weight:900;padding:12px;border-radius:12px;margin-bottom:12px;
-    background:linear-gradient(90deg,#ff007f,#ff9900,#00e0ff,#8b5cf6);color:#fff;animation:pulse 3s infinite alternate;box-shadow:0 0 25px rgba(255,255,255,0.12)
-  }
-  .vpn-banner .highlight{background:linear-gradient(90deg,#ffeb3b,#00ffcc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  @keyframes pulse{0%{transform:scale(1)}100%{transform:scale(1.03)}}
-  .controls{display:flex;gap:8px;align-items:center}
-  .btn{background:linear-gradient(135deg,var(--gold),#ff6a00);border:none;padding:10px 14px;border-radius:10px;font-weight:800;color:#051018;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.4)}
-  .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--gold);padding:8px;border-radius:10px;cursor:pointer}
-  .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:12px;border-radius:12px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.03)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
-  .task{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:12px;border-radius:10px;text-align:center;cursor:pointer;user-select:none;transition:transform .12s,box-shadow .12s}
-  .task:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
-  .small{font-size:13px;color:var(--muted)}
-  .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:12000}
-  .overlay .box{background:#071225;padding:18px;border-radius:12px;color:#e6eef6;min-width:300px;text-align:center}
-  .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:40px;padding:10px 14px;border-radius:12px;display:none;font-weight:800;z-index:13000}
-  .toast.info{background:linear-gradient(120deg,#dbeafe,#bfdbfe);color:#022558}
-  .toast.success{background:linear-gradient(120deg,#d1fae5,#bbf7d0);color:#064e3b}
-  .toast.error{background:linear-gradient(120deg,#fee2e2,#fecaca);color:#7f1d1d}
-  .coin-burst{position:fixed;left:50%;transform:translateX(-50%);bottom:120px;pointer-events:none;z-index:14000}
-  .coin{width:18px;height:18px;border-radius:50%;background:var(--gold);margin:4px;box-shadow:0 4px 10px rgba(0,0,0,0.4);animation:flyUp .9s ease forwards}
-  @keyframes flyUp{from{transform:translateY(0) scale(1);opacity:1}to{transform:translateY(-120px) scale(.6);opacity:0}}
-  .category-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
-  .pill{padding:8px 12px;border-radius:999px;font-weight:800;color:#051018;cursor:pointer;background:linear-gradient(90deg,#ff9a9e,#fad0c4)}
-  .pill.purple{background:linear-gradient(90deg,#7c4dff,#34d399)}
-  .pill.blue{background:linear-gradient(90deg,#00c6ff,#0072ff)}
-  .pill.orange{background:linear-gradient(90deg,#ff7a18,#ffb199)}
-  .pill.green{background:linear-gradient(90deg,#7be495,#34d399)}
-  .note {font-size:12px;color:#ffd591;margin-top:6px}
-  .success-text {color:#00ff9d;font-weight:800}
-  @media(max-width:720px){ .grid{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))} .header{flex-direction:column;align-items:flex-start} }
-</style>
+    #welcome {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .banner {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #ff00c8, #00fff2);
+      color: #000;
+      padding: 10px 0;
+      font-weight: 600;
+      font-size: 1rem;
+      animation: bannerGlow 3s infinite alternate;
+    }
+
+    @keyframes bannerGlow {
+      from { filter: brightness(1); }
+      to { filter: brightness(1.5); }
+    }
+  </style>
 </head>
 <body>
-<div class="wrap">
+  <h1>🌌 Galaxy Jackpot Bot 🌌</h1>
+  <div id="welcome">Welcome <span id="user"></span> 👋<br>Connecting to system...</div>
 
-  <!-- Welcome banner (show first 5s) -->
-  <div id="welcomeBanner" class="welcome-banner" aria-live="polite">
-    Welcome, <span id="welcomeName">Guest</span> — Welcome to Galaxy World 🌌 • Explore, Earn & Shine!
+  <!-- এখানে তোমার Adstra বা Monetag ads script বসবে -->
+  <!-- উদাহরণ -->
+  <script async src="https://a.magsrv.com/ad-provider.js"></script>
+
+  <div class="banner">
+    🚀 Buy Now: <a href="mailto:termuxethicalhackingbd@gmail.com" style="color:#000; text-decoration:underline;">termuxethicalhackingbd@gmail.com</a> |
+    Contact Telegram: <a href="https://t.me/Rakib90100" style="color:#000;">@Rakib90100</a>
   </div>
 
-  <!-- VPN banner (will appear after welcome, show 5s) -->
-  <div id="vpnBanner" class="vpn-banner" style="display:none;">
-    🌐 Please connect VPN — <span class="highlight">Astrolia / USA / Canada / Europe</span>
-  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name") || "User";
+    document.getElementById("user").innerText = name;
 
-  <div class="header">
-    <div class="brand">
-      <div class="logo">GJ</div>
-      <div>
-        <div class="title">Galaxy Jackpot — V9990000000</div>
-        <div class="sub">Play • Watch Ads • Earn</div>
-      </div>
-    </div>
-
-    <div class="controls">
-      <button id="inviteBtn" class="ghost" title="Invite & get referral bonus">Invite</button>
-      <button id="withdrawBtn" class="ghost" title="Withdraw funds">Withdraw</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div>
-        <div class="small">Current Balance</div>
-        <div style="font-weight:900;font-size:22px" id="balance">USDT 0.000</div>
-        <div class="small" id="xpInfo">XP 0 • Level 1</div>
-      </div>
-      <div style="text-align:right">
-        <button id="dailyBtn" class="btn" title="Claim daily reward">Daily Reward</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <strong>🔥 Click-a-Thon — 100 Buttons</strong>
-      <div class="small">Click any task → sequential ads will play → reward credited after sequence</div>
-    </div>
-
-    <div style="margin-top:12px">
-      <div class="category-row" id="categoryRow"></div>
-    </div>
-
-    <div class="grid" id="taskGrid" style="margin-top:12px;max-height:520px;overflow:auto"></div>
-  </div>
-
-  <div class="card">
-    <strong>🏆 Leaderboard (local)</strong>
-    <pre id="leaderboard" class="small" style="white-space:pre-wrap;margin-top:8px">— no data —</pre>
-  </div>
-
-</div>
-
-<!-- Overlay for "Please wait" while ads run -->
-<div id="overlay" class="overlay" aria-hidden><div class="box"><div id="overlayText">Please wait... Ads loading...</div></div></div>
-
-<!-- Toast -->
-<div id="toast" class="toast info" role="status" aria-live="polite"></div>
-
-<!-- Coin burst -->
-<div id="coinBurst" class="coin-burst" aria-hidden></div>
-
-<!-- Withdraw modal -->
-<div id="withdrawModal" class="overlay" aria-hidden><div class="box">
-  <h3>Withdraw Funds</h3>
-  <div style="text-align:left">
-    <label>Name</label>
-    <input id="wdName" style="width:100%;padding:8px;margin-top:6px;border-radius:8px;background:#0b1220;border:1px solid rgba(255,255,255,0.04);color:#fff"/>
-    <label style="margin-top:8px">Method</label>
-    <select id="wdMethod" style="width:100%;padding:8px;margin-top:6px;border-radius:8px;background:#0b1220;border:1px solid rgba(255,255,255,0.04);color:#fff">
-      <option value="Bkash">Bkash</option>
-      <option value="Nagad">Nagad</option>
-      <option value="Binance">Binance (USDT)</option>
-    </select>
-    <label id="wdLabel" style="margin-top:8px">Type your number</label>
-    <input id="wdInput" style="width:100%;padding:8px;margin-top:6px;border-radius:8px;background:#0b1220;border:1px solid rgba(255,255,255,0.04);color:#fff"/>
-    <label style="margin-top:8px">Amount (USDT)</label>
-    <input id="wdAmount" type="number" min="2" placeholder="Minimum 2 USDT" style="width:100%;padding:8px;margin-top:6px;border-radius:8px;background:#0b1220;border:1px solid rgba(255,255,255,0.04);color:#fff"/>
-    <p class="note">Minimum withdraw is 2 USDT (≈ 260 BDT)</p>
-    <div style="display:flex;gap:8px;margin-top:10px">
-      <button id="confirmWithdraw" class="btn">Withdraw Now</button>
-      <button id="cancelWithdraw" class="ghost">Cancel</button>
-    </div>
-  </div>
-</div></div>
-
-<script>
-/* ================= CONFIG ================= */
-const BDT_PER_USDT = 130;
-const AD_REWARD = 0.005; // reward after whole sequence
-const MIN_WITHDRAW = 2; // 2 USDT min withdraw
-const REF_REWARD = 0.01;
-
-/* ================ STATE ================ */
-let state = {
-  userId: null,
-  balance: 0,
-  xp: 0,
-  level: 1,
-  streak: 0,
-  adsWatched: 0,
-  referrals: []
-};
-
-/* ================ UI HELPERS ================ */
-const toastEl = document.getElementById('toast');
-function showToast(msg, type='info'){
-  toastEl.innerText = msg;
-  toastEl.className = 'toast ' + (type==='error'?'error':(type==='success'?'success':'info'));
-  toastEl.style.display = 'block';
-  setTimeout(()=> toastEl.style.display='none', 3000);
-}
-function coinBurst(){
-  const cb = document.getElementById('coinBurst'); cb.innerHTML='';
-  for(let i=0;i<8;i++){ const d=document.createElement('div'); d.className='coin'; cb.appendChild(d); }
-  cb.style.display='block'; setTimeout(()=>{ cb.innerHTML=''; cb.style.display='none'; }, 900);
-}
-function updateUI(){
-  document.getElementById('balance').innerText = 'USDT ' + state.balance.toFixed(3);
-  document.getElementById('xpInfo').innerText = `XP ${state.xp} • Level ${state.level}`;
-  const lb = JSON.parse(localStorage.getItem('gj_lb')||'[]');
-  if(lb && lb.length) document.getElementById('leaderboard').innerText = lb.map((p,i)=>`${i+1}. ${p.name} — USDT ${p.bal.toFixed(3)}`).slice(0,8).join('\n');
-  else document.getElementById('leaderboard').innerText = '— no data —';
-}
-
-/* ================ STORAGE ================ */
-function saveState(){ localStorage.setItem('gj_state', JSON.stringify(state)); updateUI(); }
-function loadState(){ const s = JSON.parse(localStorage.getItem('gj_state')||'{}'); state.userId = s.userId || ('user_'+Math.floor(Math.random()*900000+100000)); state.balance = s.balance || 0; state.xp = s.xp || 0; state.level = s.level || 1; state.streak = s.streak || 0; state.adsWatched = s.adsWatched || 0; state.referrals = s.referrals || []; saveState(); }
-
-/* ================ WELCOME + VPN BANNERS ================ */
-function showWelcomeThenVPN(){
-  const name = state.userId || 'Guest';
-  document.getElementById('welcomeName').innerText = name;
-  const welcome = document.getElementById('welcomeBanner');
-  const vpn = document.getElementById('vpnBanner');
-  // show welcome 5s then fade
-  setTimeout(()=> { welcome.style.transition='opacity .8s'; welcome.style.opacity='0'; setTimeout(()=> welcome.remove(),900); }, 5000);
-  // show vpn after welcome disappears
-  setTimeout(()=> { vpn.style.display='block'; setTimeout(()=> { vpn.style.transition='opacity .8s'; vpn.style.opacity='1'; setTimeout(()=> { vpn.style.opacity='0'; setTimeout(()=> vpn.remove(),900); }, 5000); }, 200); }, 6000);
-}
-
-/* ================ INVITE / REFERRAL ================ */
-document.getElementById('inviteBtn').onclick = async ()=>{
-  const link = window.location.origin + window.location.pathname + '?ref=' + encodeURIComponent(state.userId);
-  try{ await navigator.clipboard.writeText(link); showToast('Referral link copied to clipboard', 'success'); }
-  catch(e){ showToast('Copy failed, link: '+link,'info'); }
-};
-
-/* If user arrived with ref param, credit both */
-const params = new URLSearchParams(window.location.search);
-const ref = params.get('ref');
-if(ref){
-  loadState();
-  state.balance = parseFloat((state.balance + REF_REWARD).toFixed(3));
-  state.xp += 2;
-  state.referrals.push({from:ref,ts:Date.now()});
-  saveState();
-  showToast('Welcome! You joined via referral — +0.01 USDT', 'success');
-}
-
-/* ================ TASKS (100 buttons) ================ */
-const taskGrid = document.getElementById('taskGrid');
-const categories = ['Luxury','Galaxy','Instant','Game','Mystery','Money','Smart','Nature','Celebrate','Infinity'];
-const names = [];
-for(let c=0;c<10;c++){
-  for(let i=1;i<=10;i++){
-    names.push(`${categories[c]} Task ${i}`);
-  }
-}
-names.forEach((nm, idx)=>{
-  const el = document.createElement('div'); el.className='task';
-  el.innerHTML = `<strong>${nm}</strong><div class="small" style="margin-top:8px">Click to watch sequence ads</div>`;
-  el.onclick = () => onTaskClick(el, nm, idx);
-  taskGrid.appendChild(el);
-});
-
-/* Populate category pills (colorful) */
-const catRow = document.getElementById('categoryRow');
-['Luxury','Galaxy','Instant','Game','Mystery','Money','Smart','Nature','Celebrate','Infinity'].forEach((c,i)=>{
-  const p = document.createElement('div'); p.className='pill ' + (i%4===0?'purple':(i%4===1?'blue':(i%4===2?'orange':'green'))); p.innerText = c;
-  p.onclick = ()=> { showToast(c + ' category selected', 'info'); };
-  catRow.appendChild(p);
-});
-
-/* ================ Overlay control ================ */
-const overlay = document.getElementById('overlay');
-function showOverlay(text='Please wait... Ads loading...'){ document.getElementById('overlayText').innerText = text; overlay.style.display='flex'; }
-function hideOverlay(){ overlay.style.display='none'; }
-
-/* ================ Monetag helpers & fallback ================ */
-function isMonetagReady(){ return typeof window.show_10125761 === 'function'; }
-
-/* fallback simulated ad (used when Monetag missing or error) */
-function simulateAd(title = 'Simulated Ad', duration = 1400){
-  return new Promise((res) => {
-    showOverlay(title + ' — playing (simulated)');
-    setTimeout(()=>{ hideOverlay(); res(); }, duration);
-  });
-}
-
-/* Safe wrapper for calling Monetag show — returns Promise */
-function callMonetagRewarded(){
-  if(isMonetagReady()){
-    try{ return window.show_10125761(); }
-    catch(e){ return Promise.reject(e); }
-  }
-  return simulateAd('Rewarded (simulated)', 1400);
-}
-function callMonetagPopup(){
-  if(isMonetagReady()){
-    try{ return window.show_10125761('pop'); }
-    catch(e){ return Promise.reject(e); }
-  }
-  return simulateAd('Popup (simulated)', 900);
-}
-function callMonetagInApp(){
-  if(isMonetagReady()){
-    try{ return window.show_10125761({ type:'inApp', inAppSettings:{ frequency:2, capping:0.1, interval:30, timeout:5, everyPage:false } }); }
-    catch(e){ return Promise.reject(e); }
-  }
-  return simulateAd('In-App (simulated)', 800);
-}
-function callMonetagFinal(){
-  if(isMonetagReady()){
-    try{ return window.show_10125761(); }
-    catch(e){ return Promise.reject(e); }
-  }
-  return simulateAd('Final SDK (simulated)', 700);
-}
-
-/* ================ Sequential Ads Player (safe) ================ */
-let adsPlaying = false;
-async function playSequentialAdsSequence(taskEl, taskName){
-  if(adsPlaying) { showToast('Ads already running — please wait', 'info'); return; }
-  adsPlaying = true;
-  showOverlay('Ads sequence starting...');
-  taskEl.style.opacity = '0.6';
-
-  try{
-    // 1) Rewarded
-    await callMonetagRewarded();
-    await delay(800);
-    // 2) Popup
-    await callMonetagPopup();
-    await delay(700);
-    // 3) In-App
-    await callMonetagInApp();
-    await delay(700);
-    // 4) Final SDK call
-    await callMonetagFinal();
-    await delay(500);
-
-    // success → grant reward
-    await grantReward('sequence', AD_REWARD);
-    showOverlay('✅ All Ads Completed! You earned ' + AD_REWARD.toFixed(3) + ' USDT');
-    await delay(1200);
-    hideOverlay();
-    showToast('All Ads Completed — Reward credited', 'success');
-  }catch(err){
-    console.warn('Ad sequence error', err);
-    hideOverlay();
-    showToast('Ad failed or blocked — fallback used', 'error');
-  }finally{
-    adsPlaying = false;
-    taskEl.style.opacity = '1';
-    coinBurst();
-  }
-}
-
-/* convenience */
-function delay(ms){ return new Promise(res => setTimeout(res, ms)); }
-
-/* ================ Reward & state update ================ */
-async function grantReward(source='ad', amount=AD_REWARD){
-  state.balance = parseFloat((state.balance + amount).toFixed(3));
-  state.xp += 1;
-  state.adsWatched = (state.adsWatched || 0) + 1;
-  if(state.xp >= 10){ state.level += 1; state.xp = 0; showToast('Level Up!','success'); }
-  saveState();
-}
-
-/* ================ Task click handler ================ */
-function onTaskClick(el, name, idx){
-  playSequentialAdsSequence(el, name);
-}
-
-/* ================ Withdraw flow ================ */
-const withdrawModal = document.getElementById('withdrawModal');
-document.getElementById('withdrawBtn').onclick = ()=> withdrawModal.style.display = 'flex';
-document.getElementById('cancelWithdraw').onclick = ()=> withdrawModal.style.display = 'none';
-document.getElementById('wdMethod').addEventListener('change', (e)=>{
-  const val = e.target.value;
-  const label = document.getElementById('wdLabel');
-  const input = document.getElementById('wdInput');
-  if(val === 'Binance'){ label.innerText = 'Type your Binance UID'; input.placeholder = 'Enter your Binance UID'; }
-  else { label.innerText = 'Type your number'; input.placeholder = 'Enter your mobile number'; }
-});
-
-document.getElementById('confirmWithdraw').onclick = async ()=>{
-  const name = document.getElementById('wdName').value.trim();
-  const method = document.getElementById('wdMethod').value;
-  const input = document.getElementById('wdInput').value.trim();
-  const amount = parseFloat(document.getElementById('wdAmount').value);
-
-  if(!name || !input || isNaN(amount)){ showToast('Please fill all fields', 'error'); return; }
-  if(amount < MIN_WITHDRAW){ showToast('Minimum withdraw is ' + MIN_WITHDRAW + ' USDT', 'error'); return; }
-  if(amount > state.balance + 0.0001){ showToast('Insufficient balance', 'error'); return; }
-
-  const req = { id: 'wd_'+Date.now(), name, method, input, amountUSDT: parseFloat(amount.toFixed(3)), ts: Date.now(), userId: state.userId, status:'pending' };
-  const pending = JSON.parse(localStorage.getItem('gj_withdrawals')||'[]'); pending.push(req); localStorage.setItem('gj_withdrawals', JSON.stringify(pending));
-  state.balance = parseFloat((state.balance - req.amountUSDT).toFixed(3));
-  saveState();
-  withdrawModal.style.display = 'none';
-  showToast('Withdrawal submitted — Please wait 1 minute to 48 hours for processing', 'info');
-
-  // Optionally: send to server webhook if you set one (server-side should handle admin notify & security)
-  // if(typeof WEBAPP_URL !== 'undefined' && WEBAPP_URL) {
-  //   fetch(WEBAPP_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'log_withdraw', withdraw:req })})
-  //     .then(()=> console.log('withdraw posted'))
-  //     .catch(()=> console.warn('withdraw post failed'));
-  // }
-};
-
-/* ================ Daily reward (simple) ================ */
-document.getElementById('dailyBtn').onclick = ()=>{
-  const now = Date.now(); const last = parseInt(localStorage.getItem('gj_last_daily')||'0');
-  const oneDay = 24*60*60*1000;
-  if(now - last < oneDay){ showToast('Daily already claimed', 'error'); return; }
-  localStorage.setItem('gj_last_daily', String(now));
-  state.streak = (state.streak || 0) + 1;
-  const bonus = Math.min(state.streak,7) * 0.005;
-  const amt = parseFloat((0.01 + bonus).toFixed(3));
-  grantReward('daily', amt);
-  showToast(`Daily claimed: +${amt} USDT (streak ${state.streak})`, 'success');
-};
-
-/* ================ Init ================ */
-function init(){
-  loadState();
-  if(state.balance < 0.01){ state.balance = 0.5; saveState(); } // demo seed
-  updateUI();
-  showWelcomeThenVPN();
-}
-init();
-
-/* expose helpers for debugging in console (optional) */
-window._credit = (amt)=>{ state.balance += amt; saveState(); updateUI(); };
-window._state = state;
-
-</script>
+    // ৫ সেকেন্ড পর ওয়েলকাম টেক্সট হাইড হবে
+    setTimeout(() => {
+      document.getElementById("welcome").style.display = "none";
+    }, 5000);
+  </script>
 </body>
 </html>
