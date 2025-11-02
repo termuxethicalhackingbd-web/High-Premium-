@@ -1,1 +1,711 @@
 
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Galaxy Jackpot — FINAL • Creator: MD RAHAT</title>
+<meta name="description" content="Galaxy Jackpot — premium web app + Telegram bot ready UI. 8 games, 100 tasks, referral, withdraw, ads placeholders." />
+<!-- Monetag placeholder (optional) -->
+<!-- <script src="//libtl.com/sdk.js" data-zone="10125761" data-sdk="show_10125761"></script> -->
+
+<style>
+:root{
+  --bg-dark-1:#05020a; --bg-dark-2:#071225;
+  --muted:#9aa4b2; --gold1:#ffd54a; --gold2:#ffb84d;
+  --accent1:#7c3aed; --accent2:#34d399; --glass: rgba(255,255,255,0.02);
+  --success:#2ecc71; --danger:#ff6b6b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial;background:linear-gradient(180deg,var(--bg-dark-1),var(--bg-dark-2));color:#eaf2ff;overflow-x:hidden}
+.container{max-width:1180px;margin:86px auto 120px;padding:18px;position:relative}
+
+/* VPN top banner (fixed) */
+#vpnTop{
+  position:fixed; left:50%; top:10px; transform:translateX(-50%); z-index:99999;
+  width:calc(100% - 40px); max-width:1180px; padding:10px 16px; border-radius:999px;
+  background:linear-gradient(90deg,#06b6d4,#7c3aed); color:#021627; font-weight:800; font-size:14px;
+  display:flex;align-items:center;justify-content:center; gap:10px; box-shadow:0 28px 80px rgba(124,58,237,0.12);
+  pointer-events:none;
+  animation:vpnSlide 8s ease-in-out infinite;
+}
+@keyframes vpnSlide{0%{transform:translateX(-54%)}25%{transform:translateX(-46%)}50%{transform:translateX(-54%)}75%{transform:translateX(-62%)}100%{transform:translateX(-54%)}}
+
+/* Top Creator bar */
+.creatorTop{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));border:1px solid rgba(255,255,255,0.02);box-shadow:0 10px 40px rgba(0,0,0,0.5);margin-bottom:12px;position:relative}
+.logo{width:64px;height:64px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold1),var(--gold2));color:#051018;font-weight:900;font-size:22px;box-shadow:0 12px 40px rgba(124,58,237,0.06)}
+.creatorText{font-weight:900;font-size:15px}
+.creatorSub{color:var(--muted);font-size:13px}
+
+/* Trogol + buy controls */
+.controlsTop{margin-left:auto;display:flex;align-items:center;gap:12px}
+.trogolToggle{width:52px;height:28px;background:rgba(255,255,255,0.03);border-radius:999px;position:relative;cursor:pointer;border:1px solid rgba(255,255,255,0.03)}
+.trogolToggle .dot{position:absolute;top:4px;left:4px;width:20px;height:20px;border-radius:50%;background:#fff;transition:all .18s}
+.buyNow{padding:10px 14px;border-radius:12px;border:none;background:linear-gradient(90deg,#ff6a00,#ff54a7);color:#051018;font-weight:900;cursor:pointer;box-shadow:0 18px 60px rgba(255,106,0,0.12)}
+
+/* Header */
+.header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.title{font-size:20px;font-weight:900}
+.subtitle{color:var(--muted);font-size:13px}
+
+/* Balance card */
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 12px 40px rgba(0,0,0,0.45);margin-bottom:12px}
+.hrow{display:flex;justify-content:space-between;align-items:center}
+.balanceBig{font-size:22px;font-weight:900}
+.smallMuted{color:var(--muted);font-size:13px}
+.progressBar{height:8px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;margin-top:8px}
+.progressFill{height:100%;background:linear-gradient(90deg,var(--gold1),var(--gold2));width:0%}
+.rewardBadge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted);font-weight:700}
+
+/* Tasks grid - fast flick scroll */
+.tasksWrap{overflow:auto;max-height:420px;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent)}
+.btnGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+@media(max-width:1000px){.btnGrid{grid-template-columns:repeat(3,1fr)}}
+.taskBtn{padding:12px;border-radius:10px;border:none;cursor:pointer;font-weight:900;min-height:56px;color:#051018;box-shadow:0 8px 26px rgba(0,0,0,0.25);transition:transform .18s, box-shadow .18s}
+.taskBtn:active{transform:translateY(2px)}
+/* color classes */
+.c0{background:linear-gradient(90deg,#ffd54a,#ffb84d)}
+.c1{background:linear-gradient(90deg,#7c3aed,#34d399);color:#fff}
+.c2{background:linear-gradient(90deg,#60a5fa,#7c3aed);color:#fff}
+.c3{background:linear-gradient(90deg,#fb7185,#f97316);color:#fff}
+.c4{background:linear-gradient(90deg,#a78bfa,#f472b6);color:#fff}
+.taskBtn.trogol{box-shadow:0 18px 80px rgba(124,58,237,0.15); transform:translateY(-6px) scale(1.02)}
+
+/* Games grid */
+.gamesGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+@media(max-width:1100px){.gamesGrid{grid-template-columns:repeat(2,1fr)}}
+.gameCard{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);text-align:center;min-height:160px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center}
+.gameTitle{font-weight:900;margin-bottom:8px}
+
+/* Reward popup */
+.rewardPopup{position:fixed;left:50%;top:26%;transform:translate(-50%,-50%);min-width:300px;padding:18px;border-radius:14px;background:linear-gradient(180deg,#fff,#ffd54a);color:#051018;font-weight:900;display:none;z-index:99999;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.7)}
+.rewardPopup.show{display:block;animation:popIn .5s ease-out}
+@keyframes popIn{0%{transform:translate(-50%,-46%) scale(.95);opacity:0}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
+
+/* Modal */
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:18px;border-radius:12px;z-index:200000;min-width:320px;display:none;color:#e6eef6}
+.modal.show{display:block}
+.modal .closeX{position:absolute;right:12px;top:8px;background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer}
+.input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#e6eef6;margin-top:8px}
+
+/* buy sticky */
+.buyNowWrap{position:fixed;right:18px;bottom:18px;z-index:99995;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.buyBtn{padding:12px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:900;background:linear-gradient(90deg,#f472b6,#7c3aed);color:#fff;box-shadow:0 18px 60px rgba(124,58,237,0.16)}
+
+/* Mood switcher button (above referral) */
+.moodBtn{display:inline-block;padding:10px 14px;border-radius:999px;background:linear-gradient(90deg,#60a5fa,#7c3aed);color:#021627;font-weight:900;cursor:pointer;box-shadow:0 20px 60px rgba(124,58,237,0.12)}
+
+/* fast scroll hint */
+.tasksWrap::-webkit-scrollbar{width:8px}
+.tasksWrap::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.06);border-radius:999px}
+
+/* small helper */
+.hidden{display:none}
+.center{display:flex;align-items:center;justify-content:center}
+</style>
+</head>
+<body>
+
+<!-- VPN fixed banner -->
+<div id="vpnTop" aria-live="polite">🌎 Connect VPN (USA / Canada / Australia) for better rewards!</div>
+
+<div class="container" role="main">
+
+  <!-- Creator top -->
+  <div class="creatorTop" role="banner">
+    <div class="logo">GJ</div>
+    <div>
+      <div class="creatorText">Galaxy Jackpot — ∞× Legendary++</div>
+      <div class="creatorSub">Play • Watch Ads • Earn USDT</div>
+    </div>
+
+    <div class="controlsTop" role="toolbar" aria-label="Controls">
+      <div style="display:flex;flex-direction:column;align-items:flex-end">
+        <div style="font-size:12px;color:var(--muted)">Trogol</div>
+        <div id="trogolToggle" class="trogolToggle" role="switch" aria-checked="false" tabindex="0">
+          <div class="dot"></div>
+        </div>
+      </div>
+      <button id="buyNowTop" class="buyNow" title="Buy Now — $100">Buy Now — $100</button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <div class="title">Galaxy Jackpot — FINAL</div>
+      <div class="subtitle">8 Games • 100 Tasks • Referral • Withdraw</div>
+    </div>
+  </div>
+
+  <!-- Balance card -->
+  <div class="card">
+    <div class="hrow">
+      <div>
+        <div class="smallMuted">Current Balance</div>
+        <div class="balanceBig" id="balance">USDT 0.015000</div>
+        <div class="smallMuted" id="avail">Available: USDT 0.015000</div>
+        <div class="progressBar"><div id="xpFill" class="progressFill" style="width:0%"></div></div>
+        <div style="margin-top:8px">
+          <span class="rewardBadge" id="levelTag">Level 0</span>
+          <span class="smallMuted" id="xpInfo">XP 0</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end">
+        <button id="openReferList" class="buyBtn" style="background:linear-gradient(90deg,var(--gold1),var(--gold2));color:#051018">My Referrals</button>
+        <div class="smallMuted">Referral bonus: <strong>0.005 USDT</strong> • Commission: <strong>5%</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tasks -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="font-weight:900">Tasks</div>
+      <div class="smallMuted">Tap a task → watch ad → earn +0.0005 USDT</div>
+    </div>
+
+    <div class="tasksWrap" id="tasksWrap" tabindex="0" aria-label="Tasks list" style="margin-top:12px">
+      <div class="btnGrid" id="taskGrid"></div>
+    </div>
+  </div>
+
+  <!-- Games -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="font-weight:900">Mini Games</div>
+      <div class="smallMuted">Play & watch ad to earn rewards</div>
+    </div>
+
+    <div class="gamesGrid" id="gamesGrid" style="margin-top:12px">
+      <!-- Wheel -->
+      <div class="gameCard" id="gameWheel">
+        <div class="gameTitle">🎡 Spin Wheel</div>
+        <div id="wheel" style="width:140px;height:140px;border-radius:50%;margin:8px auto;background:conic-gradient(#f59e0b,#f97316,#60a5fa,#7c3aed);display:flex;align-items:center;justify-content:center">
+          <div class="wheelCenter" id="wheelCenter" style="font-weight:900;color:#051018">SPIN</div>
+        </div>
+        <button class="buyBtn" id="spinBtn">Play</button>
+        <div id="rWheel" class="smallMuted" style="margin-top:8px"></div>
+      </div>
+
+      <!-- Slot -->
+      <div class="gameCard" id="gameSlot">
+        <div class="gameTitle">🎰 Slot</div>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;font-weight:900;font-size:22px">
+          <div id="s1">7</div><div id="s2">7</div><div id="s3">7</div>
+        </div>
+        <button class="buyBtn" id="slotPlay">Play</button>
+        <div id="rSlot" class="smallMuted"></div>
+      </div>
+
+      <!-- Dice -->
+      <div class="gameCard" id="gameDice">
+        <div class="gameTitle">🎲 Dice Roll</div>
+        <div id="diceFace" style="font-size:28px;font-weight:900;margin:12px">-</div>
+        <button class="buyBtn" id="dicePlay">Roll</button>
+        <div id="rDice" class="smallMuted"></div>
+      </div>
+
+      <!-- Coin Flip -->
+      <div class="gameCard" id="gameCoin">
+        <div class="gameTitle">🪙 Coin Flip</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="buyBtn" id="coinHead">Head</button><button class="buyBtn" id="coinTail">Tail</button>
+        </div>
+        <div id="rCoin" class="smallMuted"></div>
+      </div>
+
+      <!-- Lucky Box -->
+      <div class="gameCard" id="gameBox">
+        <div class="gameTitle">🎁 Lucky Box</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px">
+          <button class="buyBtn" data-box="1">Box 1</button><button class="buyBtn" data-box="2">Box 2</button><button class="buyBtn" data-box="3">Box 3</button>
+        </div>
+        <div id="rBox" class="smallMuted"></div>
+      </div>
+
+      <!-- RPS -->
+      <div class="gameCard" id="gameRPS">
+        <div class="gameTitle">✊✌️✋ Rock Paper Scissors</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="buyBtn" id="rpsRock">Rock</button><button class="buyBtn" id="rpsPaper">Paper</button><button class="buyBtn" id="rpsScissors">Scissors</button>
+        </div>
+        <div id="rRPS" class="smallMuted"></div>
+      </div>
+
+      <!-- Tile Match -->
+      <div class="gameCard" id="gameTile">
+        <div class="gameTitle">🔳 Tile Match</div>
+        <div style="margin-top:12px"><button class="buyBtn" id="tilePlay">Play</button></div>
+        <div id="rTile" class="smallMuted"></div>
+      </div>
+
+      <!-- Memory (placeholder) -->
+      <div class="gameCard" id="gameMemory">
+        <div class="gameTitle">🧠 Memory Pair</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:8px">
+          <button class="buyBtn memBtn">?</button><button class="buyBtn memBtn">?</button><button class="buyBtn memBtn">?</button><button class="buyBtn memBtn">?</button>
+        </div>
+        <button class="buyBtn" id="memPlay" style="margin-top:8px">Play</button>
+        <div id="rMem" class="smallMuted"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Withdraw + info -->
+  <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+    <div style="flex:1;min-width:260px" class="card">
+      <div style="font-weight:900">Withdraw</div>
+      <div class="smallMuted" style="margin-top:8px">Minimum withdraw: <strong>2 USDT</strong></div>
+      <div style="display:flex;gap:8px;margin-top:12px;flex-direction:column">
+        <button id="openWithdraw" class="buyBtn">Withdraw Now</button>
+        <button id="copyRefLink" class="buyBtn" style="background:linear-gradient(90deg,#60a5fa,#7c3aed)">Copy Referral Link</button>
+      </div>
+    </div>
+
+    <div style="width:320px" class="card">
+      <div style="font-weight:900">About</div>
+      <div class="smallMuted" style="margin-top:8px">Premium webapp + Telegram Bot integration. Contact: termuxethicalhackingbd@gmail.com</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Withdraw modal -->
+<div id="withdrawModal" class="modal" role="dialog" aria-modal="true">
+  <button class="closeX" id="closeWithdraw">✕</button>
+  <h3 style="color:#fff">Withdraw Request</h3>
+  <div class="smallMuted">Minimum: 2 USDT</div>
+  <label class="smallMuted" style="margin-top:10px">Payment Method</label>
+  <select id="payMethod" class="input">
+    <option value="bkash">bKash</option>
+    <option value="nagad">Nagad</option>
+    <option value="binance">Binance</option>
+  </select>
+  <input id="payNumber" class="input" placeholder="Type your number / Binance UID" />
+  <input id="withdrawAmount" class="input" placeholder="Amount (USDT)" />
+  <div style="margin-top:10px;display:flex;gap:8px">
+    <button id="submitWithdraw" class="buyBtn">Withdraw Now</button>
+    <button id="cancelWithdraw" class="buyBtn" style="background:linear-gradient(90deg,#60a5fa,#7c3aed)">Cancel</button>
+  </div>
+  <div class="smallMuted" style="margin-top:8px">After request: Please wait 1 minute — 48 hours for processing.</div>
+</div>
+
+<!-- reward popup -->
+<div id="rewardPopup" class="rewardPopup" role="status" aria-live="polite"></div>
+
+<!-- refer modal -->
+<div id="referModal" class="modal" style="min-width:360px;display:none">
+  <button class="closeX" id="closeReferBtn">✕</button>
+  <h3>My Referral List</h3>
+  <div id="referList" style="max-height:300px;overflow:auto;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);margin-top:8px"></div>
+</div>
+
+<!-- buy now sticky -->
+<div class="buyNowWrap" aria-hidden="false">
+  <button id="buyNowBtn" class="buyBtn">Buy Now — $100</button>
+</div>
+
+<script>
+/* ===========================
+   CONFIG - replace with YOUR env values or use Vercel envs
+   =========================== */
+const CONFIG = {
+  TEST_MODE: false, // set true to simulate ads
+  REWARD_PER_AD: 0.0005,
+  ADS_PER_LEVEL: 100,
+  LEVEL_BASE_BONUS: 0.01,
+  MIN_WITHDRAW: 2,
+  MONETAG_FN: 'show_10125761', // Monetag SDK function name if loaded
+  ADSTRA_SMARTLINK: 'https://www.effectivegatecpm.com/za35wfvxct?key=33d9ac55094c983709eac1a9fd20c4b5', // fallback
+  GAS_URL: 'https://script.google.com/macros/s/AKfycbzRVNltwIi_q6Mgc_UKMQGQf2YTm5WRBtrCL-FlJtIUp57rv0LGoNOPnG7BhDeW7O8-/exec', // replace if needed
+  BASE_URL: location.origin,
+};
+
+/* ===========================
+   STATE
+   =========================== */
+const UID = localStorage.getItem('gj_user_id') || ('u'+Math.floor(Math.random()*9e9));
+localStorage.setItem('gj_user_id', UID);
+let state = JSON.parse(localStorage.getItem('gj_state_v2') || '{}');
+if(!state.uid){
+  state = { uid:UID, balance:0.015, adsWatched:0, level:0, referrals:[], refEarned:0 };
+  saveState();
+}
+
+function saveState(){ localStorage.setItem('gj_state_v2', JSON.stringify(state)); updateUI(); }
+function updateUI(){
+  document.getElementById('balance').innerText = 'USDT ' + (state.balance || 0).toFixed(6);
+  document.getElementById('avail').innerText = 'Available: USDT ' + (state.balance || 0).toFixed(6);
+  const xp = state.adsWatched || 0;
+  const percent = Math.min(100, Math.floor((xp % CONFIG.ADS_PER_LEVEL) / CONFIG.ADS_PER_LEVEL * 100));
+  document.getElementById('xpFill').style.width = percent + '%';
+  document.getElementById('xpInfo').innerText = 'XP ' + xp;
+  document.getElementById('levelTag').innerText = 'Level ' + (state.level || 0);
+}
+
+/* show reward popup */
+function showRewardPopup(amount, title){
+  const el = document.getElementById('rewardPopup');
+  el.innerHTML = `<div style="font-size:18px;font-weight:900">${title}</div><div style="margin-top:8px;font-size:16px">${amount.toFixed(6)} USDT</div>`;
+  el.classList.add('show'); el.style.display='block';
+  setTimeout(()=>{ el.style.display='none'; el.classList.remove('show'); }, 2200);
+}
+
+/* ===========================
+   TASKS - render 100 buttons
+   =========================== */
+const taskGrid = document.getElementById('taskGrid');
+const colorClasses = ['c0','c1','c2','c3','c4'];
+for(let i=1;i<=100;i++){
+  const b = document.createElement('button');
+  b.className = 'taskBtn ' + colorClasses[i % colorClasses.length];
+  b.innerText = `Task ${i}`;
+  b.dataset.task = `task${i}`;
+  b.addEventListener('click', ()=> onTaskClick(i,b));
+  taskGrid.appendChild(b);
+}
+
+/* fast flick scroll behaviour */
+const wrap = document.getElementById('tasksWrap');
+let isDown=false, startY=0, scrollTopStart=0, velocity=0, rafId=null;
+wrap.addEventListener('pointerdown', (e)=>{
+  isDown=true; wrap.setPointerCapture(e.pointerId);
+  startY = e.clientY; scrollTopStart = wrap.scrollTop; velocity=0;
+  if(rafId) cancelAnimationFrame(rafId);
+});
+wrap.addEventListener('pointermove', (e)=>{
+  if(!isDown) return;
+  const dy = startY - e.clientY;
+  wrap.scrollTop = scrollTopStart + dy * 3.0; // amplify
+  velocity = (e.clientY - (window._lastY||e.clientY)) / Math.max(1, e.timeStamp - (window._lastTS||e.timeStamp));
+  window._lastY = e.clientY; window._lastTS = e.timeStamp;
+});
+wrap.addEventListener('pointerup', (e)=>{
+  isDown=false; wrap.releasePointerCapture(e.pointerId);
+  let v = velocity * -2600;
+  const step = ()=>{
+    if(Math.abs(v) < 0.8) return;
+    wrap.scrollTop += v * 0.016;
+    v *= 0.92;
+    rafId = requestAnimationFrame(step);
+  };
+  rafId = requestAnimationFrame(step);
+});
+wrap.addEventListener('pointercancel', ()=>{ isDown=false; if(rafId) cancelAnimationFrame(rafId); });
+
+/* throttle clicks */
+const lastClick = {};
+function canClickTask(id){
+  const t = lastClick[id] || 0;
+  if(Date.now() - t < 4200) return false;
+  lastClick[id] = Date.now();
+  return true;
+}
+
+/* ===========================
+   AD HANDLER (SDK -> fallback)
+   =========================== */
+async function showRewardedAd(){
+  if(CONFIG.TEST_MODE){
+    return confirm('Test mode: OK = ad seen (reward). Cancel = skip (no reward).');
+  }
+  try{
+    if(typeof window[CONFIG.MONETAG_FN] === 'function'){
+      await window[CONFIG.MONETAG_FN]();
+      return true;
+    }
+  }catch(e){ console.warn('SDK error', e); }
+  // fallback: open smartlink in new tab and ask user to confirm afterwards
+  window.open(CONFIG.ADSTRA_SMARTLINK + '&ref=' + encodeURIComponent(UID), '_blank');
+  return confirm('Ad opened in new tab. After watching the full ad, press OK to claim reward.');
+}
+
+/* grant reward and level bonus */
+function grantReward(note='Ad Reward'){
+  state.balance = (state.balance || 0) + CONFIG.REWARD_PER_AD;
+  state.adsWatched = (state.adsWatched || 0) + 1;
+  const prevLevel = state.level || 0;
+  const newLevel = Math.floor(state.adsWatched / CONFIG.ADS_PER_LEVEL);
+  if(newLevel > prevLevel){
+    for(let L = prevLevel+1; L<=newLevel; L++){
+      const bonus = CONFIG.LEVEL_BASE_BONUS * L;
+      state.balance = (state.balance || 0) + bonus;
+      showRewardPopup(bonus, `Level ${L} Bonus`);
+    }
+    state.level = newLevel;
+  }
+  saveState();
+  showRewardPopup(CONFIG.REWARD_PER_AD, note);
+}
+
+/* task click handler */
+async function onTaskClick(i, el){
+  if(!canClickTask(i)){ alert('Please wait a few seconds before trying again.'); return; }
+  // visual trogol effect on click
+  el.classList.add('trogol');
+  setTimeout(()=> el.classList.remove('trogol'), 900);
+  const ok = await showRewardedAd();
+  if(ok){ grantReward('Task Reward'); } else { alert('No reward (ad skipped).'); }
+}
+
+/* ===========================
+   GAMES
+   =========================== */
+/* Wheel */
+document.getElementById('spinBtn').addEventListener('click', async ()=>{
+  const ok = await showRewardedAd(); if(!ok){ alert('No reward (ad skipped)'); return; }
+  const wheel = document.getElementById('wheel');
+  const spins = Math.floor(Math.random()*6)+8;
+  const sector = Math.floor(Math.random()*8);
+  const deg = spins*360 + sector*(360/8) + Math.floor(Math.random()*20);
+  wheel.style.transition = 'transform 4s cubic-bezier(.25,.8,.25,1)';
+  wheel.style.transform = `rotate(${deg}deg)`;
+  setTimeout(()=>{
+    wheel.style.transition=''; wheel.style.transform=`rotate(${deg%360}deg)`;
+    const win = sector%4===0 || Math.random() < 0.18;
+    document.getElementById('rWheel').innerText = win ? '★ Wheel Win!' : 'No luck';
+    if(win){ state.balance = (state.balance||0) + 0.03; showRewardPopup(0.03,'Spin Bonus'); }
+    grantReward('Spin Reward');
+  },4200);
+});
+
+/* Slot */
+const slotSymbols = ['7','🍒','⭐','🍋','💎','🔔'];
+document.getElementById('slotPlay').addEventListener('click', async ()=>{
+  const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
+  const s1 = document.getElementById('s1'), s2 = document.getElementById('s2'), s3 = document.getElementById('s3');
+  const rounds = 18;
+  for(let i=0;i<rounds;i++){
+    await new Promise(r=>setTimeout(r, 50 + i*6));
+    s1.innerText = slotSymbols[Math.floor(Math.random()*slotSymbols.length)];
+    s2.innerText = slotSymbols[Math.floor(Math.random()*slotSymbols.length)];
+    s3.innerText = slotSymbols[Math.floor(Math.random()*slotSymbols.length)];
+  }
+  const final = [s1.innerText,s2.innerText,s3.innerText];
+  const jackpot = final[0]===final[1] && final[1]===final[2];
+  const smallWin = final[0]===final[1] || final[1]===final[2] || final[0]===final[2];
+  if(jackpot){ state.balance = (state.balance||0) + 0.08; showRewardPopup(0.08,'JACKPOT!'); }
+  else if(smallWin){ state.balance = (state.balance||0) + 0.03; showRewardPopup(0.03,'Small Win'); }
+  grantReward('Slot Reward');
+});
+
+/* Dice Roll */
+document.getElementById('dicePlay').addEventListener('click', async ()=>{
+  const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
+  const face = Math.floor(Math.random()*6)+1; document.getElementById('diceFace').innerText = face;
+  if(face >=5){ state.balance=(state.balance||0)+0.02; showRewardPopup(0.02,'Dice Win'); }
+  grantReward('Dice Reward');
+});
+
+/* Coin Flip */
+document.getElementById('coinHead').addEventListener('click', ()=> coinPlay('head'));
+document.getElementById('coinTail').addEventListener('click', ()=> coinPlay('tail'));
+async function coinPlay(choice){
+  const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
+  const res = Math.random() < 0.5 ? 'head' : 'tail';
+  const win = (res===choice) && Math.random()<0.65;
+  document.getElementById('rCoin').innerText = `Result: ${res.toUpperCase()} ${win? '— Win!':''}`;
+  if(win){ state.balance = (state.balance||0) + 0.01; showRewardPopup(0.01,'Coin Win'); }
+  grantReward('Coin Reward');
+}
+
+/* Lucky Box */
+document.querySelectorAll('#gameBox .buyBtn').forEach(btn=>{
+  btn.addEventListener('click', async (e)=>{
+    const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
+    const p = Math.random();
+    if(p<0.35){ state.balance=(state.balance||0)+0.02; document.getElementById('rBox').innerText='You won +0.02 USDT'; showRewardPopup(0.02,'Box Win'); }
+    else if(p<0.7){ state.balance=(state.balance||0)+0.01; document.getElementById('rBox').innerText='You won +0.01 USDT'; showRewardPopup(0.01,'Box Win'); }
+    else { document.getElementById('rBox').innerText='No prize'; }
+    grantReward('Box Reward');
+  });
+});
+
+/* RPS */
+['rpsRock','rpsPaper','rpsScissors'].forEach(id=>{
+  document.getElementById(id).addEventListener('click', async (e)=>{
+    const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
+    const choices = ['rock','paper','scissors']; const comp = choices[Math.floor(Math.random()*3)];
+    const me = id==='rpsRock'?'rock':id==='rpsPaper'?'paper':'scissors';
+    const outcome = (me===comp)?'Draw':( (me==='rock'&&comp==='scissors')||(me==='paper'&&comp==='rock')||(me==='scissors'&&comp==='paper') ? 'You Win' : 'You Lose');
+    document.getElementById('rRPS').innerText = `${outcome} (CPU: ${comp})`;
+    if(outcome==='You Win'){ state.balance=(state.balance||0)+0.01; showRewardPopup(0.01,'RPS Win'); }
+    grantReward('RPS Reward');
+  });
+});
+
+/* Tile Match (simple) */
+document.getElementById('tilePlay').addEventListener('click', async ()=>{
+  const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
+  const win = Math.random() < 0.4;
+  document.getElementById('rTile').innerText = win? 'Tile Match Win +0.02' : 'Try again';
+  if(win){ state.balance=(state.balance||0)+0.02; showRewardPopup(0.02,'Tile Win'); }
+  grantReward('Tile Reward');
+});
+
+/* Memory (simple) */
+document.getElementById('memPlay').addEventListener('click', async ()=>{
+  const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
+  const win = Math.random() < 0.45;
+  document.getElementById('rMem').innerText = win ? 'Memory Win +0.01' : 'Try again';
+  if(win){ state.balance=(state.balance||0)+0.01; showRewardPopup(0.01,'Memory Win'); }
+  grantReward('Memory Reward');
+});
+
+/* ===========================
+   Withdraw & Notify (GAS + Telegram)
+   =========================== */
+document.getElementById('openWithdraw').addEventListener('click', ()=>{ document.getElementById('withdrawModal').classList.add('show'); });
+document.getElementById('closeWithdraw').addEventListener('click', ()=>{ document.getElementById('withdrawModal').classList.remove('show'); });
+document.getElementById('cancelWithdraw').addEventListener('click', ()=>{ document.getElementById('withdrawModal').classList.remove('show'); });
+
+document.getElementById('submitWithdraw').addEventListener('click', async ()=>{
+  const method = document.getElementById('payMethod').value;
+  const input = document.getElementById('payNumber').value.trim();
+  const amount = parseFloat(document.getElementById('withdrawAmount').value);
+  if(!input || isNaN(amount) || amount < CONFIG.MIN_WITHDRAW){ alert('Invalid withdraw data. Minimum 2 USDT.'); return; }
+  const req = { id: 'wd_'+Date.now(), user: UID, method, input, amount, status:'Pending', time: new Date().toISOString() };
+  // store locally
+  const requests = JSON.parse(localStorage.getItem('gj_withdraws') || '[]'); requests.push(req); localStorage.setItem('gj_withdraws', JSON.stringify(requests));
+  document.getElementById('withdrawModal').classList.remove('show');
+  alert('Withdraw request submitted. Admin will process (stored locally and sent to server).');
+  // send to GAS (Google Apps Script) for sheet logging
+  try{
+    await fetch(CONFIG.GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'withdraw', ...req }) });
+  }catch(e){ console.warn('GAS notify failed', e); }
+  // Optional: send to your server webhook / Telegram via server-side
+});
+
+/* copy referral link */
+document.getElementById('copyRefLink').addEventListener('click', ()=>{
+  const link = `${CONFIG.BASE_URL}?start=ref_${UID}`;
+  navigator.clipboard.writeText(link).then(()=>alert('Referral link copied to clipboard'));
+});
+
+/* referral modal (local storage demo) */
+document.getElementById('openReferList').addEventListener('click', openReferModal);
+document.getElementById('closeReferBtn').addEventListener('click', ()=>{ document.getElementById('referModal').style.display='none'; });
+
+function openReferModal(){
+  const box = document.getElementById('referList'); box.innerHTML = '';
+  const map = JSON.parse(localStorage.getItem('gj_referrals_map') || '{}');
+  const arr = map[UID] || [];
+  if(arr.length === 0){ box.innerHTML = '<div style="color:#9aa4b2">No referrals yet</div>'; }
+  else {
+    arr.forEach((r, idx)=>{ const d = document.createElement('div'); d.style.padding='8px'; d.style.borderBottom='1px solid rgba(255,255,255,0.02)'; d.innerHTML = `<div style="font-weight:900">${idx+1}. ${r.id}</div><div style="color:#9aa4b2">${r.time}</div>`; box.appendChild(d); });
+  }
+  document.getElementById('referModal').style.display='block';
+}
+
+/* handle referral onload (local demo) */
+(function handleReferralOnLoad(){
+  try{
+    const url = new URL(location.href);
+    const start = url.searchParams.get('start') || '';
+    if(start && start.startsWith('ref_')){
+      const refId = start.slice(4);
+      const map = JSON.parse(localStorage.getItem('gj_referrals_map') || '{}');
+      map[refId] = map[refId] || [];
+      map[refId].push({ id: UID, time: new Date().toLocaleString() });
+      localStorage.setItem('gj_referrals_map', JSON.stringify(map));
+      // auto-credit referral bonus locally (server-side recommended for real credit)
+      if(refId !== UID){ // don't self-ref
+        // add credit to refId's local map (demo)
+        const credits = JSON.parse(localStorage.getItem('gj_ref_credits') || '{}');
+        credits[refId] = (credits[refId]||0) + 0.005;
+        localStorage.setItem('gj_ref_credits', JSON.stringify(credits));
+      }
+    }
+  }catch(e){}
+})();
+
+/* initial save */
+saveState();
+
+/* ===========================
+   Trogol toggle + effect on buttons
+   =========================== */
+const tro = document.getElementById('trogolToggle');
+tro.addEventListener('click', toggleTrogol);
+tro.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') toggleTrogol(); });
+function toggleTrogol(){
+  const dot = tro.querySelector('.dot');
+  const on = tro.getAttribute('data-on') === '1';
+  if(on){ tro.setAttribute('data-on','0'); dot.style.left='4px'; tro.setAttribute('aria-checked','false'); showToast('Trogol OFF'); disableTrogol(false); }
+  else { tro.setAttribute('data-on','1'); dot.style.left='28px'; tro.setAttribute('aria-checked','true'); showToast('Trogol ON'); disableTrogol(true); }
+}
+function disableTrogol(on){
+  // when on, clicking a task makes trogol animation (already implemented in onTaskClick)
+  // keep for extensibility
+}
+
+/* small toast */
+function showToast(msg, t=1200){
+  const el = document.getElementById('rewardPopup');
+  el.innerHTML = `<div style="font-weight:900">${msg}</div>`; el.style.display='block';
+  setTimeout(()=> el.style.display='none', t);
+}
+
+/* ===========================
+   Theme/Mood Slider (Light / Dark / Night) - slide effect
+   =========================== */
+const moods = ['dark','light','night'];
+let currentMoodIndex = 0;
+function applyMood(m){
+  document.documentElement.style.transition = 'background 0.5s, color 0.5s';
+  if(m==='dark'){
+    document.documentElement.style.setProperty('--bg-dark-1','#05020a');
+    document.documentElement.style.setProperty('--bg-dark-2','#071225');
+    document.body.style.background = 'linear-gradient(180deg,#05020a,#071225)';
+  } else if(m==='light'){
+    document.documentElement.style.setProperty('--bg-dark-1','#f6f9ff');
+    document.documentElement.style.setProperty('--bg-dark-2','#e6f0ff');
+    document.body.style.background = 'linear-gradient(180deg,#f6f9ff,#e6f0ff)';
+    document.body.style.color = '#04203b';
+  } else { // night
+    document.documentElement.style.setProperty('--bg-dark-1','#021024');
+    document.documentElement.style.setProperty('--bg-dark-2','#001018');
+    document.body.style.background = 'linear-gradient(180deg,#021024,#001018)';
+  }
+  // small mood button glow color update
+  // add a sparkle animation in night mode
+}
+applyMood('dark');
+function cycleMood(){
+  currentMoodIndex = (currentMoodIndex + 1) % moods.length;
+  const next = moods[currentMoodIndex];
+  // slide effect: create overlay and animate
+  const overlay = document.createElement('div');
+  overlay.style.position='fixed'; overlay.style.left='0'; overlay.style.top='0'; overlay.style.width='100%'; overlay.style.height='100%';
+  overlay.style.zIndex='999999'; overlay.style.pointerEvents='none'; overlay.style.background='linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02))';
+  overlay.style.transform = 'translateX(100%)';
+  overlay.style.transition = 'transform .45s ease';
+  document.body.appendChild(overlay);
+  requestAnimationFrame(()=> overlay.style.transform='translateX(0%)');
+  setTimeout(()=>{ applyMood(next); overlay.style.transform='translateX(-100%)'; setTimeout(()=>document.body.removeChild(overlay),480); },200);
+}
+document.addEventListener('keydown',(e)=>{ if(e.key==='m') cycleMood(); }); // quick key
+
+/* link mood button area (we place above referrals) */
+const moodBtn = document.createElement('button'); moodBtn.className='moodBtn'; moodBtn.innerText='Switch Mood 🎨';
+moodBtn.addEventListener('click', ()=> cycleMood());
+document.querySelector('.card .hrow').appendChild(moodBtn);
+
+/* ===========================
+   Utility + keyboard
+   =========================== */
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getElementById('referModal').style.display='none'; document.getElementById('withdrawModal').classList.remove('show'); } });
+
+/* ===========================
+   Final UI startup tweaks
+   =========================== */
+(function startup(){
+  // short welcome toast with username (simulate)
+  showToast(`Welcome ${UID}!`,1600);
+  updateUI();
+})();
+
+</script>
+</body>
+</html>
