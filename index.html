@@ -3,130 +3,134 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Galaxy Jackpot — Premium (Creator: Md Rahat)</title>
+<title>Galaxy Jackpot — Final (Creator: MD RAHAT)</title>
 
-<!-- Monetag SDK (optional) -->
+<!-- Monetag SDK placeholder (optional) -->
 <script src="//libtl.com/sdk.js" data-zone="10125761" data-sdk="show_10125761"></script>
 
 <style>
 :root{
-  --bg:#04040a; --muted:#9aa4b2; --glass:rgba(255,255,255,0.03);
-  --gold1:#ffd54a; --gold2:#ffb84d; --accent:#7c3aed; --success:#2ecc71;
+  --bg:#030316; --card:#0b1220; --muted:#9aa4b2;
+  --gold1:#ffd54a; --gold2:#ffb84d; --accent:#7c3aed;
   --pink:#f472b6; --cyan:#06b6d4; --teal:#34d399;
 }
-
-/* --- Base --- */
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial;background:linear-gradient(180deg,#020214,var(--bg));color:#eaf2ff}
+html,body{height:100%;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial;background:linear-gradient(180deg,#020214,var(--bg));color:#eaf2ff;overflow-y:auto}
 .container{max-width:1100px;margin:18px auto;padding:18px;position:relative}
 
-/* --- Header --- */
-.header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--gold1),var(--gold2));display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;font-size:22px;box-shadow:0 18px 60px rgba(255,142,0,0.06)}
-.titleBlock{display:flex;flex-direction:column}
-.title{font-weight:900;font-size:18px}
-.subtitle{color:var(--muted);font-size:13px}
+/* --- Creator header (big & shiny) --- */
+.creatorTop{
+  width:100%;display:flex;align-items:center;gap:12px;padding:8px 14px;border-radius:10px;
+  background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));
+  border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(0,0,0,0.4);margin-bottom:12px;
+}
+.creatorTop .tag{font-weight:900;font-size:15px;background:linear-gradient(90deg,var(--gold1),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.creatorTop .sub{color:var(--muted);font-size:13px;margin-left:auto}
 
-/* creator mini signature in header */
-.creatorHeader{margin-left:auto;font-weight:900;font-size:13px;display:flex;align-items:center;gap:8px;position:relative}
-.creatorHeader .spark{width:10px;height:10px;border-radius:50%;background:linear-gradient(90deg,var(--pink),var(--cyan));box-shadow:0 6px 18px rgba(124,58,237,0.18)}
-
-/* --- VPN thin banner (top) --- */
+/* --- VPN thin line (top fixed) + combined effects --- */
 #vpnTop{
-  position:fixed;left:50%;top:8px;transform:translateX(-50%);z-index:99999;
-  width:calc(100% - 40px);max-width:1100px;
-  padding:10px 16px;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--accent));
-  color:#fff;font-weight:800;font-size:14px;text-align:center;box-shadow:0 18px 60px rgba(124,58,237,0.14);
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  /* combine effects: glow + slide + pulse */
-  animation:vpnSlide 8s linear infinite, vpnPulse 2.8s ease-in-out infinite, vpnGlow 3.2s ease-in-out infinite;
-  overflow:hidden;
+  position:fixed;left:50%;top:10px;transform:translateX(-50%);z-index:99999;
+  width:calc(100% - 40px);max-width:1100px;padding:10px 16px;border-radius:999px;
+  background:linear-gradient(90deg,var(--cyan),var(--accent));
+  color:#fff;font-weight:800;font-size:14px;text-align:center;box-shadow:0 18px 80px rgba(124,58,237,0.14);
+  display:flex;align-items:center;justify-content:center;gap:10px;pointer-events:none;
+  animation:vpnSlide 9s linear infinite, vpnPulse 2.8s ease-in-out infinite, vpnGlow 3.2s ease-in-out infinite;
 }
 @keyframes vpnSlide{0%{transform:translateX(-52%) translateY(0)}50%{transform:translateX(-48%) translateY(-2px)}100%{transform:translateX(-52%) translateY(0)}}
 @keyframes vpnPulse{0%{filter:brightness(1)}50%{filter:brightness(1.06)}100%{filter:brightness(1)}}
 @keyframes vpnGlow{0%{box-shadow:0 10px 30px rgba(6,182,212,0.08)}50%{box-shadow:0 22px 80px rgba(124,58,237,0.16)}100%{box-shadow:0 10px 30px rgba(6,182,212,0.08)}}
 
-/* thin decorative line behind text */
-#vpnTop:before{
-  content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);opacity:.8;
-  transform:translateY(-12px);
-}
+/* --- Header (logo + title) --- */
+.header{display:flex;align-items:center;gap:12px;margin-bottom:6px;margin-top:56px}
+.logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--gold1),var(--gold2));display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;font-size:22px;box-shadow:0 18px 60px rgba(255,142,0,0.06)}
+.titleBlock{display:flex;flex-direction:column}
+.title{font-weight:900;font-size:18px}
+.subtitle{color:var(--muted);font-size:13px}
 
-/* --- Main balance / info --- */
-.balanceRow{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:56px;margin-bottom:12px}
+/* --- balance row --- */
+.balanceRow{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:12px}
 .balanceBox{padding:12px;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));min-width:260px}
 .balanceBig{font-size:20px;font-weight:900}
 .smallMuted{color:var(--muted);font-size:13px}
 
-/* --- Tasks grid --- */
-.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 12px 40px rgba(0,0,0,0.5);margin-bottom:12px}
-.btnGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
+/* --- tasks container: fast-scroll enabled --- */
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 12px 40px rgba(0,0,0,0.45);margin-bottom:12px}
+.tasksWrap{overflow:auto;max-height:380px;padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent)}
+.btnGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 @media(max-width:1000px){.btnGrid{grid-template-columns:repeat(3,1fr)}}
-.taskBtn{padding:12px;border-radius:10px;border:none;cursor:pointer;font-weight:900;min-height:48px;color:#051018;text-shadow:0 2px 0 rgba(255,255,255,0.02);box-shadow:0 10px 30px rgba(0,0,0,0.35)}
-/* rainbow backgrounds */
+.taskBtn{padding:12px;border-radius:10px;border:none;cursor:pointer;font-weight:900;min-height:48px;color:#051018;box-shadow:0 10px 30px rgba(0,0,0,0.25)}
+/* rainbow variants */
 .rb0{background:linear-gradient(90deg,#ffd54a,#ffb84d)}
 .rb1{background:linear-gradient(90deg,#7c3aed,#34d399);color:#fff}
 .rb2{background:linear-gradient(90deg,#60a5fa,#7c3aed);color:#fff}
 .rb3{background:linear-gradient(90deg,#fb7185,#f97316);color:#fff}
 .rb4{background:linear-gradient(90deg,#a78bfa,#f472b6);color:#fff}
-/* subtle dance animation */
-@keyframes dance {0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+/* dance animation */
+@keyframes dance{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
 .taskBtn.dance{animation:dance 3.2s ease-in-out infinite}
 
-/* --- Games area (only wheel kept as main game) --- */
-.games{display:grid;grid-template-columns:1fr 320px;gap:12px;margin-top:12px}
-@media(max-width:1000px){.games{grid-template-columns:1fr}}
-.gameCard{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);text-align:center;min-height:220px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center}
+/* pointer cursor for drag */
+.tasksWrap { cursor: grab; -webkit-overflow-scrolling: auto; }
+
+/* --- game (wheel) --- */
+.games{display:flex;gap:12px;flex-wrap:wrap}
+.gameCard{flex:1;min-width:300px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);text-align:center}
 #wheel{width:220px;height:220px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:12px auto;box-shadow:0 14px 60px rgba(0,0,0,0.6);background:conic-gradient(#f59e0b 0 45deg,#f97316 45deg 90deg,#f59e0b 90deg 135deg,#f97316 135deg 180deg,#f59e0b 180deg 225deg,#f97316 225deg 270deg,#f59e0b 270deg 315deg,#f97316 315deg 360deg)}
 .wheelCenter{width:82px;height:82px;border-radius:50%;background:linear-gradient(90deg,#fff,#ffd54a);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018}
-.pointer{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:18px solid #fff}
 
-/* --- Reward popup (big flashy) --- */
+/* --- buy now button (sticky bottom right) --- */
+.buyNowWrap{position:fixed;right:18px;bottom:18px;z-index:99995;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.buyBtn{padding:12px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:900;background:linear-gradient(90deg,#f472b6,#7c3aed);color:#fff;box-shadow:0 18px 60px rgba(124,58,237,0.16)}
+.buyBtn:hover{transform:translateY(-4px)}
+
+/* --- reward popup --- */
 .rewardPopup{position:fixed;left:50%;top:32%;transform:translate(-50%,-50%);min-width:300px;padding:18px;border-radius:14px;background:linear-gradient(180deg,#fff,#ffd54a);color:#051018;font-weight:900;display:none;z-index:99999;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.7)}
 .rewardPopup.show{display:block;animation:popIn .6s ease-out}
-@keyframes popIn{0%{transform:translate(-50%,-40%) scale(.88);opacity:0}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
+@keyframes popIn{0%{transform:translate(-50%,-40%) scale(.9);opacity:0}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
 
 /* --- signature big footer --- */
 .signatureFooter{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99990;padding:10px 18px;border-radius:999px;background:linear-gradient(90deg,#7c3aed,#f472b6);color:#fff;font-weight:900;box-shadow:0 22px 80px rgba(124,58,237,0.18);display:flex;gap:12px;align-items:center;cursor:default}
 .signatureFooter .name{font-size:16px;letter-spacing:0.6px}
 .signatureFooter .sub{font-size:12px;opacity:0.92}
-/* shimmer / wave */
 .signatureFooter:hover{transform:translateX(-50%) scale(1.02)}
-.signatureFooter:before{content:'';position:absolute;left:-60px;top:-30px;width:120px;height:120px;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 30%);filter:blur(18px);opacity:0.6;transform:rotate(25deg)}
-/* colorful animated outline */
 .signatureFooter{animation:footerGlow 4s ease-in-out infinite}
 @keyframes footerGlow{0%{box-shadow:0 14px 40px rgba(124,58,237,0.12)}50%{box-shadow:0 26px 80px rgba(244,114,182,0.18)}100%{box-shadow:0 14px 40px rgba(124,58,237,0.12)}}
 
 /* small helpers */
 .hidden{display:none}
 .input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#e6eef6;margin-top:8px}
-.btnPrimary{background:linear-gradient(90deg,var(--gold1),var(--gold2));color:#051018;padding:10px 14px;border-radius:10px;border:none;font-weight:900;cursor:pointer}
 .center{display:flex;align-items:center;justify-content:center}
 </style>
 </head>
 <body>
 
-<!-- VPN thin banner at very top -->
-<div id="vpnTop" role="note" aria-live="polite">
-  🌎 Connect VPN (USA / Canada / Australia) for better rewards!
-</div>
+<!-- VPN banner -->
+<div id="vpnTop">🌎 Connect VPN (USA / Canada / Australia) for better rewards!</div>
 
 <div class="container">
+
+  <!-- Creator header -->
+  <div class="creatorTop" role="banner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-weight:900;font-size:18px">Galaxy Jackpot</div>
+      <div style="font-size:13px;color:var(--muted)">Play • Watch Ads • Earn</div>
+    </div>
+    <div style="margin-left:auto" class="tagArea">
+      <div class="tag" style="font-weight:900">Creator : <span style="color:#fff">MD RAHAT</span></div>
+    </div>
+    <div class="sub">Premium Edition</div>
+  </div>
+
+  <!-- header (logo + title) -->
   <div class="header">
     <div class="logo">GJ</div>
     <div class="titleBlock">
-      <div class="title">Galaxy Jackpot — Premium</div>
-      <div class="subtitle">Play • Watch Ads • Earn</div>
-    </div>
-
-    <!-- creator mini signature in header -->
-    <div class="creatorHeader" title="Creator: Md Rahat">
-      <div class="spark" aria-hidden="true"></div>
-      <div style="font-weight:800">creator <span style="color:var(--gold1)">Md Rahat</span></div>
+      <div class="title">Galaxy Jackpot — Final</div>
+      <div class="subtitle">100 Tasks • Spin Wheel • Referral • Withdraw</div>
     </div>
   </div>
 
-  <!-- balance row -->
+  <!-- balance -->
   <div class="balanceRow">
     <div class="balanceBox">
       <div class="smallMuted">Current Balance</div>
@@ -135,128 +139,162 @@ html,body{height:100%;font-family:Inter,system-ui,-apple-system,'Segoe UI',Robot
     </div>
 
     <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
-      <button id="openReferList" class="btnPrimary">My Referrals</button>
+      <button id="openReferList" class="buyBtn" style="background:linear-gradient(90deg,var(--gold1),var(--gold2));color:#051018">My Referrals</button>
       <div class="smallMuted">Referral bonus: <strong>0.005 USDT + 5%</strong></div>
     </div>
   </div>
 
-  <!-- tasks -->
+  <!-- tasks card with fast-scroll -->
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <div style="font-weight:900">Tasks</div>
-      <div class="smallMuted">Click a task → watch ad → earn +0.0005 USDT</div>
+      <div class="smallMuted">Scroll fast — touch or drag to flick. Tap a Task to watch ad & earn +0.0005 USDT</div>
     </div>
 
-    <div class="btnGrid" id="taskGrid" style="margin-top:12px"></div>
+    <div class="tasksWrap" id="tasksWrap" tabindex="0" style="margin-top:12px">
+      <div class="btnGrid" id="taskGrid"></div>
+    </div>
   </div>
 
-  <!-- games (wheel main) -->
-  <div class="games">
-    <div class="gameCard">
-      <div style="display:flex;justify-content:space-between;align-items:center;width:100%">
+  <!-- games & side -->
+  <div style="display:flex;gap:12px;flex-wrap:wrap">
+    <div class="gameCard gameCardLarge" style="flex:1;min-width:300px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
         <div><strong>🎡 Spin Wheel</strong><div class="smallMuted">Play & watch ad to earn</div></div>
-        <button id="spinBtn" class="btnPrimary">Play Spin</button>
+        <button id="spinBtn" class="buyBtn">Play Spin</button>
       </div>
-
-      <div id="wheel" style="margin-top:12px">
-        <div class="wheelCenter" id="wheelCenter" role="img" aria-label="Wheel center">SPIN</div>
-      </div>
-
+      <div id="wheel" style="margin-top:12px"><div class="wheelCenter" id="wheelCenter" aria-hidden="true">SPIN</div></div>
       <div id="spinResult" class="smallMuted" style="margin-top:10px"></div>
     </div>
 
-    <!-- side info -->
-    <div class="card" style="min-height:220px">
-      <div style="font-weight:900">Withdraw</div>
+    <div style="width:320px" class="card">
+      <div style="font-weight:900">Withdraw & Info</div>
       <div class="smallMuted" style="margin-top:8px">Minimum withdraw: <strong>2 USDT</strong></div>
       <div style="display:flex;gap:8px;margin-top:12px;flex-direction:column">
-        <button id="withdrawBtn" class="btnPrimary">Withdraw Now</button>
-        <button id="copyRefBtn" class="btn">Copy Referral Link</button>
+        <button id="withdrawBtn" class="buyBtn">Withdraw Now</button>
+        <button id="copyRefBtn" class="buyBtn" style="background:linear-gradient(90deg,#60a5fa,#7c3aed)">Copy Referral Link</button>
       </div>
     </div>
   </div>
 
 </div>
 
-<!-- reward popup -->
+<!-- big reward popup -->
 <div id="rewardPopup" class="rewardPopup" role="status" aria-live="polite"></div>
 
 <!-- refer modal -->
-<div id="referModal" class="hidden modal" role="dialog" aria-modal="true">
-  <button id="closeRefer" class="closeX" style="float:right;background:transparent;border:none;color:#fff;font-size:18px">✕</button>
+<div id="referModal" class="hidden" style="position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:14px;border-radius:12px;z-index:200000;color:#e6eef6;min-width:320px;display:none">
+  <button id="closeRefer" style="float:right;background:transparent;border:none;color:#fff;font-size:18px">✕</button>
   <h3 style="text-align:center;margin-top:8px">My Referral List</h3>
-  <div id="referList" class="listBox"></div>
+  <div id="referList" style="max-height:260px;overflow:auto;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);margin-top:8px"></div>
 </div>
 
-<!-- signature footer (big & premium) -->
-<div class="signatureFooter" title="Creator: Md Rahat">
-  <div class="name">✨ Created with ❤ by <strong>Md Rahat</strong></div>
-  <div class="sub">Design • Monetization • Premium UI</div>
+<!-- buy now sticky -->
+<div class="buyNowWrap">
+  <button id="buyNowBtn" class="buyBtn">Buy Now — $100</button>
+</div>
+
+<!-- signature footer -->
+<div class="signatureFooter" title="Creator: MD RAHAT">
+  <div class="name">✨ Created with ❤ by <strong>MD RAHAT</strong></div>
+  <div class="sub">Premium UI • Monetization • Referral</div>
 </div>
 
 <script>
 /* ===========================
-   CONFIG & INITIAL STATE
+   CONFIG (edit here)
    =========================== */
-const TEST_MODE = true;            // set false for production (SDK / smartlinks)
+const TEST_MODE = true;                // set false for production
 const REWARD_PER_AD = 0.0005;
 const ADS_PER_LEVEL = 100;
 const LEVEL_BASE_BONUS = 0.01;
+const MIN_WITHDRAW = 2;                // USDT
+const UID = localStorage.getItem('gj_user_id') || ('u'+Math.floor(Math.random()*9e8));
+localStorage.setItem('gj_user_id', UID);
 
-let uid = localStorage.getItem('gj_user_id') || ('u'+Math.floor(Math.random()*9e8));
-localStorage.setItem('gj_user_id', uid);
-let state = JSON.parse(localStorage.getItem('gj_state_final') || '{}');
-if(!state.uid){ state = { uid, balance:0.015, adsWatched:0, level:0, referrals:[], refEarned:0 }; saveState(); }
+/* STATE */
+let state = JSON.parse(localStorage.getItem('gj_state_final_v2') || '{}');
+if(!state.uid){ state = { uid:UID, balance:0.015, adsWatched:0, level:0, referrals:[], refEarned:0 }; saveState(); }
+function saveState(){ localStorage.setItem('gj_state_final_v2', JSON.stringify(state)); localStorage.setItem('gj_balance', String(state.balance)); updateUI(); }
 
-function saveState(){ localStorage.setItem('gj_state_final', JSON.stringify(state)); localStorage.setItem('gj_balance', String(state.balance)); updateUI(); }
-
-/* update UI */
+/* UI update */
 function updateUI(){
-  document.getElementById('balanceDisplay').innerText = 'USDT ' + (state.balance||0).toFixed(6);
+  document.getElementById('balanceDisplay').innerText = 'USDT ' + (state.balance || 0).toFixed(6);
   document.getElementById('progressInfo').innerText = `Ads watched: ${state.adsWatched} • Level: ${state.level} • Progress: ${state.adsWatched % ADS_PER_LEVEL}/${ADS_PER_LEVEL}`;
 }
 
-/* show reward popup */
-function showRewardPopup(amount, text){
+/* reward popup */
+function showRewardPopup(amount, title){
   const el = document.getElementById('rewardPopup');
-  el.innerHTML = `<div style="font-size:18px;font-weight:900">${text}</div><div style="margin-top:8px;font-size:16px">${amount.toFixed(6)} USDT</div>`;
+  el.innerHTML = `<div style="font-size:18px;font-weight:900">${title}</div><div style="margin-top:8px;font-size:16px">${amount.toFixed(6)} USDT</div>`;
   el.classList.add('show'); el.style.display='block';
   setTimeout(()=>{ el.style.display='none'; el.classList.remove('show'); }, 2200);
 }
 
 /* ===========================
-   TASKS: render 100 colorful buttons
+   TASKS (100) render & fast-scroll interaction
    =========================== */
 const taskGrid = document.getElementById('taskGrid');
-const classes = ['rb0','rb1','rb2','rb3','rb4'];
+const colors = ['rb0','rb1','rb2','rb3','rb4'];
 for(let i=1;i<=100;i++){
   const b = document.createElement('button');
-  b.className = 'taskBtn ' + classes[i % classes.length] + ' dance';
+  b.className = 'taskBtn ' + colors[i % colors.length] + ' dance';
   b.innerText = `Task ${i}`;
   b.dataset.task = `task${i}`;
-  b.addEventListener('click', ()=> onTaskClick(i, b));
+  b.addEventListener('click', ()=> onTaskClick(i,b));
   taskGrid.appendChild(b);
 }
 
-/* throttle & per-task cooldown */
+/* fast flick scroll on tasksWrap (vertical) */
+const wrap = document.getElementById('tasksWrap');
+let isDown=false, startY, scrollTopStart, velocity=0, lastMove=0, rafId=null;
+wrap.addEventListener('pointerdown', (e)=>{
+  isDown=true; wrap.setPointerCapture(e.pointerId);
+  startY = e.clientY; scrollTopStart = wrap.scrollTop; velocity=0; lastMove=e.timeStamp;
+  if(rafId) cancelAnimationFrame(rafId);
+  wrap.style.cursor='grabbing';
+});
+wrap.addEventListener('pointermove', (e)=>{
+  if(!isDown) return;
+  const dy = startY - e.clientY;
+  wrap.scrollTop = scrollTopStart + dy*1.8; // amplify for fast feel
+  const now = e.timeStamp;
+  velocity = (e.clientY - (window._lastY||e.clientY)) / (now - (window._lastTS||now));
+  window._lastY = e.clientY; window._lastTS = now;
+});
+wrap.addEventListener('pointerup', (e)=>{
+  isDown=false; wrap.releasePointerCapture(e.pointerId); wrap.style.cursor='grab';
+  // apply inertial scroll using velocity
+  let v = velocity * -2000; // tuned multiplier
+  const step = ()=>{
+    if(Math.abs(v) < 0.5) return;
+    wrap.scrollTop += v * 0.016;
+    v *= 0.95;
+    rafId = requestAnimationFrame(step);
+  };
+  rafId = requestAnimationFrame(step);
+});
+wrap.addEventListener('pointercancel', ()=>{ isDown=false; if(rafId) cancelAnimationFrame(rafId); wrap.style.cursor='grab'; });
+
+/* throttle per task click */
 const lastClick = {};
 function canClickTask(id){
   const t = lastClick[id] || 0;
-  if(Date.now() - t < 8000) return false;
+  if(Date.now() - t < 5000) return false;
   lastClick[id] = Date.now();
   return true;
 }
 
-/* ad provider fallback (smartlink) */
+/* ===========================
+   AD flow (try SDK else fallback) 
+   =========================== */
 const ADSTRA_SMARTLINK = 'https://www.effectivegatecpm.com/za35wfvxct?key=33d9ac55094c983709eac1a9fd20c4b5';
 const MONETAG_FN = 'show_10125761';
 
-/* show rewarded ad sequence */
 async function showRewardedAd(){
   if(TEST_MODE){
-    // simulate user watching ad: use confirm for quick test
-    const ok = confirm('Test mode: click OK to simulate full ad watched (reward). Cancel = skip.');
-    return ok;
+    // quick confirm simulation
+    return confirm('Test mode: Press OK to simulate full ad watched & earn reward, Cancel = skip (no reward).');
   }
   // production: try SDK
   try{
@@ -265,50 +303,46 @@ async function showRewardedAd(){
       return true;
     }
   }catch(e){ console.warn('SDK error', e); }
-  // fallback open smartlink
-  window.open(ADSTRA_SMARTLINK + '&ref='+encodeURIComponent(uid), '_blank');
-  const ok = confirm('Ad opened in new tab. After watching the full ad, press OK to claim reward.');
-  return ok;
+  // fallback open smartlink and ask user to confirm
+  window.open(ADSTRA_SMARTLINK + '&ref=' + encodeURIComponent(UID), '_blank');
+  return confirm('Ad opened in a new tab. After watching the full ad, press OK to claim reward.');
 }
 
-/* grant reward & level handling */
+/* grant reward & level */
 function grantReward(note='Ad Reward'){
   state.balance = (state.balance || 0) + REWARD_PER_AD;
   state.adsWatched = (state.adsWatched || 0) + 1;
-  // level calculation
-  const prev = state.level || 0;
-  const levelNow = Math.floor(state.adsWatched / ADS_PER_LEVEL);
-  if(levelNow > prev){
-    for(let L = prev+1; L<= levelNow; L++){
+  const prevLevel = state.level || 0;
+  const newLevel = Math.floor(state.adsWatched / ADS_PER_LEVEL);
+  if(newLevel > prevLevel){
+    for(let L = prevLevel+1; L<=newLevel; L++){
       const bonus = LEVEL_BASE_BONUS * L;
-      state.balance = (state.balance||0) + bonus;
+      state.balance = (state.balance || 0) + bonus;
       showRewardPopup(bonus, `Level ${L} Bonus`);
     }
-    state.level = levelNow;
+    state.level = newLevel;
   }
   saveState();
   showRewardPopup(REWARD_PER_AD, note);
 }
 
-/* click handler for task */
+/* handle task click */
 async function onTaskClick(i, el){
-  if(!canClickTask(i)) { alert('Please wait a few seconds before trying again.'); return; }
-  // prevent multiple claims rapid
-  el.disabled = true; el.style.opacity = '0.7';
-  const watched = await showRewardedAd();
-  if(watched){ grantReward('Task Reward'); } else { alert('No reward: ad skipped or failed.'); }
-  el.disabled = false; el.style.opacity = '1';
+  if(!canClickTask(i)){ alert('Please wait a few seconds before trying again.'); return; }
+  el.disabled=true; el.style.opacity='0.7';
+  const ok = await showRewardedAd();
+  if(ok){ grantReward('Task Reward'); } else { alert('No reward (ad skipped).'); }
+  el.disabled=false; el.style.opacity='1';
 }
 
 /* ===========================
-   Wheel game (play & reward)
+   Wheel game
    =========================== */
 const spinBtn = document.getElementById('spinBtn');
 spinBtn.addEventListener('click', async ()=>{
   spinBtn.disabled = true; spinBtn.innerText = 'Loading ad...';
   const ok = await showRewardedAd();
   if(!ok){ alert('No reward (ad skipped)'); spinBtn.disabled=false; spinBtn.innerText='Play Spin'; return; }
-  // wheel animation simplified visual
   const wheel = document.getElementById('wheel');
   const spins = Math.floor(Math.random()*6)+6;
   const sector = Math.floor(Math.random()*8);
@@ -316,9 +350,8 @@ spinBtn.addEventListener('click', async ()=>{
   wheel.style.transition = 'transform 4s cubic-bezier(.25,.8,.25,1)';
   wheel.style.transform = `rotate(${deg}deg)`;
   setTimeout(()=>{
-    wheel.style.transition='';
-    wheel.style.transform = `rotate(${deg%360}deg)`;
-    const win = sector%4===0 || Math.random()<0.12;
+    wheel.style.transition=''; wheel.style.transform=`rotate(${deg%360}deg)`;
+    const win = sector%4===0 || Math.random() < 0.12;
     document.getElementById('spinResult').innerText = win ? '★ Wheel Win!' : 'No luck';
     if(win){ state.balance = (state.balance||0) + 0.02; showRewardPopup(0.02,'Spin Bonus'); }
     grantReward('Spin Reward');
@@ -327,63 +360,63 @@ spinBtn.addEventListener('click', async ()=>{
 });
 
 /* ===========================
-   Withdraw & Referral UI
+   Withdraw & referral UI
    =========================== */
 document.getElementById('copyRefBtn').addEventListener('click', ()=>{
-  const link = `https://t.me/galaxy_jackpot_bot?start=ref_${uid}`;
+  const link = `https://t.me/galaxy_jackpot_bot?start=ref_${UID}`;
   navigator.clipboard.writeText(link).then(()=>alert('Referral link copied'));
 });
 
 document.getElementById('openReferList').addEventListener('click', openReferModal);
-document.getElementById('closeRefer').addEventListener('click', ()=>document.getElementById('referModal').classList.remove('show'));
+document.getElementById('closeRefer').addEventListener('click', ()=>document.getElementById('referModal').style.display='none');
 
 function openReferModal(){
-  const box = document.getElementById('referList');
-  box.innerHTML = '';
-  if(!state.referrals || state.referrals.length===0){ box.innerHTML = '<div class="smallMuted">No referrals yet</div>'; }
+  const box = document.getElementById('referList'); box.innerHTML = '';
+  if(!state.referrals || state.referrals.length===0){ box.innerHTML = '<div style="color:#9aa4b2">No referrals yet</div>'; }
   else {
     state.referrals.forEach((r, idx)=>{
-      const el = document.createElement('div');
-      el.style.padding='8px'; el.style.borderBottom='1px solid rgba(255,255,255,0.02)';
-      el.innerHTML = `<div style="font-weight:900">${idx+1}. ${r.id}</div><div class="smallMuted">${r.time}</div>`;
+      const el = document.createElement('div'); el.style.padding='8px'; el.style.borderBottom='1px solid rgba(255,255,255,0.02)';
+      el.innerHTML = `<div style="font-weight:900">${idx+1}. ${r.id}</div><div style="color:#9aa4b2">${r.time}</div>`;
       box.appendChild(el);
     });
   }
-  document.getElementById('referModal').classList.add('show');
+  document.getElementById('referModal').style.display='block';
 }
 
-/* On load: check referral param */
-(function handleReferral(){
+/* demo: on URL param ?start=ref_<id> -> record referral locally (best-effort) */
+(function handleReferralOnLoad(){
   try{
-    const url = new URL(location.href);
-    const start = url.searchParams.get('start') || '';
-    if(start && start.startsWith('ref_')){
-      const refId = start.slice(4);
-      // If current user is the referrer store (best-effort local); real crediting should be server-side
-      if(refId === state.uid){
-        // ignore self-ref
-      } else {
-        // store to referrer's map locally (best-effort)
-        const map = JSON.parse(localStorage.getItem('gj_referrals_map') || '{}');
-        (map[refId] = map[refId] || []).push({ id: state.uid, time: new Date().toLocaleString() });
-        localStorage.setItem('gj_referrals_map', JSON.stringify(map));
-        // if referrer exists on this device, credit locally
-        const key = 'gj_state_user_' + refId;
-        const refState = JSON.parse(localStorage.getItem(key) || 'null');
-        if(refState){
-          refState.balance = (refState.balance||0) + 0.005;
-          refState.refEarned = (refState.refEarned||0) + 0.005;
-          localStorage.setItem(key, JSON.stringify(refState));
-        }
-        // For reliability, process referrals on server (Telegram bot) for actual crediting.
-      }
+    const url = new URL(location.href); const start = url.searchParams.get('start') || '';
+    if(start && start.startsWith('ref_')){ const refId = start.slice(4);
+      // add to ref map for refId
+      const map = JSON.parse(localStorage.getItem('gj_referrals_map')|| '{}');
+      map[refId] = map[refId] || []; map[refId].push({ id: UID, time: new Date().toLocaleString() });
+      localStorage.setItem('gj_referrals_map', JSON.stringify(map));
+      // if the referrer is this device user, credit locally (best-effort)
+      const refKey = 'gj_state_' + refId;
+      const refState = JSON.parse(localStorage.getItem(refKey) || 'null');
+      if(refState){ refState.balance = (refState.balance || 0) + 0.005; refState.refEarned = (refState.refEarned || 0) + 0.005; localStorage.setItem(refKey, JSON.stringify(refState)); }
     }
   }catch(e){}
 })();
 
-/* Save initial state & UI */
-saveState();
-updateUI();
+/* Save & init */
+function saveState(){ localStorage.setItem('gj_state_final_v2', JSON.stringify(state)); localStorage.setItem('gj_balance', String(state.balance)); updateUI(); }
+saveState(); updateUI();
+
+/* ===========================
+   Buy Now behavior
+   =========================== */
+document.getElementById('buyNowBtn').addEventListener('click', ()=>{
+  // show contact modal (simple)
+  const ok = confirm('Buy Galaxy Jackpot — $100\nContact: termuxethicalhackingbd@gmail.com\nOpen mail client?');
+  if(ok) location.href = 'mailto:termuxethicalhackingbd@gmail.com?subject=Buy%20Galaxy%20Jackpot%20($100)';
+});
+
+/* ===========================
+   Small accessibility & keyboard
+   =========================== */
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ document.getElementById('referModal').style.display='none'; } });
 
 </script>
 </body>
