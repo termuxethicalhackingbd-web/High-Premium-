@@ -1,79 +1,106 @@
 import express from "express";
-import bodyParser from "body-parser";
 import fetch from "node-fetch";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import TelegramBot from "node-telegram-bot-api";
 
 const app = express();
-app.use(bodyParser.json());
-app.use(express.static(__dirname + "/public"));
+app.use(express.json());
 
+// 🔹 তোমার Bot Token আর Admin ID
 const BOT_TOKEN = "8476734737:AAEOORZ-iBbRXcL_AO3sz4wlPBtdQKJILn0";
 const ADMIN_ID = "6209706593";
+
+// 🔹 Google Sheet Web App URL
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbzRVNltwIi_q6Mgc_UKMQGQf2YTm5WRBtrCL-FlJtIUp57rv0LGoNOPnG7BhDeW7O8-/exec";
 
-// Telegram API base
-const API_URL = `https://api.telegram.org/bot${BOT_TOKEN}`;
+// 🔹 Telegram Bot চালু করা
+const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
-// --- WebApp Route ---
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+// 🌈 ইউজার বট চালু করলে
+bot.onText(/\/start/, async (msg) => {
+  const chatId = msg.chat.id;
+  const name = msg.from.first_name || "User";
+
+  // ঝলমলে Welcome মেসেজ
+  await bot.sendMessage(
+    chatId,
+    `✨ <b>Welcome, ${name}!</b>\n\n🪐 You’ve entered <b>Galaxy Jackpot</b>!\n\n🎯 Earn rewards, complete tasks, and win prizes.`,
+    {
+      parse_mode: "HTML",
+      reply_markup: {
+        inline_keyboard: [
+          [
+            { text: "🎮 Start Earning", callback_data: "start_earn" },
+            { text: "💸 Withdraw", callback_data: "withdraw" },
+          ],
+          [
+            { text: "👫 Refer & Earn", callback_data: "refer" },
+            { text: "⚙️ Settings", callback_data: "settings" },
+          ],
+        ],
+      },
+    }
+  );
+
+  // Google Sheet এ লগ পাঠানো
+  await fetch(SHEET_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user_id: chatId,
+      username: name,
+      action: "Start Bot",
+      amount: "0",
+      status: "Active",
+    }),
+  });
+
+  // নিচের ব্যানার মেসেজ
+  setTimeout(() => {
+    bot.sendMessage(
+      chatId,
+      "🌟 <b>Buy Now Galaxy Jackpot Full Script</b>\n📧 termuxethicalhackingbd@gmail.com",
+      { parse_mode: "HTML" }
+    );
+  }, 4000);
 });
 
-// --- Telegram Bot ---
-app.post("/webhook", async (req, res) => {
-  try {
-    const msg = req.body.message;
-    if (!msg || !msg.text) return res.sendStatus(200);
+// 🔹 Ads দেখানোর জন্য ডেমো কমান্ড
+bot.onText(/\/ad/, async (msg) => {
+  const chatId = msg.chat.id;
+  await bot.sendMessage(
+    chatId,
+    "🪙 Please wait while loading your reward ad…"
+  );
 
-    const chatId = msg.chat.id;
-    const name = msg.from.first_name;
+  // এখানে Monetag বা Adstra ads স্ক্রিপ্ট লোড করার জন্য iframe URL দিতে পারো
+  await bot.sendMessage(
+    chatId,
+    "✅ Reward completed! You’ve earned 10 points 🎉"
+  );
+});
 
-    if (msg.text === "/start") {
-      const welcomeMsg = `🌟 Welcome ${name}!\n\n🎯 Use USA VPN before using this bot.\n\n💰 Earn more from ads, tasks & games!`;
-      await sendMessage(chatId, welcomeMsg);
-      setTimeout(() => deleteMessage(chatId, msg.message_id + 1), 6000);
-    }
+// 🔹 ডিফল্ট callback হ্যান্ডল
+bot.on("callback_query", async (query) => {
+  const chatId = query.message.chat.id;
+  const action = query.data;
 
-    // Log user in Google Sheet
-    await fetch(SHEET_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        user_id: chatId,
-        username: name,
-        action: msg.text,
-        status: "Active"
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    res.sendStatus(200);
-  } catch (err) {
-    console.error("Webhook Error:", err);
-    res.sendStatus(500);
+  if (action === "start_earn") {
+    await bot.sendMessage(chatId, "🎯 Watch ads or complete tasks to earn!");
+  } else if (action === "withdraw") {
+    await bot.sendMessage(chatId, "💳 Withdrawal will be available soon!");
+  } else if (action === "refer") {
+    await bot.sendMessage(
+      chatId,
+      `👫 Invite your friends!\nYour link: https://t.me/galaxy_jackpot_bot?start=${chatId}`
+    );
+  } else if (action === "settings") {
+    await bot.sendMessage(chatId, "⚙️ Settings panel coming soon!");
   }
 });
 
-// --- Telegram Message Helper ---
-async function sendMessage(chatId, text) {
-  await fetch(`${API_URL}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: chatId, text }),
-  });
-}
+// 🌍 Web Server
+app.get("/", (req, res) => {
+  res.send("🚀 Galaxy Jackpot Bot Server Running Successfully!");
+});
 
-async function deleteMessage(chatId, messageId) {
-  await fetch(`${API_URL}/deleteMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: chatId, message_id: messageId }),
-  });
-}
-
-// --- Start server ---
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(3000, () => console.log("✅ Server running on port 3000"));
