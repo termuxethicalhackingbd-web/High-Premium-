@@ -1,81 +1,373 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galaxy Jackpot</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at center, #1a1a2e, #000);
-      color: white;
-      text-align: center;
-      overflow: hidden;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Galaxy Jackpot — WebApp</title>
 
-    h1 {
-      font-size: 2.2rem;
-      margin-top: 70px;
-      animation: glow 2s infinite alternate;
-    }
+<!-- Monetag SDK (your provided script) -->
+<script src="//libtl.com/sdk.js" data-zone="10125761" data-sdk="show_10125761"></script>
 
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #ff00c8; }
-      to { text-shadow: 0 0 20px #00fff2, 0 0 30px #ff0080; }
-    }
+<style>
+  :root{
+    --bg1:#020018; --bg2:#07122a; --accent:#ffd54a; --muted:#9aa4b2; --card:rgba(255,255,255,0.03);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,Roboto,Arial;background:
+    radial-gradient(800px at 20% 10%, rgba(124,77,255,0.04), transparent 8%),
+    linear-gradient(160deg,var(--bg1),var(--bg2)); color:#eaf2ff; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1100px;margin:18px auto;padding:18px;position:relative;z-index:2}
+  .header{display:flex;align-items:center;gap:14px}
+  .logo{width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#ff6a00);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018}
+  h1{margin:0;font-size:20px}
+  .subtitle{color:var(--muted);font-size:13px}
 
-    #welcome {
-      font-size: 1.2rem;
-      margin-top: 20px;
-      animation: fadeIn 2s ease-in-out;
-    }
+  .main{display:grid;grid-template-columns:1fr 360px;gap:16px;margin-top:16px}
+  @media(max-width:980px){.main{grid-template-columns:1fr}}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+  .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+  .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  @media(max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:520px){.grid{grid-template-columns:repeat(2,1fr)}}
+  .tile{background:var(--card);padding:12px;border-radius:12px;text-align:center;cursor:pointer;border:1px solid rgba(255,255,255,0.03);transition:transform .18s,box-shadow .18s}
+  .tile:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(0,0,0,0.6)}
+  .tile .title{font-weight:800;font-size:13px}
+  .tile .sub{font-size:12px;color:var(--muted);margin-top:6px}
 
-    .banner {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: linear-gradient(90deg, #ff00c8, #00fff2);
-      color: #000;
-      padding: 10px 0;
-      font-weight: 600;
-      font-size: 1rem;
-      animation: bannerGlow 3s infinite alternate;
-    }
+  .sidebar{position:sticky;top:18px}
+  .input{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#eaf2ff;margin-top:8px}
 
-    @keyframes bannerGlow {
-      from { filter: brightness(1); }
-      to { filter: brightness(1.5); }
-    }
-  </style>
+  /* welcome & vpn banners */
+  .banner{
+    position:fixed;left:50%;transform:translateX(-50%);top:22px;z-index:9999;padding:14px 20px;border-radius:12px;
+    background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    backdrop-filter:blur(6px);box-shadow:0 20px 60px rgba(0,0,0,0.6);display:flex;align-items:center;gap:12px;color:#fff;font-weight:700;
+    animation:bannerIn .45s ease;
+  }
+  @keyframes bannerIn{from{transform:translateX(-50%) translateY(-10px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
+  .banner.hide{display:none}
+
+  .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:120px;background:linear-gradient(120deg,#d1fae5,#bbf7d0);color:#064e3b;padding:10px 16px;border-radius:10px;display:none;font-weight:800;z-index:9999}
+  .mini{position:fixed;right:18px;top:18px;padding:10px 12px;border-radius:10px;background:linear-gradient(90deg,#bbf7d0,#d1fae5);color:#064e3b;display:none;z-index:9999}
+
+  .stars{pointer-events:none; position:fixed;inset:0;z-index:0;background:
+    radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,0.06), transparent 2px),
+    radial-gradient(1.5px 1.5px at 30% 80%, rgba(255,255,255,0.04), transparent 2px),
+    radial-gradient(2px 2px at 80% 30%, rgba(255,255,255,0.05), transparent 2px);
+    opacity:0.9;
+  }
+
+  /* Sell Banner (bottom) - Buy now Galaxy Jackpot Full Script */
+  .sell-banner {
+    position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%);
+    width: min(980px, calc(100% - 36px)); border-radius: 14px; padding: 14px 18px;
+    box-shadow: 0 18px 50px rgba(12,18,30,0.6); display:flex; gap:12px; align-items:center; z-index:99999;
+    backdrop-filter: blur(6px); border:1px solid rgba(255,255,255,0.04); overflow:hidden;
+    background: linear-gradient(90deg, rgba(255,214,74,0.12), rgba(124,77,255,0.06));
+  }
+  .sell-logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#ffd54a,#ff6a00);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018}
+  .sell-title{font-weight:900;color:#051018}
+  .sell-desc{color:#051018;background:rgba(255,255,255,0.85);padding:6px 10px;border-radius:8px;font-size:13px}
+  .sell-actions{display:flex;gap:8px;align-items:center}
+  .sell-cta{background: linear-gradient(135deg,#7c4dff,#34d399);color:#051018;font-weight:800;padding:10px 14px;border-radius:10px;text-decoration:none}
+  .sell-buy{background:transparent;border:1px solid rgba(0,0,0,0.06);color:#051018;padding:8px 12px;border-radius:10px;text-decoration:none}
+  .sell-close{background:transparent;border:none;color:#051018;font-size:18px;cursor:pointer;padding:6px;border-radius:8px}
+  @media(max-width:680px){
+    .sell-desc{display:none}
+  }
+</style>
 </head>
 <body>
-  <h1>🌌 Galaxy Jackpot Bot 🌌</h1>
-  <div id="welcome">Welcome <span id="user"></span> 👋<br>Connecting to system...</div>
+<div class="stars"></div>
 
-  <!-- এখানে তোমার Adstra বা Monetag ads script বসবে -->
-  <!-- উদাহরণ -->
-  <script async src="https://a.magsrv.com/ad-provider.js"></script>
-
-  <div class="banner">
-    🚀 Buy Now: <a href="mailto:termuxethicalhackingbd@gmail.com" style="color:#000; text-decoration:underline;">termuxethicalhackingbd@gmail.com</a> |
-    Contact Telegram: <a href="https://t.me/Rakib90100" style="color:#000;">@Rakib90100</a>
+<div class="wrap" id="root">
+  <div class="header">
+    <div class="logo">GJ</div>
+    <div>
+      <h1>Galaxy Jackpot — Telegram WebApp</h1>
+      <div class="subtitle">Premium • Ads • Withdraw • Referral • Sheet logging</div>
+    </div>
+    <div style="margin-left:auto" class="controls">
+      <button id="stopAdsBtn" class="tile" style="padding:8px 12px;">Stop Ads</button>
+    </div>
   </div>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get("name") || "User";
-    document.getElementById("user").innerText = name;
+  <div class="main">
+    <div class="panel">
+      <strong>Explore — 100 features</strong>
+      <div style="margin-top:10px;color:var(--muted)">Tap any tile to watch ad & earn</div>
+      <div style="height:12px"></div>
+      <div class="grid" id="grid"></div>
+    </div>
 
-    // ৫ সেকেন্ড পর ওয়েলকাম টেক্সট হাইড হবে
-    setTimeout(() => {
-      document.getElementById("welcome").style.display = "none";
-    }, 5000);
-  </script>
+    <aside class="sidebar panel">
+      <div><strong>Balance</strong><div id="balance" style="font-weight:900;margin-top:6px">USDT 0.000</div><div style="color:var(--muted);font-size:13px">Available</div></div>
+
+      <div style="margin-top:12px"><strong>Referral</strong>
+        <input id="refInput" class="input" readonly />
+        <button id="copyRef" class="input" style="margin-top:8px;cursor:pointer">Copy Referral Link</button>
+      </div>
+
+      <div style="margin-top:12px"><strong>Withdraw</strong>
+        <div style="color:var(--muted);font-size:13px;margin-top:6px">Minimum withdraw: <strong>2 USDT</strong></div>
+        <select id="method" class="input">
+          <option value="bkash">bKash</option>
+          <option value="nagad">Nagad</option>
+          <option value="binance">Binance</option>
+        </select>
+        <input id="payInput" class="input" placeholder="Type your number / Binance UID" />
+        <input id="amt" class="input" type="number" step="0.01" min="2" placeholder="Amount (USDT)" />
+        <div style="font-size:13px;color:var(--muted);margin-top:6px">bKash/Nagad: 1 USDT = 130 BDT</div>
+        <button id="withdrawBtn" class="input" style="margin-top:8px;cursor:pointer">Withdraw Now</button>
+      </div>
+
+      <div style="margin-top:12px"><strong>Info</strong>
+        <div style="color:var(--muted);font-size:13px;margin-top:6px">GAS URL shown below (for debug)</div>
+        <div id="gasDisplay" style="word-break:break-all;color:var(--accent);font-size:12px;margin-top:6px"></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- Welcome banner -->
+<div id="welcomeBanner" class="banner" style="display:none">
+  <div style="font-size:18px;color:#ffd54a">✨ Welcome, <span id="welcomeName"></span>!</div>
+</div>
+
+<!-- VPN banner (appears after welcome) -->
+<div id="vpnBanner" class="banner" style="display:none">
+  <div style="font-size:15px;color:#ffcc66">🔵 For best rewards, connect VPN — USA / Canada / Germany / UK recommended</div>
+</div>
+
+<!-- Sell banner (bottom) - Buy now Galaxy Jackpot Full Script -->
+<div id="sellBanner" class="sell-banner" role="region" aria-label="Buy now Galaxy Jackpot Full Script">
+  <div class="sell-logo">GJ</div>
+  <div style="flex:1;min-width:0">
+    <div class="sell-title">Buy now — Galaxy Jackpot Full Script</div>
+    <div class="sell-desc">Full premium package: WebApp + Ads + Withdraw + Referral + Sheet logging. Contact @Rakib90100 or email.</div>
+  </div>
+  <div class="sell-actions">
+    <a class="sell-cta" href="https://t.me/Rakib90100" target="_blank" rel="noopener noreferrer">Contact @Rakib90100</a>
+    <a class="sell-buy" href="mailto:termuxethicalhackingbd@gmail.com" target="_blank" rel="noopener noreferrer">Buy Now</a>
+    <button class="sell-close" onclick="closeSellBanner()">✕</button>
+  </div>
+</div>
+
+<div id="toast" class="toast">...</div>
+<div id="mini" class="mini">...</div>
+
+<script>
+/* ================= CONFIG - Edit only top-level values if needed ================= */
+const GAS_URL = "https://script.google.com/macros/s/AKfycbzRVNltwIi_q6Mgc_UKMQGQf2YTm5WRBtrCL-FlJtIUp57rv0LGoNOPnG7BhDeW7O8-/exec";
+const SECRET_KEY = "GalaxySecure2025";
+const BOT_USERNAME = "galaxy_jackpot_bot"; // <-- your bot username (without @)
+const MIN_WITHDRAW = 2.0;
+const BDT_RATE = 130;
+const BANNER_SNIPPET = ""; // optional Monetag banner HTML (paste if you have)
+const REWARD_PER_AD = 0.005; // USDT reward per successful ad
+/* ================================================================================== */
+
+/* runtime state */
+let balance = 0.0;
+let stopAds = false;
+let userId = localStorage.getItem('gj_user_id') || (Math.floor(Math.random()*9e8)+100000000).toString();
+let username = localStorage.getItem('gj_username') || "";
+
+/* Init UI */
+document.getElementById('gasDisplay').innerText = GAS_URL;
+
+/* Referral link builder */
+function updateRef(){
+  let link = "";
+  if(BOT_USERNAME && BOT_USERNAME.indexOf('<')===-1){
+    link = `https://t.me/${BOT_USERNAME}?start=${userId}`;
+  } else {
+    link = `${location.origin}${location.pathname}#ref=${userId}`;
+  }
+  document.getElementById('refInput').value = link;
+}
+updateRef();
+
+/* Get Telegram user if in WebApp mode, else URL param ?user=, else prompt */
+function getQueryParam(name){ const p = new URLSearchParams(location.search); return p.get(name); }
+(function initUser(){
+  const qUser = getQueryParam('user') || getQueryParam('username') || null;
+  if(qUser) username = qUser;
+
+  // Telegram WebApp detection (best-effort)
+  try {
+    if(window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user){
+      const u = window.Telegram.WebApp.initDataUnsafe.user;
+      username = (u.first_name || u.username || ("User"+(u.id||"")));
+      userId = u.id ? String(u.id) : userId;
+    }
+  } catch(e){ /* ignore */ }
+
+  if(!username){
+    const saved = localStorage.getItem('gj_username');
+    if(saved) username = saved;
+  }
+  if(!username){
+    username = prompt("Enter display name (will be stored locally):", "Player"+userId.slice(-4)) || ("Player"+userId.slice(-4));
+  }
+  localStorage.setItem('gj_username', username);
+  localStorage.setItem('gj_user_id', userId);
+})();
+
+/* Welcome -> VPN sequence (5s each) */
+function showSequence(){
+  const w = document.getElementById('welcomeBanner');
+  const v = document.getElementById('vpnBanner');
+  document.getElementById('welcomeName').innerText = username;
+  w.style.display = 'flex';
+  setTimeout(()=>{ w.classList.add('hide'); w.style.display='none';
+    v.style.display = 'flex';
+    setTimeout(()=>{ v.classList.add('hide'); v.style.display='none';
+      // show banner ad area after sequence
+      if(BANNER_SNIPPET && BANNER_SNIPPET.trim().length>0){
+        // inject snippet
+        const bannerBox = document.createElement('div');
+        bannerBox.innerHTML = BANNER_SNIPPET;
+        document.body.appendChild(bannerBox);
+      }
+    },5000);
+  },5000);
+}
+showSequence();
+
+/* Toast helpers */
+function showToast(msg, ok=true){
+  const t = document.getElementById('toast');
+  t.innerText = msg;
+  t.style.display = 'block';
+  t.style.background = ok? 'linear-gradient(120deg,#d1fae5,#bbf7d0)' : 'linear-gradient(120deg,#fee2e2,#fecaca)';
+  setTimeout(()=> t.style.display = 'none', 2600);
+}
+function showMini(msg){ const m=document.getElementById('mini'); m.innerText = msg; m.style.display = 'block'; setTimeout(()=>m.style.display = 'none',1600); }
+
+/* Generate 100 tiles (10 categories x 10) */
+const grid = document.getElementById('grid');
+const cats = ["Galaxy Spins","Legend Chests","Mystery Boxes","Lucky Draws","Rocket Boost","Star Chests","Bonus Quests","Daily Treasures","VIP Tasks","Cosmic MiniGames"];
+const labels = ["Spin","Crack","Blast","Flip","Tap","Strike","Rush","Snap","Pop"];
+for(let c=0;c<10;c++){
+  for(let i=1;i<=10;i++){
+    const div = document.createElement('div');
+    div.className = 'tile';
+    const title = `${cats[c]} • ${labels[(i-1)%labels.length]} #${i}`;
+    div.innerHTML = `<div class="title">${title}</div><div class="sub">Watch ad • Earn</div>`;
+    div.onclick = ()=> onTileClick(title);
+    grid.appendChild(div);
+  }
+}
+
+/* Stop Ads toggle */
+document.getElementById('stopAdsBtn').addEventListener('click',()=>{
+  stopAds = !stopAds;
+  document.getElementById('stopAdsBtn').innerText = stopAds? "Resume Ads":"Stop Ads";
+  showToast(stopAds? "Ads paused":"Ads resumed");
+});
+
+/* Tile click: show Monetag ad (one of variants), reward & log */
+async function onTileClick(label){
+  if(stopAds){ showMini("Ads paused"); return; }
+
+  showToast("Preparing ad...");
+  await sleep(600);
+
+  let adPlayed = false;
+  try {
+    if(typeof show_10125761 === 'function'){
+      const pick = Math.floor(Math.random()*3);
+      if(pick===0) await show_10125761();
+      else if(pick===1) await show_10125761('pop');
+      else await show_10125761({ type:'inApp', inAppSettings:{ frequency:2, capping:0.1, interval:30, timeout:5, everyPage:false } });
+      adPlayed = true;
+    } else {
+      // fallback: open monetag domain in new tab
+      window.open('https://libtl.com','_blank');
+      adPlayed = true;
+    }
+  } catch(e){
+    console.warn('Ad error', e);
+    adPlayed = false;
+  }
+
+  if(adPlayed){
+    // reward
+    balance = Math.round((balance + REWARD_PER_AD) * 1000) / 1000;
+    document.getElementById('balance').innerText = `USDT ${balance.toFixed(3)}`;
+
+    // log to GAS
+    const payload = { secret: SECRET_KEY, user_id: userId, username: username, action: "Ad Click", input: label, amount: REWARD_PER_AD };
+    sendToGAS(payload);
+
+    // notify admin (serverless)
+    try{
+      fetch('/api/notify', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ secret: SECRET_KEY, type:'ad_click', user_id:userId, username:username, detail: label, amount: REWARD_PER_AD }) });
+    }catch(e){}
+
+    showMini(`Ad watched • +${REWARD_PER_AD} USDT`);
+  } else {
+    showMini("Ad couldn't play");
+  }
+}
+
+/* send POST to GAS (Google Apps Script) */
+async function sendToGAS(payload){
+  try{
+    const res = await fetch(GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    const j = await res.json();
+    return j;
+  }catch(e){ console.warn('GAS error', e); return null; }
+}
+
+/* Withdraw handling */
+document.getElementById('withdrawBtn').addEventListener('click', async ()=>{
+  const method = document.getElementById('method').value;
+  const input = document.getElementById('payInput').value.trim();
+  const amount = parseFloat(document.getElementById('amt').value || "0");
+  if(Number.isNaN(amount) || amount < MIN_WITHDRAW){ alert("Minimum withdraw is 2 USDT"); return; }
+  if(!input){ alert("Please enter number or Binance UID"); return; }
+
+  showToast("Submitting withdraw...");
+  const payload = { secret: SECRET_KEY, user_id: userId, username: username, action: "Withdraw", input: `${method.toUpperCase()}: ${input}`, amount: amount };
+  try{
+    // Post to GAS logger
+    await fetch(GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    // Notify serverless (Telegram admin)
+    const r2 = await fetch('/api/notify', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ secret: SECRET_KEY, type:'withdraw', payload }) });
+    const j2 = await r2.json();
+    if(j2 && j2.ok){
+      showToast("Withdraw submitted — admin notified");
+    } else {
+      showToast("Withdraw submitted — admin notify failed", true);
+    }
+  }catch(e){ showToast("Network error", false); }
+});
+
+/* Referral copy */
+document.getElementById('copyRef').addEventListener('click', ()=> {
+  const v = document.getElementById('refInput').value;
+  navigator.clipboard.writeText(v).then(()=> showToast("Referral copied"));
+});
+
+/* Sleep util */
+function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+
+/* Sell banner close persistence */
+const SELL_KEY = 'gj_sell_banner_closed_v1';
+function closeSellBanner(){
+  try{ localStorage.setItem(SELL_KEY,'1'); }catch(e){}
+  const el = document.getElementById('sellBanner'); if(el) el.style.display='none';
+}
+try{ if(localStorage.getItem(SELL_KEY) === '1'){ const el = document.getElementById('sellBanner'); if(el) el.style.display='none'; } }catch(e){}
+
+/* init values */
+document.getElementById('balance').innerText = `USDT ${balance.toFixed(3)}`;
+document.getElementById('gasDisplay').innerText = GAS_URL;
+updateRef();
+showMini("Ready — enjoy Galaxy ✨");
+
+</script>
 </body>
 </html>
