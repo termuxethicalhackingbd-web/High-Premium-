@@ -1,15 +1,10 @@
 
 {
-  "name": "galaxy-jackpot-bot",
+  "name": "galaxy-jackpot",
   "version": "1.0.0",
-  "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "node server.js"
   },
-  "dependencies": {
-    "express": "^4.18.2",
-    "node-fetch": "^3.3.2",
-    "body-parser": "^1.20.2"
-  }
+  "dependencies": {}
 }
