@@ -94,194 +94,6 @@
 </style>
 </head>
 <body> 
-  <!-- ====== Project Credit / Footer — Paste before </body> ====== -->
-<style>
-  /* Credit footer styles (paste once) */
-  .gj-footer {
-    --bg1: linear-gradient(90deg,#7c4dff,#34d399);
-    --glass: rgba(255,255,255,0.06);
-    position: fixed;
-    left: 12px;
-    right: 12px;
-    bottom: 14px;
-    z-index: 9999;
-    display: flex;
-    gap:from 120deg,#ff6a00,#ffd54a,#7c4dff,#00ffe0);
-    display:flex;align-items:center;justify-content:center;color:#041018;font-weight:900;
-    font-size:16px;box-shadow:0 6px 24px rgba(124,77,255,0.12);
-  }
-  .gj-text {
-    line-height:1;
-  }
-  .gj-text
-  // Buy Now -> open mailto
-  document.getElementById('contactBtn').addEventListener('click', ()=>{
-    window.open('mailto:termuxethicalhackingbd@gmail.com?subject=Buy Galaxy Jackpot Full Script&body=Hi, I want to buy the Galaxy Jackpot Full Script for $100');
-  });
-
-  // Toggle Info: expands to show full details (simple behavior)
-  document.getElementById('toggleFooterBtn').addEventListener('click', ()=>{
-    const footer = document.getElementById('gjFooter');
-    if(!footer.classList.contains('info')){
-      footer.classList.add('info');
-      // temporarily expand with extra info
-      const info = document.createElement('div');
-      info.id = 'gjFooterInfo';
-      info.style.cssText = 'position:absolute;left:12px;right:12px;bottom:74px;background:rgba(0,0,0,0.6);padding:12px;border-radius:10px;color:#eaf6ff;font-weight:600;';
-      info.innerHTML->
-
-  <!-- Floating banners -->
-  <div class="floatingBanner" id="vpnBanner">🌐 Connect VPN (USA / Canada / Australia) for higher rewards!</div>
-  <div class="welcomeBanner" id="welcomeBanner" aria-live="polite"></div>
-
-  <main class="app" role="main" aria-labelledby="appTitle">
-    <header class="header" id="appTitle">
-      <div class="logo">GJ</div>
-      <div>
-        <div class="title">Galaxy Jackpot — ∞× Legendary++</div>
-        <div class="subtitle">Play • Watch Ads • Earn USDT</div>
-      </div>
-
-      <div class="controls" role="region" aria-label="controls">
-        <div class="adsBadge" id="adsBadge">Ads: 0</div>
-        <div class="creator" title="Creator">MD RAHAT</div>
-      </div>
-    </header>
-
-    <!-- top area -->
-    <div class="grid2">
-      <div class="card" aria-live="polite">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div>
-            <div class="smallMuted">Current Balance</div>
-            <div class="balanceBig" id="balance">USDT 0.015000</div>
-            <div class="smallMuted" id="avail">Available: USDT 0.015000</div>
-            <div class="progress"><div id="xpFill" class="progressFill" style="width:0%"></div></div>
-            <div style="margin-top:8px">
-              <span class="smallMuted">Level <strong id="levelTag">0</strong></span>
-              <span class="smallMuted" id="xpInfo" style="margin-left:10px">XP 0</span>
-            </div>
-          </div>
-
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-            <button id="btnRefModal" class="playNow" style="background:linear-gradient(90deg,var(--gold1),var(--gold2));">My Referrals</button>
-            <div class="smallMuted">Referral bonus: <strong>0.005 USDT</strong> • Commission: <strong>5%</strong></div>
-            <button id="btnWithdrawOpen" class="playNow" style="background:linear-gradient(90deg,#ffb84d,#ffd54a);margin-top:6px">Withdraw</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div style="font-weight:900">Quick Actions</div>
-          <div class="smallMuted">Invite • Withdraw • Settings</div>
-        </div>
-
-        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
-          <div class="refRow">
-            <input id="refLink" class="refInput" readonly aria-label="Referral link">
-            <button id="copyRef" class="refBtn">Copy Referral Link</button>
-          </div>
-          <div style="display:flex;gap:8px;margin-top:6px">
-            <button id="btnMood" class="refBtn" style="flex:1">Toggle Mood</button>
-            <button id="btnReset" class="refBtn" style="flex:1;background:linear-gradient(90deg,#fb7185,#f97316)">Reset Data</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- tasks -->
-    <section class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div style="font-weight:900">100 Tasks</div>
-        <div class="smallMuted">Click a task → watch ad → earn 0.0005 USDT</div>
-      </div>
-      <div class="tasksWrap" style="margin-top:12px">
-        <div class="btnGrid" id="taskGrid"></div>
-      </div>
-    </section>
-
-    <!-- games -->
-    <section class="card" style="margin-top:12px">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div style="font-weight:900">8 Mini Games</div>
-        <div class="smallMuted">Play & watch ad to earn</div>
-      </div>
-
-      <div class="gamesGrid" id="gamesGrid" style="margin-top:12px">
-        <!-- Wheel -->
-        <div class="gameCard" id="gameWheel">
-          <div class="gameTitle">🎡 Spin Wheel</div>
-          <div id="wheel" style="width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:conic-gradient(#f59e0b,#f97316,#60a5fa,#7c3aed);font-weight:900;color:#051018">SPIN</div>
-          <button class="playNow" id="spinBtn">Play Now</button>
-          <div id="rWheel" class="smallMuted" style="margin-top:8px"></div>
-        </div>
-
-        <!-- Slot -->
-        <div class="gameCard" id="gameSlot">
-          <div class="gameTitle">🎰 Slot</div>
-          <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;font-weight:900;font-size:22px">
-            <div id="s1" style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.02)">7</div>
-            <div id="s2" style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.02)">7</div>
-            <div id="s3" style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.02)">7</div>
-          </div>
-          <button class="playNow" id="slotPlay">Play Now</button>
-          <div id="rSlot" class="smallMuted"></div>
-        </div>
-
-        <!-- Dice -->
-        <div class="gameCard" id="gameDice">
-          <div class="gameTitle">🎲 Dice Roll</div>
-          <div id="diceFace" style="font-size:28px;font-weight:900;margin:12px;background:linear-gradient(90deg,#ffffff,#e6e6e6);color:#051018;border-radius:8px;padding:8px;width:88px;text-align:center">-</div>
-          <button class="playNow" id="dicePlay">Roll Now</button>
-          <div id="rDice" class="smallMuted"></div>
-        </div>
-
-        <!-- Coin -->
-        <div class="gameCard" id="gameCoin">
-          <div class="gameTitle">🪙 Coin Flip</div>
-          <div id="coinAnim" style="width:74px;height:74px;border-radius:50%;background:linear-gradient(90deg,#ffd54a,#ffb84d);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;margin:8px">◐</div>
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <button class="playNow" id="coinHead">Head</button><button class="playNow" id="coinTail">Tail</button>
-          </div>
-          <div id="rCoin" class="smallMuted"></div>
-        </div>
-
-        <!-- Lucky Box -->
-        <div class="gameCard" id="gameBox">
-          <div class="gameTitle">🎁 Lucky Box</div>
-          <div id="boxIcon" style="width:80px;height:80px;border-radius:12px;background:linear-gradient(90deg,#f97316,#fb7185);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;margin:8px">BOX</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px">
-            <button class="playNow boxBtn" data-box="1">Open</button>
-          </div>
-          <div id="rBox" class="smallMuted"></div>
-        </div>
-
-        <!-- RPS -->
-        <div class="gameCard" id="gameRPS">
-          <div class="gameTitle">✊✌️✋ Rock Paper Scissors</div>
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <button class="playNow" id="rpsRock">Rock</button><button class="playNow" id="rpsPaper">Paper</button><button class="playNow" id="rpsScissors">Scissors</button>
-          </div>
-          <div id="rRPS" class="smallMuted"></div>
-        </div>
-
-        <!-- Tile -->
-        <div class="gameCard" id="gameTile">
-          <div class="gameTitle">🔳 Tile Match</div>
-          <div id="tileBoard" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px;width:100%">
-            <div class="tile playNow" data-idx="0">?</div><div class="tile playNow" data-idx="1">?</div><div class="tile playNow" data-idx="2">?</div>
-            <div class="tile playNow" data-idx="3">?</div><div class="tile playNow" data-idx="4">?</div><div class="tile playNow" data-idx="5">?</div>
-          </div>
-          <div id="rTile" class="smallMuted" style="margin-top:8px"></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- bottom spacing -->
-    <div style="height:120px"></div>
-  </main>
 
   <!-- buy bottom -->
   <div class="buyBox" id="buyBox" role="dialog" aria-label="Buy">
@@ -299,6 +111,48 @@
       <button class="buyCTA" id="buyNowBtn">💎 Buy Full Script — $100</button>
     </div>
   </div>
+  <body>
+
+  <!-- Floating banners -->
+  <div class="floatingBanner" id="vpnBanner">🌐 Connect VPN (USA / Canada / Australia) for higher rewards!</div>
+  <div class="welcomeBanner" id="welcomeBanner" aria-live="polite"></div>
+
+  <!-- Main Content -->
+  <main class="container">
+    <section class="hero">
+      <h1>🌌 Galaxy Jackpot Bot</h1>
+      <p class="smallMuted">Earn rewards, play games & refer friends to win more!</p>
+      <button id="buyNow" class="btnPrimary">🚀 Buy Now</button>
+    </section>
+
+    <section class="features">
+      <h2>✨ Features</h2>
+      <ul>
+        <li>💰 Instant Withdraw</li>
+        <li>🎯 Daily Tasks</li>
+        <li>👥 Referral System</li>
+        <li>🎮 Mini Games</li>
+      </ul>
+    </section>
+
+    <section class="ads">
+      <h3>Sponsored Ads</h3>
+      <div class="adBox">🪙 Watch Ads to Earn More Coins!</div>
+    </section>
+  </main>
+
+  <!-- Footer / Credit -->
+  <footer style="margin-top: 80px; padding: 20px; text-align: center; color: #aaa; font-size: 14px;">
+    <p>🌌 <b>Galaxy Jackpot Bot</b> © 2025</p>
+    <p>Developed by <b>MD Rahat</b> | <a href="mailto:termuxethicalhackingbd@gmail.com" style="color:#888;">Contact</a></p>
+  </footer>
+
+  <!-- Sparkle Animation -->
+  <div class="sparkle" id="sparkle"></div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
 
   <!-- Withdraw modal -->
   <div class="modal" id="withdrawModal" aria-hidden="true">
