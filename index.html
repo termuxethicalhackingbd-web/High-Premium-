@@ -6,33 +6,40 @@
   <title>Galaxy Jackpot — ∞× Legendary++</title>
   <meta name="description" content="Galaxy Jackpot — Play • Watch Ads • Earn USDT — Creator: MD RAHAT">
 
-  <!-- Monetag (Monetag SDK) -->
+  <!-- Monetag SDK -->
   <script src='//libtl.com/sdk.js' data-zone='10125761' data-sdk='show_10125761'></script>
 
   <style>
     :root{
-      --bg-1:#03040a; --bg-2:#071329; --card:#0e1724;
+      --bg-1:#03040a; --bg-2:#071329;
       --muted:#9aa4b2; --text:#eaf2ff;
       --neon-1:#7c3aed; --neon-2:#00ffe0; --accent:#ff6a00;
       --gold1:#ffd54a; --gold2:#ffb84d;
-      --glass:rgba(255,255,255,0.03);
     }
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:var(--text);-webkit-font-smoothing:antialiased}
-    a{color:inherit}
     .app{max-width:1200px;margin:80px auto;padding:20px;position:relative}
-    .floatingBanner{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:9999;max-width:1160px;width:calc(100% - 40px);
-      background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#021627;padding:12px 18px;border-radius:999px;font-weight:800;box-shadow:0 24px 60px rgba(124,58,237,0.12)}
+
+    /* BuyBox fixed at bottom */
+    .buyBox{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:9999;background:linear-gradient(180deg,#071225,#0b0f1a);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 80px rgba(0,0,0,0.55);max-width:1100px;width:calc(100% - 40px)}
+    .buyHeader{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .buyTitle{font-weight:900;color:var(--gold1)}
+    .buyToggle{cursor:pointer;padding:8px 10px;border-radius:10px;background:linear-gradient(90deg,#0f1724,#081028);border:1px solid rgba(255,255,255,0.03)}
+    .buyDetails{display:none;margin-top:12px;color:var(--muted);font-size:14px}
+    .buyCTA{margin-top:10px;padding:10px 18px;border-radius:12px;border:none;background:linear-gradient(90deg,#34d399,#60a5fa);font-weight:900;color:#021018;cursor:pointer}
+
+    /* VPN banner - now positioned above buyBox */
+    .vpnContainer{position:fixed;left:50%;transform:translateX(-50%);bottom:86px;z-index:9998;max-width:1100px;width:calc(100% - 40px);display:flex;justify-content:center;pointer-events:none}
+    .floatingBanner{pointer-events:auto;background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#021627;padding:12px 18px;border-radius:999px;font-weight:800;box-shadow:0 24px 60px rgba(124,58,237,0.12);display:flex;align-items:center;gap:12px}
     .vpnBtn{
       display:inline-block;padding:10px 18px;border-radius:999px;font-weight:900;background:linear-gradient(90deg,#00ffe0,#7c3aed);color:#021018;cursor:pointer;
       box-shadow:0 8px 30px rgba(0,255,224,0.08);
       animation:snake 3s ease-in-out infinite;
-      transition:box-shadow .25s,transform .25s;
+      border:none;
     }
-    @keyframes snake{0%{transform:translateY(0)}50%{transform:translateY(10px)}100%{transform:translateY(0)}}
-    .welcomeBanner{position:fixed;left:50%;top:72px;transform:translateX(-50%);z-index:9998;max-width:1160px;width:calc(100% - 40px);
-      background:linear-gradient(90deg,#0ea5a5,#3b82f6);color:#021627;padding:10px 14px;border-radius:12px;font-weight:800;box-shadow:0 18px 50px rgba(3,7,18,0.6);opacity:0;transition:opacity .35s}
+    @keyframes snake{0%{transform:translateY(0)}50%{transform:translateY(8px)}100%{transform:translateY(0)}}
 
+    /* header & top */
     .header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
     .logo{width:72px;height:72px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold1),var(--gold2));font-weight:900;color:#051018;font-size:20px;box-shadow:0 10px 40px rgba(124,77,255,0.08)}
     .title{font-size:20px;font-weight:900}
@@ -67,13 +74,6 @@
     .playNow{padding:10px 18px;border-radius:999px;border:none;cursor:pointer;font-weight:900;color:#051018;background:linear-gradient(90deg,#ff00cc,#3333ff);box-shadow:0 16px 50px rgba(124,58,237,0.18);transition:transform .12s}
     .playNow:hover{transform:translateY(-6px);box-shadow:0 32px 100px rgba(124,58,237,0.26)}
 
-    .buyBox{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:9999;background:linear-gradient(180deg,#071225,#0b0f1a);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 80px rgba(0,0,0,0.55);max-width:1100px;width:calc(100% - 40px)}
-    .buyHeader{display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .buyTitle{font-weight:900;color:var(--gold1)}
-    .buyToggle{cursor:pointer;padding:8px 10px;border-radius:10px;background:linear-gradient(90deg,#0f1724,#081028);border:1px solid rgba(255,255,255,0.03)}
-    .buyDetails{display:none;margin-top:12px;color:var(--muted);font-size:14px}
-    .buyCTA{margin-top:10px;padding:10px 18px;border-radius:12px;border:none;background:linear-gradient(90deg,#34d399,#60a5fa);font-weight:900;color:#021018;cursor:pointer}
-
     .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:18px;border-radius:12px;z-index:200000;min-width:320px;display:none;color:#e6eef6}
     .modal.show{display:block}
     .closeX{position:absolute;right:12px;top:8px;background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer}
@@ -87,29 +87,28 @@
     .sparkle{position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff;transform:translate(-50%,-50%) scale(0);animation:spk .7s linear}
     @keyframes spk{0%{transform:translate(-50%,-50%) scale(0)}50%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}}
 
-    /* shooting star area polished */
+    /* shooting star area */
     #shootingStarWrap{margin:18px auto;max-width:680px}
     #shootingArea{position:relative;height:220px;border-radius:12px;background:radial-gradient(circle at top,#000,#021);overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
     .shootStar{position:absolute;width:12px;height:12px;border-radius:50%;background:linear-gradient(45deg,#fff,#0ff);box-shadow:0 0 14px rgba(0,255,240,0.8);cursor:pointer}
-    .rewardBox{display:none;background:linear-gradient(90deg,#071225,#0b1220);padding:12px;border-radius:12px;color:var(--text);border:1px solid rgba(255,255,255,0.03);text-align:center}
-    /* responsive tweaks */
+    .sparkle{position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff;transform:translate(-50%,-50%) scale(0);animation:spk .7s linear}
+
     @media(max-width:700px){
       .btnGrid{grid-template-columns:repeat(2,1fr)}
       .gamesGrid{grid-template-columns:repeat(1,1fr)}
+      .vpnContainer{bottom:120px}
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating VPN banner (animated snake + glowing) -->
-  <div class="floatingBanner" id="vpnBanner">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+  <!-- VPN container sits above buyBox (bottom area) -->
+  <div class="vpnContainer" id="vpnContainer" aria-hidden="false">
+    <div class="floatingBanner" role="region" aria-label="VPN banner">
       <div style="font-weight:900">🌐 Connect VPN (USA / Canada / Australia) for higher rewards!</div>
-      <div class="vpnBtn" id="vpnBtn" role="button" aria-pressed="false">Watch Ad • Better Rewards</div>
+      <button id="vpnBtn" class="vpnBtn" aria-pressed="false">Watch Ad • Better Rewards</button>
     </div>
   </div>
-
-  <div class="welcomeBanner" id="welcomeBanner" aria-live="polite"></div>
 
   <main class="app" role="main" aria-labelledby="appTitle">
     <header class="header" id="appTitle">
@@ -154,7 +153,6 @@
         </div>
 
         <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
-          <!-- REFER BOX REMOVED as requested -->
           <div style="display:flex;gap:8px;margin-top:6px">
             <button id="btnMood" class="refBtn" style="flex:1">Toggle Mood</button>
             <button id="btnReset" class="refBtn" style="flex:1;background:linear-gradient(90deg,#fb7185,#f97316)">Reset Data</button>
@@ -243,7 +241,7 @@
       </div>
     </section>
 
-    <!-- Shooting Star (placed after games, visible) -->
+    <!-- Shooting Star -->
     <section class="card" id="shootingStarSection" style="margin-top:12px">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div style="font-weight:900">Shooting Star — Tap to Collect</div>
@@ -258,10 +256,10 @@
       </div>
     </section>
 
-    <div style="height:120px"></div>
+    <div style="height:220px"></div>
   </main>
 
-  <!-- Buy Box -->
+  <!-- BuyBox (fixed bottom) -->
   <div class="buyBox" id="buyBox" role="dialog" aria-label="Buy">
     <div class="buyHeader">
       <div class="buyTitle">Buy Now — Galaxy Jackpot Full Script — $100</div>
@@ -314,29 +312,25 @@
 
   <!-- Footer Credit -->
   <div style="height:18px"></div>
-  <div class="footer-credit" style="width:100%;text-align:center;padding:10px 6px;font-size:14px;background:linear-gradient(to right, rgba(0,0,0,0.25), rgba(0,0,0,0.4));color:#d4d4d4;border-top:1px solid rgba(255,255,255,0.06);font-family:Poppins, sans-serif;letter-spacing:0.6px;backdrop-filter:blur(4px);position:relative">
-    Creator <strong style="background:linear-gradient(90deg,#00ffe0,#ff00c8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600;text-shadow:0 0 10px rgba(0,255,255,0.3)">MD RAHAT</strong> | Powered by <span style="color:#00ffe0;text-shadow:0 0 10px #00ffe0,0 0 20px #00ffe0;font-weight:500">ChatGPT&nbsp;5</span>
-    <div style="position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#00ffe0,#ff00c8,#ffae00,#00ffe0);background-size:300% 100%;animation:moveGlow 4s linear infinite;box-shadow:0 0 20px #00ffe0,0 0 40px #ff00c8"></div>
+  <div class="footer-credit" style="width:100%;text-align:center;padding:10px 6px;font-size:14px;background:linear-gradient(to right, rgba(0,0,0,0.25), rgba(0,0,0,0.4));color:#d4d4d4;border-top:1px solid rgba(255,255,255,0.06);font-family:Poppins, sans-serif;letter-spacing:0.6px;position:relative">
+    Creator <strong style="background:linear-gradient(90deg,#00ffe0,#ff00c8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600">MD RAHAT</strong> | Powered by <span style="color:#00ffe0;font-weight:500">ChatGPT 5</span>
+    <div style="position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#00ffe0,#ff00c8,#ffae00,#00ffe0);background-size:300% 100%;animation:moveGlow 4s linear infinite;"></div>
   </div>
 
   <!-- Toast area -->
   <div id="toastArea" aria-live="polite" style="position:fixed;left:50%;top:20%;transform:translateX(-50%);z-index:99999"></div>
 
 <script>
-/* ===========================
-   CONFIG
-   =========================== */
+/* CONFIG */
 const CONFIG = {
   REWARD_PER_TASK: 0.0005,
   REWARD_STAR: 0.001,
-  ADS_FN: 'show_10125761', // Monetag function name from script
+  ADS_FN: 'show_10125761',
   AD_FALLBACK: 'https://www.effectivegatecpm.com/za35wfvxct?key=33d9ac55094c983709eac1a9fd20c4b5',
-  GAS_URL: '' // put your GAS URL if you want withdraw logging e.g. https://script.../exec
+  GAS_URL: '' // set your GAS endpoint if available
 };
 
-/* ===========================
-   STATE
-   =========================== */
+/* STATE */
 const UID = localStorage.getItem('gj_uid') || ('u'+Math.floor(Math.random()*9e9));
 localStorage.setItem('gj_uid', UID);
 
@@ -348,7 +342,7 @@ if(!state.uid){
 
 /* helpers */
 function persist(){ localStorage.setItem('gj_state_v2', JSON.stringify(state)); renderUI(); }
-function toast(msg, t=1600){ const ta=document.getElementById('toastArea'); const el=document.createElement('div'); el.innerText=msg; el.style.cssText='background:linear-gradient(90deg,#ffd54a,#ffb84d);color:#031018;padding:10px 16px;border-radius:10px;font-weight:900;margin-top:8px;box-shadow:0 10px 30px rgba(0,0,0,0.3)'; ta.appendChild(el); setTimeout(()=>el.remove(),t); }
+function toast(msg, t=1400){ const ta=document.getElementById('toastArea'); const el=document.createElement('div'); el.innerText=msg; el.style.cssText='background:linear-gradient(90deg,#ffd54a,#ffb84d);color:#031018;padding:10px 16px;border-radius:10px;font-weight:900;margin-top:8px;box-shadow:0 10px 30px rgba(0,0,0,0.3)'; ta.appendChild(el); setTimeout(()=>el.remove(),t); }
 
 /* render UI */
 function renderUI(){
@@ -359,11 +353,12 @@ function renderUI(){
   document.getElementById('xpInfo').innerText = 'XP ' + (state.adsWatched||0);
   const pct = Math.min(100, Math.floor(((state.adsWatched||0) % 100)/100*100));
   document.getElementById('xpFill').style.width = pct + '%';
-  document.getElementById('refLink').value = `${location.origin}${location.pathname}?start=ref_${UID}`;
+  const refEl = document.getElementById('refLink');
+  if(refEl) refEl.value = `${location.origin}${location.pathname}?start=ref_${UID}`;
 }
 renderUI();
 
-/* check incoming referral param and credit referrer (local) */
+/* handle incoming ref */
 (function handleIncomingRef(){
   try{
     const url = new URL(location.href);
@@ -384,11 +379,8 @@ renderUI();
   }catch(e){}
 })();
 
-/* ===========================
-   Ad helper (Monetag first, fallback open)
-   =========================== */
+/* Monetag helper + fallback */
 async function showRewardedAd(){
-  // Monetag exposes a promise-style function in examples, try call
   try{
     if(CONFIG.ADS_FN && typeof window[CONFIG.ADS_FN] === 'function'){
       await window[CONFIG.ADS_FN]();
@@ -397,12 +389,11 @@ async function showRewardedAd(){
   }catch(e){
     console.warn('Monetag call failed', e);
   }
-  // fallback: open smartlink in new tab and ask user to confirm
   window.open(CONFIG.AD_FALLBACK + '&ref=' + encodeURIComponent(UID), '_blank');
   return confirm('Ad opened in new tab. After watching the ad, press OK to claim reward.');
 }
 
-/* crediting */
+/* credit function */
 function credit(amount, reason='Reward'){
   state.balance = (state.balance || 0) + Number(amount);
   state.adsWatched = (state.adsWatched || 0) + 1;
@@ -417,12 +408,10 @@ function credit(amount, reason='Reward'){
     state.level = newLevel;
   }
   persist();
-  toast(`${reason} +${Number(amount).toFixed(6)} USDT`,1600);
+  toast(`${reason} +${Number(amount).toFixed(6)} USDT`,1400);
 }
 
-/* ===========================
-   Tasks (100)
-   =========================== */
+/* Tasks */
 const taskGrid = document.getElementById('taskGrid');
 const colours = ['c0','c1','c2','c3','c4'];
 for(let i=1;i<=100;i++){
@@ -438,9 +427,7 @@ for(let i=1;i<=100;i++){
   taskGrid.appendChild(btn);
 }
 
-/* ===========================
-   Games implementation
-   =========================== */
+/* Games implementation (Wheel, Slot, Dice, Coin, Box, RPS, Tile) */
 /* Wheel */
 document.getElementById('spinBtn').addEventListener('click', async ()=>{
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
@@ -539,16 +526,12 @@ document.querySelectorAll('#tileBoard .tile').forEach(t => t.addEventListener('c
   credit(CONFIG.REWARD_PER_TASK, 'Tile Reward');
 }));
 
-/* ===========================
-   Shooting Star game (with ad on collect)
-   =========================== */
+/* Shooting Star */
 let starCount = 0;
 const shootingArea = document.getElementById('shootingArea');
 document.getElementById('startShooting').addEventListener('click', ()=>{
-  // spawn a burst of stars
   for(let i=0;i<18;i++) spawnStar();
 });
-
 function spawnStar(){
   const s = document.createElement('div');
   s.className='shootStar';
@@ -560,7 +543,6 @@ function spawnStar(){
   const duration = 1600 + Math.random()*900;
   s.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(260px)',opacity:0}],{duration:duration,easing:'linear'});
   s.addEventListener('click', async (ev)=>{
-    // on star click -> show ad then reward
     s.remove();
     createSpark(ev.clientX, ev.clientY);
     const ok = await showRewardedAd();
@@ -574,16 +556,13 @@ function spawnStar(){
   });
   setTimeout(()=>{ if(s.parentNode) s.remove(); }, duration+200);
 }
-
 function createSpark(x,y){
   const sp = document.createElement('div');
   sp.className='sparkle'; sp.style.left = x+'px'; sp.style.top = y+'px';
   document.body.appendChild(sp); setTimeout(()=>sp.remove(),700);
 }
 
-/* ===========================
-   Withdraw handling (GAS POST + local storage)
-   =========================== */
+/* Withdraw handling */
 document.getElementById('btnWithdrawOpen').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.add('show'));
 document.getElementById('closeWithdraw').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.remove('show'));
 document.getElementById('cancelWithdraw').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.remove('show'));
@@ -597,15 +576,10 @@ document.getElementById('submitWithdraw').addEventListener('click', async ()=>{
   const list = JSON.parse(localStorage.getItem('gj_withdraws') || '[]'); list.push(req); localStorage.setItem('gj_withdraws', JSON.stringify(list));
   document.getElementById('withdrawModal').classList.remove('show');
   toast('Withdraw submitted. Admin will process (1min - 48h).',1800);
-
-  try{
-    if(CONFIG.GAS_URL){ await fetch(CONFIG.GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'withdraw', ...req }) }); }
-  }catch(e){ console.warn('GAS send failed', e); }
+  try{ if(CONFIG.GAS_URL){ await fetch(CONFIG.GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'withdraw', ...req }) }); } }catch(e){ console.warn('GAS send failed', e); }
 });
 
-/* ===========================
-   Referral modal & copy
-   =========================== */
+/* Referral modal */
 document.getElementById('btnRefModal').addEventListener('click', ()=> {
   document.getElementById('refModal').classList.add('show');
 });
@@ -615,9 +589,7 @@ document.getElementById('copyRef').addEventListener('click', ()=>{
   navigator.clipboard?.writeText(link).then(()=> toast('Referral link copied',1200)).catch(()=> { prompt('Copy referral link', link); });
 });
 
-/* ===========================
-   Buy toggle & mailto
-   =========================== */
+/* Buy toggle */
 document.getElementById('buyToggle').addEventListener('click', ()=>{
   const d = document.getElementById('buyDetails');
   const open = d.style.display === 'block';
@@ -628,18 +600,14 @@ document.getElementById('buyNowBtn').addEventListener('click', ()=> {
   window.open('mailto:termuxethicalhackingbd@gmail.com?subject=Buy Galaxy Jackpot&body=I want to buy the Galaxy Jackpot Full Script ($100).', '_blank');
 });
 
-/* ===========================
-   VPN Banner click -> show ad
-   =========================== */
+/* VPN click triggers ad */
 document.getElementById('vpnBtn').addEventListener('click', async ()=>{
   const ok = await showRewardedAd();
   if(ok){ credit(CONFIG.REWARD_PER_TASK, 'VPN Ad'); }
   else alert('No reward (ad not completed)');
 });
 
-/* ===========================
-   Buy footer & mood
-   =========================== */
+/* Mood toggle */
 document.getElementById('btnMood').addEventListener('click', ()=>{
   const current = document.documentElement.getAttribute('data-mood') || 'dark';
   if(current === 'dark'){ applyMood('light'); document.documentElement.setAttribute('data-mood','light'); }
@@ -647,22 +615,19 @@ document.getElementById('btnMood').addEventListener('click', ()=>{
   else { applyMood('dark'); document.documentElement.setAttribute('data-mood','dark'); }
 });
 function applyMood(m){
-  if(m === 'light'){ document.body.style.background = 'linear-gradient(180deg,#f6fbff,#eef6ff)'; document.body.style.color = '#04111a'; document.getElementById('vpnBanner').style.opacity = '0.9'; }
-  else if(m === 'galaxy'){ document.body.style.background = 'linear-gradient(180deg,#02021a,#061033)'; document.body.style.color = '#eaf2ff'; document.getElementById('vpnBanner').style.opacity = '1'; }
-  else { document.body.style.background = 'linear-gradient(180deg,var(--bg-1),var(--bg-2))'; document.body.style.color = '#eaf2ff'; document.getElementById('vpnBanner').style.opacity = '1'; }
+  if(m === 'light'){ document.body.style.background = 'linear-gradient(180deg,#f6fbff,#eef6ff)'; document.body.style.color = '#04111a'; document.querySelector('.vpnContainer').style.opacity = '0.95'; }
+  else if(m === 'galaxy'){ document.body.style.background = 'linear-gradient(180deg,#02021a,#061033)'; document.body.style.color = '#eaf2ff'; document.querySelector('.vpnContainer').style.opacity = '1'; }
+  else { document.body.style.background = 'linear-gradient(180deg,var(--bg-1),var(--bg-2))'; document.body.style.color = '#eaf2ff'; document.querySelector('.vpnContainer').style.opacity = '1'; }
 }
 
 /* Reset data (admin-only visibility) */
 function isAdmin(){ return localStorage.getItem('userRole') === 'admin' || localStorage.getItem('admin_id') === '6209706593'; }
 window.onload = function(){
-  if(!isAdmin()){ document.getElementById('btnReset').style.display = 'none'; }
-  else { document.getElementById('btnReset').style.display = 'inline-block'; }
-
-  // welcome banner show
-  const wb = document.getElementById('welcomeBanner');
-  wb.innerText = `Welcome ${UID} — Enjoy Galaxy Jackpot!`;
-  wb.style.opacity = '1';
-  setTimeout(()=> wb.style.opacity='0', 5000);
+  if(!isAdmin()){ document.getElementById('btnReset').style.display = 'none'; } else { document.getElementById('btnReset').style.display = 'inline-block'; }
+  // welcome
+  const wb = document.getElementById('vpnBtn');
+  // small initial toast
+  setTimeout(()=>{ const el = document.getElementById('toastArea'); const t=document.createElement('div'); t.innerText='Welcome — Galaxy Jackpot!'; t.style.cssText='background:linear-gradient(90deg,#ffd54a,#ffb84d);color:#031018;padding:10px 16px;border-radius:10px;font-weight:900;margin-top:8px;'; el.appendChild(t); setTimeout(()=>t.remove(),2200); },600);
 };
 
 /* Reset event */
@@ -679,7 +644,7 @@ function sparkleAt(el){
   s.style.left = x + 'px'; s.style.top = y + 'px';
   document.body.appendChild(s); setTimeout(()=> s.remove(),700);
 }
-document.querySelectorAll('.playNow, .taskBtn, .refBtn, .buyCTA').forEach(btn=>btn.addEventListener('mouseenter', ()=> sparkleAt(btn)));
+document.querySelectorAll('.playNow, .taskBtn, .refBtn, .buyCTA, .vpnBtn').forEach(btn=>btn.addEventListener('mouseenter', ()=> sparkleAt(btn)));
 
 /* persist periodically */
 setInterval(()=> persist(), 2500);
