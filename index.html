@@ -106,83 +106,14 @@
     bottom: 14px;
     z-index: 9999;
     display: flex;
-    gap: 12px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    border-radius: 14px;
-    backdrop-filter: blur(6px) saturate(1.1);
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.18));
-    border: 1px solid rgba(255,255,255,0.04);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
-    color: #eaf6ff;
-    font-weight: 700;
-    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  }
-
-  .gj-brand {
-    display:flex;
-    gap:12px;
-    align-items:center;
-  }
-  .gj-logo {
-    width:46px;height:46px;border-radius:10px;
-    background: conic-gradient(from 120deg,#ff6a00,#ffd54a,#7c4dff,#00ffe0);
+    gap:from 120deg,#ff6a00,#ffd54a,#7c4dff,#00ffe0);
     display:flex;align-items:center;justify-content:center;color:#041018;font-weight:900;
     font-size:16px;box-shadow:0 6px 24px rgba(124,77,255,0.12);
   }
   .gj-text {
     line-height:1;
   }
-  .gj-text .title { font-size:14px; color:#fff; display:block; }
-  .gj-text .subtitle { font-size:12px; color:rgba(255,255,255,0.75); display:block; margin-top:2px; }
-
-  .gj-actions { display:flex; gap:10px; align-items:center; }
-  .gj-btn {
-    background: linear-gradient(90deg,#ff6a00,#ffb84d);
-    border: none; padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:800;
-    color:#041018; box-shadow:0 10px 30px rgba(255,106,0,0.12);
-  }
-  .gj-link {
-    background: transparent; border:1px solid rgba(255,255,255,0.06); color: #fff;
-    padding:8px 12px; border-radius:10px; font-weight:700; cursor:pointer;
-  }
-
-  /* small "powered" glow */
-  .gj-powered { font-size:12px; color: rgba(255,255,255,0.85); padding-left:8px; opacity:0.95; }
-
-  /* responsive */
-  @media(max-width:640px){
-    .gj-footer { flex-direction:column; gap:8px; padding:10px; left:10px; right:10px; bottom:12px; }
-    .gj-actions{ width:100%; justify-content:space-between; }
-  }
-
-  /* subtle entry animation */
-  .gj-footer { transform: translateY(16px); opacity:0; transition: transform .5s ease, opacity .5s ease; }
-  .gj-footer.show { transform: translateY(0); opacity:1; }
-</style>
-
-<div id="gjFooter" class="gj-footer" role="contentinfo" aria-label="Galaxy Jackpot footer">
-  <div class="gj-brand">
-    <div class="gj-logo">GJ</div>
-    <div class="gj-text">
-      <span class="title">Galaxy Jackpot — Full Script</span>
-      <span class="subtitle">Created by MD Rahat · <span class="gj-powered">Powered by GPT-5 Thinking mini</span></span>
-    </div>
-  </div>
-
-  <div class="gj-actions">
-    <button class="gj-btn" id="contactBtn">Buy Now — $100</button>
-    <button class="gj-link" id="toggleFooterBtn">Info</button>
-  </div>
-</div>
-
-<script>
-  // show footer with animation
-  window.addEventListener('load', ()=> {
-    setTimeout(()=> document.getElementById('gjFooter').classList.add('show'), 300);
-  });
-
+  .gj-text
   // Buy Now -> open mailto
   document.getElementById('contactBtn').addEventListener('click', ()=>{
     window.open('mailto:termuxethicalhackingbd@gmail.com?subject=Buy Galaxy Jackpot Full Script&body=Hi, I want to buy the Galaxy Jackpot Full Script for $100');
@@ -197,23 +128,7 @@
       const info = document.createElement('div');
       info.id = 'gjFooterInfo';
       info.style.cssText = 'position:absolute;left:12px;right:12px;bottom:74px;background:rgba(0,0,0,0.6);padding:12px;border-radius:10px;color:#eaf6ff;font-weight:600;';
-      info.innerHTML = `
-        <div style="font-size:13px;margin-bottom:6px">Buy Now — Galaxy Jackpot Full Script — $100</div>
-        <div style="font-size:12px;opacity:0.85">
-          What you get: Full front-end UI (responsive), 8 playable mini-games, 100 animated task buttons, referral & withdraw system, ad placeholders, admin panel hook, install & deploy instructions.
-        </div>
-      `;
-      document.body.appendChild(info);
-      // auto remove after 7s
-      setTimeout(()=> {
-        const el = document.getElementById('gjFooterInfo');
-        if(el) el.remove();
-        footer.classList.remove('info');
-      }, 7000);
-    }
-  });
-</script>
-<!-- ====== End credit/footer ====== -->
+      info.innerHTML->
 
   <!-- Floating banners -->
   <div class="floatingBanner" id="vpnBanner">🌐 Connect VPN (USA / Canada / Australia) for higher rewards!</div>
