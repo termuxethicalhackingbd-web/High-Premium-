@@ -1,170 +1,115 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Galaxy Jackpot — Ultimate Polished</title>
-<meta name="description" content="Galaxy Jackpot — 8 mini-games, 100 tasks, referral & withdraw, Monetag/Adstra placeholders. Creator: MD RAHAT">
-<!-- Optional Monetag SDK (uncomment if you want to use Monetag JS function) -->
-<!-- <script src="//libtl.com/sdk.js" data-zone="10125761" data-sdk="show_10125761"></script> -->
-<style>
-  :root{
-    --bg-1:#03040a; --bg-2:#071329; --card:#0e1724;
-    --muted:#9aa4b2; --text:#eaf2ff;
-    --neon-1:#7c3aed; --neon-2:#00ffe0; --accent:#ff6a00;
-    --gold1:#ffd54a; --gold2:#ffb84d;
-    --glass:rgba(255,255,255,0.03);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{height:100%;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:var(--text);-webkit-font-smoothing:antialiased}
-  .app{max-width:1200px;margin:64px auto;padding:20px;position:relative}
-  /* VPN banner */
-  .vpnBanner{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:9999;max-width:1180px;width:calc(100% - 32px);
-    background:linear-gradient(90deg,#0ea5a5,#7c3aed);color:#021627;padding:12px 18px;border-radius:999px;font-weight:900;box-shadow:0 18px 60px rgba(124,58,237,0.12);text-align:center}
-  .vpnSub{font-weight:700;display:block;font-size:13px;margin-top:4px;color:#021627;opacity:0.95}
-  .welcome{position:fixed;left:50%;top:72px;transform:translateX(-50%);z-index:9998;max-width:1180px;width:calc(100% - 32px);
-    background:linear-gradient(90deg,#06b6d4,#60a5fa);color:#021627;padding:10px 14px;border-radius:10px;font-weight:800;box-shadow:0 14px 44px rgba(3,7,18,0.6);opacity:0;transition:opacity .25s}
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Galaxy Jackpot — ∞× Legendary++</title>
+  <meta name="description" content="Galaxy Jackpot — Play • Watch Ads • Earn USDT — Creator: MD RAHAT">
 
-  .header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-  .logo{width:68px;height:68px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold1),var(--gold2));font-weight:900;color:#051018;font-size:20px;box-shadow:0 10px 40px rgba(124,77,255,0.06)}
-  .title{font-size:20px;font-weight:900}
-  .subtitle{color:var(--muted);font-size:13px}
-  .controls{margin-left:auto;display:flex;align-items:center;gap:10px}
+  <!-- Monetag (Monetag SDK) -->
+  <script src='//libtl.com/sdk.js' data-zone='10125761' data-sdk='show_10125761'></script>
 
-  .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 40px rgba(0,0,0,0.45)}
-  .balanceBig{font-size:20px;font-weight:900}
-  .muted{color:var(--muted);font-size:13px}
-  .progress{height:8px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;margin-top:6px}
-  .progressFill{height:100%;background:linear-gradient(90deg,var(--gold1),var(--gold2));width:0%}
+  <style>
+    :root{
+      --bg-1:#03040a; --bg-2:#071329; --card:#0e1724;
+      --muted:#9aa4b2; --text:#eaf2ff;
+      --neon-1:#7c3aed; --neon-2:#00ffe0; --accent:#ff6a00;
+      --gold1:#ffd54a; --gold2:#ffb84d;
+      --glass:rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:var(--text);-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    .app{max-width:1200px;margin:80px auto;padding:20px;position:relative}
+    .floatingBanner{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:9999;max-width:1160px;width:calc(100% - 40px);
+      background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#021627;padding:12px 18px;border-radius:999px;font-weight:800;box-shadow:0 24px 60px rgba(124,58,237,0.12)}
+    .vpnBtn{
+      display:inline-block;padding:10px 18px;border-radius:999px;font-weight:900;background:linear-gradient(90deg,#00ffe0,#7c3aed);color:#021018;cursor:pointer;
+      box-shadow:0 8px 30px rgba(0,255,224,0.08);
+      animation:snake 3s ease-in-out infinite;
+      transition:box-shadow .25s,transform .25s;
+    }
+    @keyframes snake{0%{transform:translateY(0)}50%{transform:translateY(10px)}100%{transform:translateY(0)}}
+    .welcomeBanner{position:fixed;left:50%;top:72px;transform:translateX(-50%);z-index:9998;max-width:1160px;width:calc(100% - 40px);
+      background:linear-gradient(90deg,#0ea5a5,#3b82f6);color:#021627;padding:10px 14px;border-radius:12px;font-weight:800;box-shadow:0 18px 50px rgba(3,7,18,0.6);opacity:0;transition:opacity .35s}
 
-  .tasksWrap{padding:8px;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent);max-height:420px;overflow:auto}
-  .btnGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-  @media(max-width:1000px){.btnGrid{grid-template-columns:repeat(3,1fr)}}
-  .taskBtn{padding:10px;border-radius:10px;border:none;cursor:pointer;font-weight:900;min-height:60px;color:#051018;box-shadow:0 10px 30px rgba(0,0,0,0.28);transition:transform .08s,box-shadow .08s}
-  .taskBtn:active{transform:translateY(2px)}
-  .taskBtn.anim { animation: danceFast .9s infinite ease-in-out; }
-  @keyframes danceFast { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
+    .header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    .logo{width:72px;height:72px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold1),var(--gold2));font-weight:900;color:#051018;font-size:20px;box-shadow:0 10px 40px rgba(124,77,255,0.08)}
+    .title{font-size:20px;font-weight:900}
+    .subtitle{color:var(--muted);font-size:13px}
+    .controls{margin-left:auto;display:flex;align-items:center;gap:12px}
+    .adsBadge{background:linear-gradient(90deg,var(--neon-2),var(--neon-1));color:#021018;padding:8px 12px;border-radius:10px;font-weight:900;box-shadow:0 10px 30px rgba(0,255,224,0.06)}
+    .creator{color:var(--neon-2);font-weight:800;text-shadow:0 0 10px rgba(0,255,224,0.05)}
 
-  .gamesGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
-  @media(max-width:1100px){.gamesGrid{grid-template-columns:repeat(2,1fr)}}
-  .gameCard{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);min-height:160px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden}
-  .playNow{padding:8px 14px;border-radius:999px;border:none;cursor:pointer;font-weight:900;color:#051018;background:linear-gradient(90deg,#ff00cc,#3333ff);box-shadow:0 12px 40px rgba(124,58,237,0.14);transition:transform .08s}
-  .playNow:hover{transform:translateY(-4px);box-shadow:0 22px 70px rgba(124,58,237,0.22)}
+    .grid2{display:grid;grid-template-columns:1fr 380px;gap:14px;margin-bottom:12px}
+    @media(max-width:980px){.grid2{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 40px rgba(0,0,0,0.45)}
+    .balanceBig{font-size:24px;font-weight:900}
+    .muted{color:var(--muted);font-size:13px}
+    .progress{height:10px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;margin-top:8px}
+    .progressFill{height:100%;background:linear-gradient(90deg,var(--gold1),var(--gold2));width:0%}
 
-  .referBtn{padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:900;background:linear-gradient(90deg,#00ffe0,#7c3aed);color:#021018;box-shadow:0 14px 40px rgba(0,255,224,0.06)}
-  .refCopy{padding:8px 12px;border-radius:10px;border:none;background:linear-gradient(90deg,#ffd54a,#ffb84d);color:#021018;font-weight:800;cursor:pointer}
+    .tasksWrap{padding:10px;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent);max-height:420px;overflow:auto}
+    .btnGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+    @media(max-width:1000px){.btnGrid{grid-template-columns:repeat(3,1fr)}}
+    .taskBtn{padding:12px;border-radius:12px;border:none;cursor:pointer;font-weight:900;min-height:62px;color:#051018;box-shadow:0 12px 30px rgba(0,0,0,0.3);transition:transform .12s,box-shadow .12s}
+    .taskBtn:active{transform:translateY(2px)}
+    .c0{background:linear-gradient(90deg,#ffd54a,#ffb84d)}
+    .c1{background:linear-gradient(90deg,#7c3aed,#34d399);color:#fff}
+    .c2{background:linear-gradient(90deg,#60a5fa,#7c3aed);color:#fff}
+    .c3{background:linear-gradient(90deg,#fb7185,#f97316);color:#fff}
+    .c4{background:linear-gradient(90deg,#a78bfa,#f472b6);color:#fff}
 
-  /* BUY bottom redesigned */
-  .buyBox{position:fixed;left:50%;transform:translateX(-50%);bottom:12px;z-index:9999;background:linear-gradient(180deg,#071225,#0b0f1a);padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 80px rgba(0,0,0,0.55);max-width:1100px;width:calc(100% - 36px);display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .buyCompact{display:flex;gap:12px;align-items:center}
-  .buyBadge{background:linear-gradient(90deg,#ffb84d,#ffd54a);color:#021018;padding:8px 10px;border-radius:10px;font-weight:900}
-  .buyTitleCompact{font-weight:900}
-  .buyPrimary{padding:10px 14px;border-radius:12px;border:none;background:linear-gradient(90deg,#ff00aa,#00b3ff);color:white;font-weight:900;cursor:pointer;box-shadow:0 16px 60px rgba(124,58,237,0.18)}
-  .buyDetailsPanel{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:20000;background:linear-gradient(180deg,#081022,#071225);padding:18px;border-radius:12px;min-width:320px;max-width:760px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 120px rgba(0,0,0,0.7);display:none}
-  .buyDetailsPanel.show{display:block}
-  .buyClose{position:absolute;right:10px;top:8px;background:transparent;border:none;color:var(--muted);font-size:22px;cursor:pointer}
-  .buyRow{display:flex;gap:12px;align-items:center;margin-top:8px}
-  .buyList{color:var(--muted);font-size:14px;line-height:1.4}
+    .gamesGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+    @media(max-width:1100px){.gamesGrid{grid-template-columns:repeat(2,1fr)}}
+    .gameCard{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);min-height:190px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden}
+    .gameTitle{font-weight:900;margin-bottom:8px}
+    .playNow{padding:10px 18px;border-radius:999px;border:none;cursor:pointer;font-weight:900;color:#051018;background:linear-gradient(90deg,#ff00cc,#3333ff);box-shadow:0 16px 50px rgba(124,58,237,0.18);transition:transform .12s}
+    .playNow:hover{transform:translateY(-6px);box-shadow:0 32px 100px rgba(124,58,237,0.26)}
 
-  .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:12px;border-radius:12px;z-index:200000;min-width:320px;display:none;color:#e6eef6}
-  .modal.show{display:block}
-  .closeX{position:absolute;right:12px;top:8px;background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer}
-  .input{width:100%;padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#e6eef6;margin-top:8px}
+    .buyBox{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:9999;background:linear-gradient(180deg,#071225,#0b0f1a);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 80px rgba(0,0,0,0.55);max-width:1100px;width:calc(100% - 40px)}
+    .buyHeader{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .buyTitle{font-weight:900;color:var(--gold1)}
+    .buyToggle{cursor:pointer;padding:8px 10px;border-radius:10px;background:linear-gradient(90deg,#0f1724,#081028);border:1px solid rgba(255,255,255,0.03)}
+    .buyDetails{display:none;margin-top:12px;color:var(--muted);font-size:14px}
+    .buyCTA{margin-top:10px;padding:10px 18px;border-radius:12px;border:none;background:linear-gradient(90deg,#34d399,#60a5fa);font-weight:900;color:#021018;cursor:pointer}
 
-  .smallMuted{color:var(--muted);font-size:13px}
-  .sparkle{position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff;transform:translate(-50%,-50%) scale(0);animation:spk .6s linear}
-  @keyframes spk{0%{transform:translate(-50%,-50%) scale(0)}50%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}
-  }
+    .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:18px;border-radius:12px;z-index:200000;min-width:320px;display:none;color:#e6eef6}
+    .modal.show{display:block}
+    .closeX{position:absolute;right:12px;top:8px;background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer}
+    .input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#e6eef6;margin-top:8px}
 
-  footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;padding-bottom:24px}
-</style>
+    .refRow{display:flex;gap:8px;align-items:center;margin-top:8px}
+    .refInput{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:var(--text);flex:1}
+    .refBtn{padding:8px 12px;border-radius:8px;border:none;background:linear-gradient(90deg,var(--neon-2),var(--neon-1));color:#021018;font-weight:800;cursor:pointer}
+
+    .smallMuted{color:var(--muted);font-size:13px}
+    .sparkle{position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff;transform:translate(-50%,-50%) scale(0);animation:spk .7s linear}
+    @keyframes spk{0%{transform:translate(-50%,-50%) scale(0)}50%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}}
+
+    /* shooting star area polished */
+    #shootingStarWrap{margin:18px auto;max-width:680px}
+    #shootingArea{position:relative;height:220px;border-radius:12px;background:radial-gradient(circle at top,#000,#021);overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+    .shootStar{position:absolute;width:12px;height:12px;border-radius:50%;background:linear-gradient(45deg,#fff,#0ff);box-shadow:0 0 14px rgba(0,255,240,0.8);cursor:pointer}
+    .rewardBox{display:none;background:linear-gradient(90deg,#071225,#0b1220);padding:12px;border-radius:12px;color:var(--text);border:1px solid rgba(255,255,255,0.03);text-align:center}
+    /* responsive tweaks */
+    @media(max-width:700px){
+      .btnGrid{grid-template-columns:repeat(2,1fr)}
+      .gamesGrid{grid-template-columns:repeat(1,1fr)}
+    }
+  </style>
 </head>
-  <!-- Shooting Star Section -->
-<div id="shootingStarContainer">
-  <div id="shootingText">✨ Shooting Star! Tap to Collect 🌟</div>
-  <canvas id="shootingStarCanvas"></canvas>
-</div>
-
-<style>
-  #shootingStarContainer {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    background: linear-gradient(180deg, #000, #020617);
-  }
-
-  #shootingText {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #fff;
-    font-size: 20px;
-    font-weight: bold;
-    text-shadow: 0 0 10px #fff, 0 0 20px #0ff;
-    animation: glow 2s ease-in-out infinite;
-  }
-
-  @keyframes glow {
-    0%, 100% { text-shadow: 0 0 10px #fff, 0 0 20px #0ff; }
-    50% { text-shadow: 0 0 20px #fff, 0 0 40px #00f; }
-  }
-
-  #shootingStarCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>
-
-<script>
-  const canvas = document.getElementById('shootingStarCanvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = 200;
-
-  function star() {
-    this.x = Math.random() * canvas.width;
-    this.y = 0;
-    this.len = Math.random() * 80 + 10;
-    this.speed = Math.random() * 8 + 4;
-  }
-
-  const stars = [];
-  for (let i = 0; i < 20; i++) stars.push(new star());
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#fff';
-    stars.forEach((s, i) => {
-      ctx.beginPath();
-      ctx.moveTo(s.x, s.y);
-      ctx.lineTo(s.x - s.len, s.y + s.len);
-      ctx.strokeStyle = 'white';
-      ctx.stroke();
-      s.x += s.speed;
-      s.y += s.speed;
-      if (s.x > canvas.width || s.y > canvas.height) stars[i] = new star();
-    });
-    requestAnimationFrame(draw);
-  }
-
-  draw();
-</script>
 <body>
 
-  <!-- VPN banner -->
-  <div class="vpnBanner" id="vpnBanner">
-    🌐 Connect VPN (USA / Canada / Australia) for higher rewards!
-    <span class="vpnSub">Tip: connect to USA for best payout rates and ad availability.</span>
+  <!-- Floating VPN banner (animated snake + glowing) -->
+  <div class="floatingBanner" id="vpnBanner">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <div style="font-weight:900">🌐 Connect VPN (USA / Canada / Australia) for higher rewards!</div>
+      <div class="vpnBtn" id="vpnBtn" role="button" aria-pressed="false">Watch Ad • Better Rewards</div>
+    </div>
   </div>
 
-  <!-- Welcome -->
-  <div class="welcome" id="welcome" aria-live="polite"></div>
+  <div class="welcomeBanner" id="welcomeBanner" aria-live="polite"></div>
 
   <main class="app" role="main" aria-labelledby="appTitle">
     <header class="header" id="appTitle">
@@ -173,13 +118,14 @@
         <div class="title">Galaxy Jackpot — ∞× Legendary++</div>
         <div class="subtitle">Play • Watch Ads • Earn USDT</div>
       </div>
+
       <div class="controls" role="region" aria-label="controls">
-        <div class="smallMuted">Ads Watched: <strong id="adsBadge">0</strong></div>
+        <div class="adsBadge" id="adsBadge">Ads: 0</div>
+        <div class="creator" title="Creator">MD RAHAT</div>
       </div>
     </header>
 
-    <!-- top area -->
-    <div style="display:grid;grid-template-columns:1fr 360px;gap:12px;margin-bottom:12px">
+    <div class="grid2">
       <div class="card" aria-live="polite">
         <div style="display:flex;justify-content:space-between;align-items:center">
           <div>
@@ -187,13 +133,16 @@
             <div class="balanceBig" id="balance">USDT 0.000000</div>
             <div class="smallMuted" id="avail">Available: USDT 0.000000</div>
             <div class="progress"><div id="xpFill" class="progressFill" style="width:0%"></div></div>
-            <div style="margin-top:8px"><span class="smallMuted">Level <strong id="levelTag">0</strong></span><span class="smallMuted" id="xpInfo" style="margin-left:8px">XP 0</span></div>
+            <div style="margin-top:8px">
+              <span class="smallMuted">Level <strong id="levelTag">0</strong></span>
+              <span class="smallMuted" id="xpInfo" style="margin-left:10px">XP 0</span>
+            </div>
           </div>
 
           <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-            <button id="btnRefModal" class="playNow" style="background:linear-gradient(90deg,var(--gold1),var(--gold2));padding:8px 12px">My Referrals</button>
+            <button id="btnRefModal" class="playNow" style="background:linear-gradient(90deg,var(--gold1),var(--gold2));">My Referrals</button>
             <div class="smallMuted">Referral bonus: <strong>0.005 USDT</strong> • Commission: <strong>5%</strong></div>
-            <button id="btnWithdrawOpen" class="playNow" style="background:linear-gradient(90deg,#ffb84d,#ffd54a);margin-top:6px;padding:8px 12px">Withdraw</button>
+            <button id="btnWithdrawOpen" class="playNow" style="background:linear-gradient(90deg,#ffb84d,#ffd54a);margin-top:6px">Withdraw</button>
           </div>
         </div>
       </div>
@@ -204,101 +153,89 @@
           <div class="smallMuted">Invite • Withdraw • Settings</div>
         </div>
 
-        <div style="margin-top:10px;display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;gap:8px;align-items:center">
-            <input id="refLink" class="input" readonly aria-label="Referral link" style="flex:1;background:rgba(255,255,255,0.02);color:var(--text)">
-            <button id="openRefInfo" class="referBtn" title="Earn by sharing">Refer & Earn</button>
-          </div>
-          <div style="display:flex;gap:8px">
-            <button id="btnMood" class="playNow" style="flex:1">Toggle Mood</button>
-            <button id="btnReset" class="playNow" style="background:linear-gradient(90deg,#fb7185,#f97316);padding:8px 10px">Reset Data</button>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+          <!-- REFER BOX REMOVED as requested -->
+          <div style="display:flex;gap:8px;margin-top:6px">
+            <button id="btnMood" class="refBtn" style="flex:1">Toggle Mood</button>
+            <button id="btnReset" class="refBtn" style="flex:1;background:linear-gradient(90deg,#fb7185,#f97316)">Reset Data</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- tasks -->
     <section class="card">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div style="font-weight:900">100 Tasks</div>
         <div class="smallMuted">Click a task → watch ad → earn 0.0005 USDT</div>
       </div>
-      <div class="tasksWrap" style="margin-top:10px" id="tasksWrap">
+      <div class="tasksWrap" style="margin-top:12px">
         <div class="btnGrid" id="taskGrid"></div>
       </div>
     </section>
 
-    <!-- games -->
     <section class="card" style="margin-top:12px">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div style="font-weight:900">8 Mini Games</div>
         <div class="smallMuted">Play & watch ad to earn</div>
       </div>
 
-      <div class="gamesGrid" id="gamesGrid" style="margin-top:10px">
-        <!-- Wheel -->
+      <div class="gamesGrid" id="gamesGrid" style="margin-top:12px">
         <div class="gameCard" id="gameWheel">
           <div class="gameTitle">🎡 Spin Wheel</div>
-          <div id="wheel" style="width:120px;height:120px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:conic-gradient(#f59e0b,#f97316,#60a5fa,#7c3aed);font-weight:900;color:#051018">SPIN</div>
-          <button class="playNow" id="spinBtn" style="margin-top:8px;padding:8px 12px">Play Now</button>
-          <div id="rWheel" class="smallMuted" style="margin-top:6px"></div>
+          <div id="wheel" style="width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:conic-gradient(#f59e0b,#f97316,#60a5fa,#7c3aed);font-weight:900;color:#051018">SPIN</div>
+          <button class="playNow" id="spinBtn">Play Now</button>
+          <div id="rWheel" class="smallMuted" style="margin-top:8px"></div>
         </div>
 
-        <!-- Slot -->
         <div class="gameCard" id="gameSlot">
           <div class="gameTitle">🎰 Slot</div>
-          <div style="display:flex;gap:6px;justify-content:center;margin-top:8px;font-weight:900;font-size:20px">
-            <div id="s1" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.02)">7</div>
-            <div id="s2" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.02)">7</div>
-            <div id="s3" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.02)">7</div>
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;font-weight:900;font-size:22px">
+            <div id="s1" style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.02)">7</div>
+            <div id="s2" style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.02)">7</div>
+            <div id="s3" style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,0.02)">7</div>
           </div>
-          <button class="playNow" id="slotPlay" style="margin-top:8px;padding:8px 12px">Play Now</button>
+          <button class="playNow" id="slotPlay">Play Now</button>
           <div id="rSlot" class="smallMuted"></div>
         </div>
 
-        <!-- Dice -->
         <div class="gameCard" id="gameDice">
           <div class="gameTitle">🎲 Dice Roll</div>
-          <div id="diceFace" style="font-size:26px;font-weight:900;margin:12px;background:linear-gradient(90deg,#ffffff,#e6e6e6);color:#051018;border-radius:8px;padding:6px;width:80px;text-align:center">-</div>
-          <button class="playNow" id="dicePlay" style="margin-top:6px;padding:8px 12px">Roll Now</button>
+          <div id="diceFace" style="font-size:28px;font-weight:900;margin:12px;background:linear-gradient(90deg,#ffffff,#e6e6e6);color:#051018;border-radius:8px;padding:8px;width:88px;text-align:center">-</div>
+          <button class="playNow" id="dicePlay">Roll Now</button>
           <div id="rDice" class="smallMuted"></div>
         </div>
 
-        <!-- Coin -->
         <div class="gameCard" id="gameCoin">
           <div class="gameTitle">🪙 Coin Flip</div>
-          <div id="coinAnim" style="width:68px;height:68px;border-radius:50%;background:linear-gradient(90deg,#ffd54a,#ffb84d);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;margin:8px">◐</div>
+          <div id="coinAnim" style="width:74px;height:74px;border-radius:50%;background:linear-gradient(90deg,#ffd54a,#ffb84d);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;margin:8px">◐</div>
           <div style="display:flex;gap:8px;margin-top:8px">
-            <button class="playNow" id="coinHead" style="padding:6px 10px">Head</button><button class="playNow" id="coinTail" style="padding:6px 10px">Tail</button>
+            <button class="playNow" id="coinHead">Head</button><button class="playNow" id="coinTail">Tail</button>
           </div>
           <div id="rCoin" class="smallMuted"></div>
         </div>
 
-        <!-- Lucky Box -->
         <div class="gameCard" id="gameBox">
           <div class="gameTitle">🎁 Lucky Box</div>
-          <div id="boxIcon" style="width:72px;height:72px;border-radius:10px;background:linear-gradient(90deg,#f97316,#fb7185);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;margin:8px">BOX</div>
+          <div id="boxIcon" style="width:80px;height:80px;border-radius:12px;background:linear-gradient(90deg,#f97316,#fb7185);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;margin:8px">BOX</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px">
-            <button class="playNow boxBtn" data-box="1" style="padding:6px 10px">Open</button>
+            <button class="playNow boxBtn" data-box="1">Open</button>
           </div>
           <div id="rBox" class="smallMuted"></div>
         </div>
 
-        <!-- RPS -->
         <div class="gameCard" id="gameRPS">
           <div class="gameTitle">✊✌️✋ Rock Paper Scissors</div>
           <div style="display:flex;gap:8px;margin-top:8px">
-            <button class="playNow" id="rpsRock" style="padding:6px 10px">Rock</button><button class="playNow" id="rpsPaper" style="padding:6px 10px">Paper</button><button class="playNow" id="rpsScissors" style="padding:6px 10px">Scissors</button>
+            <button class="playNow" id="rpsRock">Rock</button><button class="playNow" id="rpsPaper">Paper</button><button class="playNow" id="rpsScissors">Scissors</button>
           </div>
           <div id="rRPS" class="smallMuted"></div>
         </div>
 
-        <!-- Tile -->
         <div class="gameCard" id="gameTile">
           <div class="gameTitle">🔳 Tile Match</div>
-          <div id="tileBoard" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;width:100%">
-            <div class="tile playNow" data-idx="0" style="padding:10px;border-radius:8px;background:rgba(255,255,255,0.02)">?</div><div class="tile playNow" data-idx="1" style="padding:10px;border-radius:8px;background:rgba(255,255,255,0.02)">?</div><div class="tile playNow" data-idx="2" style="padding:10px;border-radius:8px;background:rgba(255,255,255,0.02)">?</div>
-            <div class="tile playNow" data-idx="3" style="padding:10px;border-radius:8px;background:rgba(255,255,255,0.02)">?</div><div class="tile playNow" data-idx="4" style="padding:10px;border-radius:8px;background:rgba(255,255,255,0.02)">?</div><div class="tile playNow" data-idx="5" style="padding:10px;border-radius:8px;background:rgba(255,255,255,0.02)">?</div>
+          <div id="tileBoard" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px;width:100%">
+            <div class="tile playNow" data-idx="0">?</div><div class="tile playNow" data-idx="1">?</div><div class="tile playNow" data-idx="2">?</div>
+            <div class="tile playNow" data-idx="3">?</div><div class="tile playNow" data-idx="4">?</div><div class="tile playNow" data-idx="5">?</div>
           </div>
           <div id="rTile" class="smallMuted" style="margin-top:8px"></div>
         </div>
@@ -306,42 +243,39 @@
       </div>
     </section>
 
-    <div style="height:100px"></div>
-  </main>
-
-  <!-- BUY compact bar (improved) -->
-  <div class="buyBox" id="buyBox">
-    <div class="buyCompact">
-      <div class="buyBadge">Premium</div>
-      <div class="buyTitleCompact">Buy Now — Galaxy Jackpot Full Script — $100</div>
-    </div>
-    <div style="display:flex;gap:12px;align-items:center">
-      <button id="buyOpenBtn" class="buyPrimary">Buy Now — $100</button>
-      <button id="buyDetailsBtn" class="buyPrimary" style="background:linear-gradient(90deg,#34d399,#60a5fa)">Show Details</button>
-    </div>
-  </div>
-
-  <!-- Buy Details Panel (modal style) -->
-  <div class="buyDetailsPanel" id="buyPanel" role="dialog" aria-hidden="true">
-    <button class="buyClose" id="buyClose">✕</button>
-    <h3 style="margin:0 0 8px 0;color:var(--gold1)">Buy Now — Galaxy Jackpot Full Script — $100</h3>
-    <div class="buyRow">
-      <div style="flex:1">
-        <div class="buyList">
-          • Full front-end UI (responsive) — ready to deploy.<br>
-          • 8 playable mini-games (spin, slot, dice, coin, box, rps, tile, wheel).<br>
-          • 100 animated tasks + Monetag/Adstra ad placeholders.<br>
-          • Referral system (0.005 signup bonus, 5% commission), withdraw modal (GAS logging).<br>
-          • Mood selector, fast scroll, premium UI effects, installation notes.
+    <!-- Shooting Star (placed after games, visible) -->
+    <section class="card" id="shootingStarSection" style="margin-top:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-weight:900">Shooting Star — Tap to Collect</div>
+        <div class="smallMuted">Watch ad → Collect reward (0.001 USDT per star)</div>
+      </div>
+      <div id="shootingStarWrap" style="margin-top:12px">
+        <div id="shootingArea"></div>
+        <div style="display:flex;gap:8px;margin-top:10px;align-items:center;justify-content:center">
+          <button id="startShooting" class="playNow" style="background:linear-gradient(90deg,#34d399,#60a5fa)">Start Stars</button>
+          <div id="starScore" class="smallMuted">Stars collected: 0</div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div style="display:flex;gap:10px;margin-top:12px;align-items:center">
-      <button id="buyConfirm" class="buyPrimary">💎 Buy — $100 (Email Now)</button>
-      <button id="buyContact" class="refCopy">Contact via Email</button>
+    <div style="height:120px"></div>
+  </main>
+
+  <!-- Buy Box -->
+  <div class="buyBox" id="buyBox" role="dialog" aria-label="Buy">
+    <div class="buyHeader">
+      <div class="buyTitle">Buy Now — Galaxy Jackpot Full Script — $100</div>
+      <div class="buyToggle" id="buyToggle">➡️</div>
     </div>
-    <p class="smallMuted" style="margin-top:10px">After purchase you'll receive full source (HTML + server examples + env guide). Contact: termuxethicalhackingbd@gmail.com</p>
+    <div class="buyDetails" id="buyDetails" aria-hidden="true">
+      <p style="margin:6px 0;color:var(--muted)">
+        What you get: Full front-end UI (responsive), 8 playable mini-games with animations, 100 animated task buttons,
+        referral & commission system, withdraw modal with GAS logging, ad placeholders for Monetag/Adstra, mood selector,
+        trogol effects, fast scroll UX, and installation instructions. Perfect for resell or white-label.
+      </p>
+      <p style="margin:6px 0;color:var(--muted)"><b>Contact:</b> termuxethicalhackingbd@gmail.com</p>
+      <button class="buyCTA" id="buyNowBtn">💎 Buy Full Script — $100</button>
+    </div>
   </div>
 
   <!-- Withdraw modal -->
@@ -350,146 +284,179 @@
     <h3>Withdraw Request</h3>
     <div class="smallMuted">Minimum: 2 USDT — bKash/Nagad: 1 USDT = 130 BDT</div>
     <label class="smallMuted" style="margin-top:10px">Payment Method</label>
-    <select id="payMethod" class="input"><option value="bkash">bKash</option><option value="nagad">Nagad</option><option value="binance">Binance</option></select>
+    <select id="payMethod" class="input">
+      <option value="bkash">bKash</option>
+      <option value="nagad">Nagad</option>
+      <option value="binance">Binance</option>
+    </select>
     <input id="payNumber" class="input" placeholder="Type your number / Binance UID"/>
     <input id="withdrawAmount" class="input" placeholder="Amount (USDT)"/>
     <div style="display:flex;gap:8px;margin-top:10px">
-      <button id="submitWithdraw" class="buyPrimary" style="padding:8px 12px">Withdraw Now</button>
-      <button id="cancelWithdraw" class="refCopy" style="padding:8px 12px">Cancel</button>
+      <button id="submitWithdraw" class="buyCTA">Withdraw Now</button>
+      <button id="cancelWithdraw" class="buyCTA" style="background:linear-gradient(90deg,#ffb84d,#ffd54a)">Cancel</button>
     </div>
     <div class="smallMuted" style="margin-top:8px">Please wait 1 minute — 48 hours for processing.</div>
   </div>
 
   <!-- Referrals modal -->
-  <div class="modal" id="refModal" aria-hidden="true" style="min-width:320px">
+  <div class="modal" id="refModal" aria-hidden="true" style="min-width:360px">
     <button class="closeX" id="closeRef">✕</button>
-    <h3>My Referrals</h3>
-    <div id="refList" style="max-height:300px;overflow:auto;margin-top:8px;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02)"></div>
+    <h3>Refer & Earn</h3>
+    <div style="margin-top:8px">
+      <p class="smallMuted">Share your referral link. For each referred user: <strong>0.005 USDT</strong> + <strong>5%</strong> commission on their earnings.</p>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <input id="refLink" class="refInput" readonly>
+        <button id="copyRef" class="refBtn">Copy</button>
+      </div>
+      <div style="margin-top:10px" id="refExtra" class="smallMuted"></div>
+    </div>
   </div>
 
-  <!-- Refer Info modal -->
-  <div class="modal" id="refInfoModal" aria-hidden="true" style="min-width:420px">
-    <button class="closeX" id="closeRefInfo">✕</button>
-    <h3>💸 Earn With Galaxy Jackpot!</h3>
-    <p class="smallMuted" style="margin-top:6px">
-      Share your referral link. When someone joins via your link they receive a signup bonus and you earn <strong>0.005 USDT</strong> plus <strong>5% commission</strong> on their ad rewards.
-    </p>
-    <div style="margin-top:10px">
-      <input id="refInfoLink" class="input" readonly style="background:rgba(255,255,255,0.02)"/>
-    </div>
-    <div style="display:flex;gap:8px;margin-top:10px">
-      <button id="copyRefFull" class="refCopy">Copy Link + Message</button>
-      <button id="copyLinkOnly" class="referBtn">Copy Link Only</button>
-    </div>
-    <p class="smallMuted" style="margin-top:8px">Share on socials or Telegram — every signup counts!</p>
+  <!-- Footer Credit -->
+  <div style="height:18px"></div>
+  <div class="footer-credit" style="width:100%;text-align:center;padding:10px 6px;font-size:14px;background:linear-gradient(to right, rgba(0,0,0,0.25), rgba(0,0,0,0.4));color:#d4d4d4;border-top:1px solid rgba(255,255,255,0.06);font-family:Poppins, sans-serif;letter-spacing:0.6px;backdrop-filter:blur(4px);position:relative">
+    Creator <strong style="background:linear-gradient(90deg,#00ffe0,#ff00c8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600;text-shadow:0 0 10px rgba(0,255,255,0.3)">MD RAHAT</strong> | Powered by <span style="color:#00ffe0;text-shadow:0 0 10px #00ffe0,0 0 20px #00ffe0;font-weight:500">ChatGPT&nbsp;5</span>
+    <div style="position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#00ffe0,#ff00c8,#ffae00,#00ffe0);background-size:300% 100%;animation:moveGlow 4s linear infinite;box-shadow:0 0 20px #00ffe0,0 0 40px #ff00c8"></div>
   </div>
 
-  <footer>Creator: MD RAHAT — Powered by ChatGPT-5</footer>
+  <!-- Toast area -->
+  <div id="toastArea" aria-live="polite" style="position:fixed;left:50%;top:20%;transform:translateX(-50%);z-index:99999"></div>
 
 <script>
-/* ========== CONFIG ========== */
+/* ===========================
+   CONFIG
+   =========================== */
 const CONFIG = {
-  REWARD_PER_AD: 0.0005,
-  ADS_PER_LEVEL: 100,
-  LEVEL_BASE_BONUS: 0.01,
-  MIN_WITHDRAW: 2,
-  MONETAG_FN: 'show_10125761',
-  ADSTRA_SMARTLINK: 'https://www.effectivegatecpm.com/za35wfvxct?key=33d9ac55094c983709eac1a9fd20c4b5',
-  GAS_URL: '' // set your Google Apps Script URL here for withdraw logging
+  REWARD_PER_TASK: 0.0005,
+  REWARD_STAR: 0.001,
+  ADS_FN: 'show_10125761', // Monetag function name from script
+  AD_FALLBACK: 'https://www.effectivegatecpm.com/za35wfvxct?key=33d9ac55094c983709eac1a9fd20c4b5',
+  GAS_URL: '' // put your GAS URL if you want withdraw logging e.g. https://script.../exec
 };
 
-/* ========== STATE ========== */
+/* ===========================
+   STATE
+   =========================== */
 const UID = localStorage.getItem('gj_uid') || ('u'+Math.floor(Math.random()*9e9));
 localStorage.setItem('gj_uid', UID);
-let state = JSON.parse(localStorage.getItem('gj_state_v2') || '{}');
-if(!state.uid){ state = { uid:UID, balance:0.000000, adsWatched:0, level:0, referrals:[], refEarned:0 }; localStorage.setItem('gj_state_v2', JSON.stringify(state)); }
-function persist(){ localStorage.setItem('gj_state_v2', JSON.stringify(state)); renderUI(); }
 
-/* Render UI */
+let state = JSON.parse(localStorage.getItem('gj_state_v2') || '{}');
+if(!state.uid){
+  state = { uid:UID, balance:0.0, adsWatched:0, level:0, referrals:[], refEarned:0 };
+  localStorage.setItem('gj_state_v2', JSON.stringify(state));
+}
+
+/* helpers */
+function persist(){ localStorage.setItem('gj_state_v2', JSON.stringify(state)); renderUI(); }
+function toast(msg, t=1600){ const ta=document.getElementById('toastArea'); const el=document.createElement('div'); el.innerText=msg; el.style.cssText='background:linear-gradient(90deg,#ffd54a,#ffb84d);color:#031018;padding:10px 16px;border-radius:10px;font-weight:900;margin-top:8px;box-shadow:0 10px 30px rgba(0,0,0,0.3)'; ta.appendChild(el); setTimeout(()=>el.remove(),t); }
+
+/* render UI */
 function renderUI(){
   document.getElementById('balance').innerText = 'USDT ' + (state.balance||0).toFixed(6);
   document.getElementById('avail').innerText = 'Available: USDT ' + (state.balance||0).toFixed(6);
-  document.getElementById('adsBadge').innerText = (state.adsWatched||0);
+  document.getElementById('adsBadge').innerText = 'Ads: ' + (state.adsWatched||0);
   document.getElementById('levelTag').innerText = state.level || 0;
   document.getElementById('xpInfo').innerText = 'XP ' + (state.adsWatched||0);
-  const pct = Math.min(100, Math.floor(((state.adsWatched||0) % CONFIG.ADS_PER_LEVEL)/CONFIG.ADS_PER_LEVEL*100));
+  const pct = Math.min(100, Math.floor(((state.adsWatched||0) % 100)/100*100));
   document.getElementById('xpFill').style.width = pct + '%';
   document.getElementById('refLink').value = `${location.origin}${location.pathname}?start=ref_${UID}`;
-  document.getElementById('refInfoLink').value = `${location.origin}${location.pathname}?start=ref_${UID}`;
 }
 renderUI();
 
-/* toast */
-function toast(text, time=1200){
-  const el = document.createElement('div'); el.innerText = text;
-  el.style.cssText = 'position:fixed;left:50%;top:18%;transform:translateX(-50%);background:linear-gradient(90deg,#fff,#ffd54a);color:#031018;padding:8px 12px;border-radius:8px;font-weight:900;z-index:99999';
-  document.body.appendChild(el); setTimeout(()=> el.remove(), time);
-}
-
-/* Ads function */
-async function showRewardedAd(){
+/* check incoming referral param and credit referrer (local) */
+(function handleIncomingRef(){
   try{
-    if(CONFIG.MONETAG_FN && typeof window[CONFIG.MONETAG_FN] === 'function'){
-      await window[CONFIG.MONETAG_FN]();
+    const url = new URL(location.href);
+    const start = url.searchParams.get('start') || '';
+    if(start && start.startsWith('ref_')){
+      const refId = start.slice(4);
+      if(refId && refId !== UID){
+        const map = JSON.parse(localStorage.getItem('gj_ref_map') || '{}');
+        map[refId] = map[refId] || [];
+        map[refId].push({ id: UID, time: new Date().toLocaleString() });
+        localStorage.setItem('gj_ref_map', JSON.stringify(map));
+        const credits = JSON.parse(localStorage.getItem('gj_ref_credits') || '{}');
+        credits[refId] = (credits[refId] || 0) + 0.005;
+        localStorage.setItem('gj_ref_credits', JSON.stringify(credits));
+        toast('Referred! Referrer credited',2000);
+      }
+    }
+  }catch(e){}
+})();
+
+/* ===========================
+   Ad helper (Monetag first, fallback open)
+   =========================== */
+async function showRewardedAd(){
+  // Monetag exposes a promise-style function in examples, try call
+  try{
+    if(CONFIG.ADS_FN && typeof window[CONFIG.ADS_FN] === 'function'){
+      await window[CONFIG.ADS_FN]();
       return true;
     }
-  }catch(e){ console.warn('Monetag call failed', e); }
-  window.open(CONFIG.ADSTRA_SMARTLINK + '&ref=' + encodeURIComponent(UID), '_blank');
+  }catch(e){
+    console.warn('Monetag call failed', e);
+  }
+  // fallback: open smartlink in new tab and ask user to confirm
+  window.open(CONFIG.AD_FALLBACK + '&ref=' + encodeURIComponent(UID), '_blank');
   return confirm('Ad opened in new tab. After watching the ad, press OK to claim reward.');
 }
 
-/* credit */
-function credit(amount, reason='Ad Reward'){
+/* crediting */
+function credit(amount, reason='Reward'){
   state.balance = (state.balance || 0) + Number(amount);
   state.adsWatched = (state.adsWatched || 0) + 1;
   const prevLevel = state.level || 0;
-  const newLevel = Math.floor(state.adsWatched / CONFIG.ADS_PER_LEVEL);
+  const newLevel = Math.floor(state.adsWatched / 100);
   if(newLevel > prevLevel){
     for(let L=prevLevel+1; L<=newLevel; L++){
-      const bonus = CONFIG.LEVEL_BASE_BONUS * L;
+      const bonus = 0.01 * L;
       state.balance += bonus;
-      toast(`Level ${L} Bonus +${bonus.toFixed(6)} USDT`, 1600);
+      toast(`Level ${L} Bonus +${bonus.toFixed(6)} USDT`,2000);
     }
     state.level = newLevel;
   }
   persist();
-  toast(`${reason} +${Number(amount).toFixed(6)} USDT`, 1200);
+  toast(`${reason} +${Number(amount).toFixed(6)} USDT`,1600);
 }
 
-/* ========== TASKS (100) ========== */
+/* ===========================
+   Tasks (100)
+   =========================== */
 const taskGrid = document.getElementById('taskGrid');
-const colorList = ['#ffd54a','#7c3aed','#60a5fa','#fb7185','#a78bfa'];
+const colours = ['c0','c1','c2','c3','c4'];
 for(let i=1;i<=100;i++){
   const btn = document.createElement('button');
-  btn.className = 'taskBtn anim';
+  btn.className = 'taskBtn ' + colours[i % colours.length];
   btn.innerText = `Task ${i}`;
-  btn.style.background = colorList[i % colorList.length];
   btn.title = 'Watch an ad to earn';
   btn.addEventListener('click', async ()=>{
-    let ok = false;
-    try{ ok = await showRewardedAd(); }catch(e){ ok = false; }
-    if(ok) credit(CONFIG.REWARD_PER_AD, `Task ${i}`);
+    const ok = await showRewardedAd();
+    if(ok){ credit(CONFIG.REWARD_PER_TASK, `Task ${i}`); }
     else alert('No reward (ad not completed)');
   });
   taskGrid.appendChild(btn);
 }
 
-/* ========== GAMES ========== */
+/* ===========================
+   Games implementation
+   =========================== */
 /* Wheel */
 document.getElementById('spinBtn').addEventListener('click', async ()=>{
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
   const wheel = document.getElementById('wheel');
-  const spins = Math.floor(Math.random()*4)+6;
+  const spins = Math.floor(Math.random()*6)+8;
   const sector = Math.floor(Math.random()*8);
-  const deg = spins*360 + sector*(360/8) + Math.floor(Math.random()*12);
-  wheel.style.transition = 'transform 2.0s cubic-bezier(.25,.8,.25,1)';
+  const deg = spins*360 + sector*(360/8) + Math.floor(Math.random()*20);
+  wheel.style.transition = 'transform 3.6s cubic-bezier(.25,.8,.25,1)';
   wheel.style.transform = `rotate(${deg}deg)`;
   setTimeout(()=>{
-    wheel.style.transition = ''; wheel.style.transform = `rotate(${deg%360}deg)`;
-    const win = (sector%4===0) || Math.random() < 0.2;
-    if(win){ state.balance += 0.02; toast('Spin Bonus +0.02 USDT',1200); }
-    credit(CONFIG.REWARD_PER_AD, 'Spin Reward');
-  },2100);
+    wheel.style.transition = '';
+    wheel.style.transform = `rotate(${deg%360}deg)`;
+    const win = (sector%4===0) || Math.random() < 0.18;
+    if(win){ state.balance += 0.03; toast('Spin Bonus +0.03 USDT',1800); }
+    credit(CONFIG.REWARD_PER_TASK, 'Spin Reward');
+  },3800);
 });
 
 /* Slot */
@@ -497,14 +464,19 @@ const symbols = ['7','🍒','⭐','🍋','💎','🔔'];
 async function spinSlot(){
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
   const s1 = document.getElementById('s1'), s2 = document.getElementById('s2'), s3 = document.getElementById('s3');
-  const rounds = 10;
-  for(let i=0;i<rounds;i++){ await new Promise(r=>setTimeout(r,30 + i*10)); s1.innerText = symbols[Math.floor(Math.random()*symbols.length)]; s2.innerText = symbols[Math.floor(Math.random()*symbols.length)]; s3.innerText = symbols[Math.floor(Math.random()*symbols.length)]; }
+  const rounds = 16;
+  for(let i=0;i<rounds;i++){
+    await new Promise(r=>setTimeout(r,40 + i*6));
+    s1.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+    s2.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+    s3.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+  }
   const final = [s1.innerText,s2.innerText,s3.innerText];
   const jackpot = final[0]===final[1] && final[1]===final[2];
   const smallWin = final[0]===final[1] || final[1]===final[2] || final[0]===final[2];
-  if(jackpot){ state.balance += 0.05; toast('JACKPOT +0.05 USDT',1500); }
-  else if(smallWin){ state.balance += 0.02; toast('Small Win +0.02 USDT',1200); }
-  credit(CONFIG.REWARD_PER_AD, 'Slot Reward');
+  if(jackpot){ state.balance += 0.08; toast('JACKPOT +0.08 USDT',2000); }
+  else if(smallWin){ state.balance += 0.03; toast('Small Win +0.03 USDT',1600); }
+  credit(CONFIG.REWARD_PER_TASK, 'Slot Reward');
 }
 document.getElementById('slotPlay').addEventListener('click', spinSlot);
 
@@ -512,22 +484,24 @@ document.getElementById('slotPlay').addEventListener('click', spinSlot);
 document.getElementById('dicePlay').addEventListener('click', async ()=>{
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
   const faceEl = document.getElementById('diceFace');
-  faceEl.style.transform = 'rotate(540deg) scale(.95)'; faceEl.style.transition = 'transform .6s';
-  await new Promise(r=>setTimeout(r,640)); faceEl.style.transform = '';
-  const val = Math.floor(Math.random()*6)+1; faceEl.innerText = val;
-  if(val >= 5){ state.balance += 0.015; toast('Dice Win +0.015 USDT',1000); }
-  credit(CONFIG.REWARD_PER_AD, 'Dice Reward');
+  faceEl.style.transform = 'rotate(720deg) scale(.95)'; faceEl.style.transition = 'transform .8s';
+  await new Promise(r=>setTimeout(r,820));
+  faceEl.style.transform = '';
+  const val = Math.floor(Math.random()*6)+1;
+  faceEl.innerText = val;
+  if(val >= 5){ state.balance += 0.02; toast('Dice Win +0.02 USDT',1400); }
+  credit(CONFIG.REWARD_PER_TASK, 'Dice Reward');
 });
 
 /* Coin */
 async function coin(choice){
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
-  const c = document.getElementById('coinAnim'); c.style.transform='rotateY(540deg)'; c.style.transition='transform .7s';
-  await new Promise(r=>setTimeout(r,760)); c.style.transform='';
+  const c = document.getElementById('coinAnim'); c.style.transform='rotateY(720deg)'; c.style.transition='transform .9s';
+  await new Promise(r=>setTimeout(r,920)); c.style.transform='';
   const res = Math.random() < 0.5 ? 'head' : 'tail';
   document.getElementById('rCoin').innerText = 'Result: ' + res.toUpperCase();
-  if(res === choice) { state.balance += 0.01; toast('Coin Win +0.01 USDT',900); }
-  credit(CONFIG.REWARD_PER_AD, 'Coin Reward');
+  if(res === choice) { state.balance += 0.01; toast('Coin Win +0.01 USDT',1300); }
+  credit(CONFIG.REWARD_PER_TASK, 'Coin Reward');
 }
 document.getElementById('coinHead').addEventListener('click', ()=> coin('head'));
 document.getElementById('coinTail').addEventListener('click', ()=> coin('tail'));
@@ -536,10 +510,10 @@ document.getElementById('coinTail').addEventListener('click', ()=> coin('tail'))
 document.querySelectorAll('.boxBtn').forEach(b => b.addEventListener('click', async ()=>{
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
   const p = Math.random();
-  if(p < 0.35){ state.balance += 0.02; toast('Box Win +0.02 USDT',1200); }
-  else if(p < 0.7){ state.balance += 0.01; toast('Box Win +0.01 USDT',1000); }
+  if(p < 0.35){ state.balance += 0.02; toast('Box Win +0.02 USDT',1400); }
+  else if(p < 0.7){ state.balance += 0.01; toast('Box Win +0.01 USDT',1200); }
   else { document.getElementById('rBox').innerText = 'No prize'; }
-  credit(CONFIG.REWARD_PER_AD, 'Box Reward');
+  credit(CONFIG.REWARD_PER_TASK, 'Box Reward');
 }));
 
 /* RPS */
@@ -550,22 +524,66 @@ document.querySelectorAll('.boxBtn').forEach(b => b.addEventListener('click', as
     const player = id === 'rpsRock' ? 'rock' : id === 'rpsPaper' ? 'paper' : 'scissors';
     const outcome = (player === cpu)?'Draw':((player==='rock'&&cpu==='scissors')||(player==='paper'&&cpu==='rock')||(player==='scissors'&&cpu==='paper')?'You Win':'You Lose');
     document.getElementById('rRPS').innerText = `${outcome} (CPU: ${cpu})`;
-    if(outcome === 'You Win'){ state.balance += 0.01; toast('RPS Win +0.01 USDT',1100); }
-    credit(CONFIG.REWARD_PER_AD, 'RPS Reward');
+    if(outcome === 'You Win'){ state.balance += 0.01; toast('RPS Win +0.01 USDT',1200); }
+    credit(CONFIG.REWARD_PER_TASK, 'RPS Reward');
   });
 });
 
 /* Tile */
 document.querySelectorAll('#tileBoard .tile').forEach(t => t.addEventListener('click', async ()=>{
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
-  t.style.transform='scale(.95)'; await new Promise(r=>setTimeout(r,120)); t.style.transform='';
-  const win = Math.random() < 0.45;
-  if(win){ state.balance += 0.02; document.getElementById('rTile').innerText = 'Tile Match Win'; toast('Tile Win +0.02 USDT',1000); }
+  t.style.transform='scale(.95)'; await new Promise(r=>setTimeout(r,160)); t.style.transform='';
+  const win = Math.random() < 0.4;
+  if(win){ state.balance += 0.02; document.getElementById('rTile').innerText = 'Tile Match Win'; toast('Tile Win +0.02 USDT',1200); }
   else { document.getElementById('rTile').innerText = 'Try again'; }
-  credit(CONFIG.REWARD_PER_AD, 'Tile Reward');
+  credit(CONFIG.REWARD_PER_TASK, 'Tile Reward');
 }));
 
-/* ========== Withdraw ========== */
+/* ===========================
+   Shooting Star game (with ad on collect)
+   =========================== */
+let starCount = 0;
+const shootingArea = document.getElementById('shootingArea');
+document.getElementById('startShooting').addEventListener('click', ()=>{
+  // spawn a burst of stars
+  for(let i=0;i<18;i++) spawnStar();
+});
+
+function spawnStar(){
+  const s = document.createElement('div');
+  s.className='shootStar';
+  const w = shootingArea.clientWidth || 600;
+  const left = Math.random()*(w-30);
+  s.style.left = left+'px';
+  s.style.top = '-12px';
+  shootingArea.appendChild(s);
+  const duration = 1600 + Math.random()*900;
+  s.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(260px)',opacity:0}],{duration:duration,easing:'linear'});
+  s.addEventListener('click', async (ev)=>{
+    // on star click -> show ad then reward
+    s.remove();
+    createSpark(ev.clientX, ev.clientY);
+    const ok = await showRewardedAd();
+    if(ok){
+      starCount++;
+      document.getElementById('starScore').innerText = 'Stars collected: ' + starCount;
+      credit(CONFIG.REWARD_STAR, 'Shooting Star');
+    } else {
+      alert('No reward (ad not completed)');
+    }
+  });
+  setTimeout(()=>{ if(s.parentNode) s.remove(); }, duration+200);
+}
+
+function createSpark(x,y){
+  const sp = document.createElement('div');
+  sp.className='sparkle'; sp.style.left = x+'px'; sp.style.top = y+'px';
+  document.body.appendChild(sp); setTimeout(()=>sp.remove(),700);
+}
+
+/* ===========================
+   Withdraw handling (GAS POST + local storage)
+   =========================== */
 document.getElementById('btnWithdrawOpen').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.add('show'));
 document.getElementById('closeWithdraw').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.remove('show'));
 document.getElementById('cancelWithdraw').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.remove('show'));
@@ -574,79 +592,54 @@ document.getElementById('submitWithdraw').addEventListener('click', async ()=>{
   const method = document.getElementById('payMethod').value;
   const input = document.getElementById('payNumber').value.trim();
   const amount = parseFloat(document.getElementById('withdrawAmount').value);
-  if(!input || isNaN(amount) || amount < CONFIG.MIN_WITHDRAW){ alert('Invalid withdraw (minimum ' + CONFIG.MIN_WITHDRAW + ' USDT)'); return; }
+  if(!input || isNaN(amount) || amount < 2){ alert('Invalid withdraw (minimum 2 USDT)'); return; }
   const req = { id:'wd_'+Date.now(), user:UID, method, input, amount, status:'Pending', time:new Date().toISOString() };
   const list = JSON.parse(localStorage.getItem('gj_withdraws') || '[]'); list.push(req); localStorage.setItem('gj_withdraws', JSON.stringify(list));
   document.getElementById('withdrawModal').classList.remove('show');
-  toast('Withdraw submitted. Admin will process (1min - 48h).',1400);
+  toast('Withdraw submitted. Admin will process (1min - 48h).',1800);
+
   try{
-    if(CONFIG.GAS_URL && CONFIG.GAS_URL.indexOf('YOUR_GAS_ID') === -1){
-      await fetch(CONFIG.GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'withdraw', ...req }) });
-    }
+    if(CONFIG.GAS_URL){ await fetch(CONFIG.GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'withdraw', ...req }) }); }
   }catch(e){ console.warn('GAS send failed', e); }
 });
 
-/* ========== Referrals ========== */
-function openRefModal(){
-  const box = document.getElementById('refList'); box.innerHTML = '';
-  const map = JSON.parse(localStorage.getItem('gj_ref_map') || '{}');
-  const arr = map[UID] || [];
-  if(!arr || arr.length === 0){ box.innerHTML = '<div style="color:var(--muted)">No referrals yet</div>'; }
-  else {
-    arr.forEach((r,idx)=>{ const d = document.createElement('div'); d.style.padding='8px'; d.style.borderBottom='1px solid rgba(255,255,255,0.02)'; d.innerHTML = `<div style="font-weight:900">${idx+1}. ${r.id}</div><div style="color:var(--muted)">${r.time}</div>`; box.appendChild(d); });
-  }
+/* ===========================
+   Referral modal & copy
+   =========================== */
+document.getElementById('btnRefModal').addEventListener('click', ()=> {
   document.getElementById('refModal').classList.add('show');
-}
-document.getElementById('btnRefModal').addEventListener('click', openRefModal);
+});
 document.getElementById('closeRef').addEventListener('click', ()=> document.getElementById('refModal').classList.remove('show'));
-
-/* Ref info modal & copy */
-document.getElementById('openRefInfo').addEventListener('click', ()=> document.getElementById('refInfoModal').classList.add('show'));
-document.getElementById('closeRefInfo').addEventListener('click', ()=> document.getElementById('refInfoModal').classList.remove('show'));
-document.getElementById('copyLinkOnly').addEventListener('click', ()=>{
-  const link = document.getElementById('refInfoLink').value;
-  navigator.clipboard?.writeText(link).then(()=> toast('Referral link copied',1200)).catch(()=> prompt('Copy link', link));
-});
-document.getElementById('copyRefFull').addEventListener('click', ()=>{
-  const link = document.getElementById('refInfoLink').value;
-  const message = `Join Galaxy Jackpot and earn! Use my link: ${link}\n\nWhen you join you get signup bonus. I earn 0.005 USDT + 5% commission on your ad rewards.`;
-  navigator.clipboard?.writeText(message).then(()=> toast('Link + message copied',1400)).catch(()=> prompt('Copy message', message));
-});
-(function handleIncomingRef(){
-  try{
-    const url = new URL(location.href);
-    const start = url.searchParams.get('start') || '';
-    if(start && start.startsWith('ref_')){
-      const refId = start.slice(4);
-      const map = JSON.parse(localStorage.getItem('gj_ref_map') || '{}');
-      map[refId] = map[refId] || [];
-      map[refId].push({ id: UID, time: new Date().toLocaleString() });
-      localStorage.setItem('gj_ref_map', JSON.stringify(map));
-      if(refId !== UID){
-        const credits = JSON.parse(localStorage.getItem('gj_ref_credits') || '{}');
-        credits[refId] = (credits[refId] || 0) + 0.005;
-        localStorage.setItem('gj_ref_credits', JSON.stringify(credits));
-      }
-    }
-  }catch(e){}
-})();
-
-/* ========== Buy panel actions ========== */
-const buyPanel = document.getElementById('buyPanel');
-document.getElementById('buyDetailsBtn').addEventListener('click', ()=> { buyPanel.classList.add('show'); buyPanel.setAttribute('aria-hidden','false'); });
-document.getElementById('buyClose').addEventListener('click', ()=> { buyPanel.classList.remove('show'); buyPanel.setAttribute('aria-hidden','true'); });
-document.getElementById('buyOpenBtn').addEventListener('click', ()=> {
-  // direct mailto to purchase
-  window.open('mailto:termuxethicalhackingbd@gmail.com?subject=Buy Galaxy Jackpot&body=Hi, I want to buy Galaxy Jackpot Full Script - $100', '_blank');
-});
-document.getElementById('buyConfirm').addEventListener('click', ()=> {
-  window.open('mailto:termuxethicalhackingbd@gmail.com?subject=Buy Galaxy Jackpot&body=Hi, I want to buy Galaxy Jackpot Full Script - $100', '_blank');
-});
-document.getElementById('buyContact').addEventListener('click', ()=> {
-  window.open('mailto:termuxethicalhackingbd@gmail.com?subject=Query about Galaxy Jackpot&body=Hi, I have a question about Galaxy Jackpot Full Script', '_blank');
+document.getElementById('copyRef').addEventListener('click', ()=>{
+  const link = document.getElementById('refLink').value;
+  navigator.clipboard?.writeText(link).then(()=> toast('Referral link copied',1200)).catch(()=> { prompt('Copy referral link', link); });
 });
 
-/* mood, sparkle, fast scroll, reset */
+/* ===========================
+   Buy toggle & mailto
+   =========================== */
+document.getElementById('buyToggle').addEventListener('click', ()=>{
+  const d = document.getElementById('buyDetails');
+  const open = d.style.display === 'block';
+  d.style.display = open ? 'none' : 'block';
+  document.getElementById('buyToggle').innerText = open ? '➡️' : '❌';
+});
+document.getElementById('buyNowBtn').addEventListener('click', ()=> {
+  window.open('mailto:termuxethicalhackingbd@gmail.com?subject=Buy Galaxy Jackpot&body=I want to buy the Galaxy Jackpot Full Script ($100).', '_blank');
+});
+
+/* ===========================
+   VPN Banner click -> show ad
+   =========================== */
+document.getElementById('vpnBtn').addEventListener('click', async ()=>{
+  const ok = await showRewardedAd();
+  if(ok){ credit(CONFIG.REWARD_PER_TASK, 'VPN Ad'); }
+  else alert('No reward (ad not completed)');
+});
+
+/* ===========================
+   Buy footer & mood
+   =========================== */
 document.getElementById('btnMood').addEventListener('click', ()=>{
   const current = document.documentElement.getAttribute('data-mood') || 'dark';
   if(current === 'dark'){ applyMood('light'); document.documentElement.setAttribute('data-mood','light'); }
@@ -654,22 +647,42 @@ document.getElementById('btnMood').addEventListener('click', ()=>{
   else { applyMood('dark'); document.documentElement.setAttribute('data-mood','dark'); }
 });
 function applyMood(m){
-  if(m === 'light'){ document.body.style.background = 'linear-gradient(180deg,#f6fbff,#eef6ff)'; document.body.style.color = '#04111a'; document.getElementById('vpnBanner').style.opacity = '0.96'; }
+  if(m === 'light'){ document.body.style.background = 'linear-gradient(180deg,#f6fbff,#eef6ff)'; document.body.style.color = '#04111a'; document.getElementById('vpnBanner').style.opacity = '0.9'; }
   else if(m === 'galaxy'){ document.body.style.background = 'linear-gradient(180deg,#02021a,#061033)'; document.body.style.color = '#eaf2ff'; document.getElementById('vpnBanner').style.opacity = '1'; }
   else { document.body.style.background = 'linear-gradient(180deg,var(--bg-1),var(--bg-2))'; document.body.style.color = '#eaf2ff'; document.getElementById('vpnBanner').style.opacity = '1'; }
 }
-function sparkleAt(el){ const rect = el.getBoundingClientRect(); const x = rect.left + rect.width * Math.random(); const y = rect.top + rect.height * Math.random(); const s = document.createElement('div'); s.className = 'sparkle'; s.style.left = x + 'px'; s.style.top = y + 'px'; document.body.appendChild(s); setTimeout(()=> s.remove(),600); }
-document.querySelectorAll('.playNow, .taskBtn, .referBtn, .refCopy, .buyPrimary, .boxBtn').forEach(btn=>{ btn.addEventListener('mouseenter', ()=> sparkleAt(btn)); });
-setInterval(()=> persist(), 1500);
-(function showWelcome(){ const el = document.getElementById('welcome'); el.innerText = `Welcome ${UID} — Enjoy Galaxy Jackpot!`; el.style.opacity = '1'; setTimeout(()=> el.style.opacity = '0', 4200); })();
-(function fastScrollBoost(){ const container = document.getElementById('tasksWrap'); if(!container) return; container.addEventListener('wheel', (e)=>{ e.preventDefault(); const multiplier = 6; container.scrollBy({ top: e.deltaY * multiplier, behavior: 'auto' }); }, { passive:false }); })();
 
-/* Reset data button (admin-only control is handled separately by you) */
+/* Reset data (admin-only visibility) */
+function isAdmin(){ return localStorage.getItem('userRole') === 'admin' || localStorage.getItem('admin_id') === '6209706593'; }
+window.onload = function(){
+  if(!isAdmin()){ document.getElementById('btnReset').style.display = 'none'; }
+  else { document.getElementById('btnReset').style.display = 'inline-block'; }
+
+  // welcome banner show
+  const wb = document.getElementById('welcomeBanner');
+  wb.innerText = `Welcome ${UID} — Enjoy Galaxy Jackpot!`;
+  wb.style.opacity = '1';
+  setTimeout(()=> wb.style.opacity='0', 5000);
+};
+
+/* Reset event */
 document.getElementById('btnReset').addEventListener('click', ()=>{
-  if(confirm('Reset local demo data? This affects only this browser.')){ localStorage.removeItem('gj_state_v2'); localStorage.removeItem('gj_withdraws'); localStorage.removeItem('gj_ref_map'); location.reload(); }
+  if(confirm('Reset local demo data?')){ localStorage.removeItem('gj_state_v2'); localStorage.removeItem('gj_withdraws'); localStorage.removeItem('gj_ref_map'); location.reload(); }
 });
 
-/* final render */
+/* sparkle effect */
+function sparkleAt(el){
+  const rect = el.getBoundingClientRect();
+  const x = rect.left + rect.width * Math.random();
+  const y = rect.top + rect.height * Math.random();
+  const s = document.createElement('div'); s.className = 'sparkle';
+  s.style.left = x + 'px'; s.style.top = y + 'px';
+  document.body.appendChild(s); setTimeout(()=> s.remove(),700);
+}
+document.querySelectorAll('.playNow, .taskBtn, .refBtn, .buyCTA').forEach(btn=>btn.addEventListener('mouseenter', ()=> sparkleAt(btn)));
+
+/* persist periodically */
+setInterval(()=> persist(), 2500);
 renderUI();
 </script>
 </body>
