@@ -1,74 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Galaxy Jackpot — Fast & Final</title>
-  <meta name="description" content="Galaxy Jackpot — Fast version. Creator: MD RAHAT">
-  <style>
-    :root{
-      --bg-1:#03040a; --bg-2:#071329; --card:#0e1724;
-      --muted:#9aa4b2; --text:#eaf2ff;
-      --neon-1:#7c3aed; --neon-2:#00ffe0; --accent:#ff6a00;
-      --gold1:#ffd54a; --gold2:#ffb84d;
-      --glass:rgba(255,255,255,0.03);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth} /* smooth scroll enabled */
-    body{height:100%;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:var(--text);-webkit-font-smoothing:antialiased}
-    .app{max-width:1200px;margin:48px auto;padding:18px;position:relative}
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Galaxy Jackpot — Ultimate</title>
+<meta name="description" content="Galaxy Jackpot — 8 mini-games, 100 tasks, referral & withdraw, Monetag/Adstra placeholders. Creator: MD RAHAT">
+<style>
+  :root{
+    --bg-1:#03040a; --bg-2:#071329; --card:#0e1724;
+    --muted:#9aa4b2; --text:#eaf2ff;
+    --neon-1:#7c3aed; --neon-2:#00ffe0; --accent:#ff6a00;
+    --gold1:#ffd54a; --gold2:#ffb84d;
+    --glass:rgba(255,255,255,0.03);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{height:100%;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:var(--text);-webkit-font-smoothing:antialiased}
+  .app{max-width:1200px;margin:56px auto;padding:18px;position:relative}
+  .floatingBanner{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:9999;max-width:1160px;width:calc(100% - 40px);
+    background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#021627;padding:10px 16px;border-radius:999px;font-weight:900;box-shadow:0 16px 44px rgba(124,58,237,0.12);pointer-events:none;opacity:0.98}
+  .welcomeBanner{position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:9998;max-width:1160px;width:calc(100% - 40px);
+    background:linear-gradient(90deg,#0ea5a5,#3b82f6);color:#021627;padding:8px 12px;border-radius:10px;font-weight:800;box-shadow:0 14px 40px rgba(3,7,18,0.6);opacity:0;transition:opacity .25s}
 
-    /* fast banner (unchanging) */
-    .floatingBanner{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:9999;max-width:1160px;width:calc(100% - 40px);
-      background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#021627;padding:10px 16px;border-radius:999px;font-weight:900;box-shadow:0 16px 44px rgba(124,58,237,0.12);pointer-events:none;opacity:0.98}
-    .welcomeBanner{position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:9998;max-width:1160px;width:calc(100% - 40px);
-      background:linear-gradient(90deg,#0ea5a5,#3b82f6);color:#021627;padding:8px 12px;border-radius:10px;font-weight:800;box-shadow:0 14px 40px rgba(3,7,18,0.6);opacity:0;transition:opacity .25s}
+  .header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .logo{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold1),var(--gold2));font-weight:900;color:#051018;font-size:20px;box-shadow:0 8px 30px rgba(124,77,255,0.06)}
+  .title{font-size:18px;font-weight:900}
+  .subtitle{color:var(--muted);font-size:13px}
+  .controls{margin-left:auto;display:flex;align-items:center;gap:12px}
 
-    .header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-    .logo{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold1),var(--gold2));font-weight:900;color:#051018;font-size:20px;box-shadow:0 8px 30px rgba(124,77,255,0.06)}
-    .title{font-size:18px;font-weight:900}
-    .subtitle{color:var(--muted);font-size:13px}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(0,0,0,0.45)}
+  .balanceBig{font-size:20px;font-weight:900}
+  .muted{color:var(--muted);font-size:13px}
+  .progress{height:8px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;margin-top:6px}
+  .progressFill{height:100%;background:linear-gradient(90deg,var(--gold1),var(--gold2));width:0%}
 
-    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(0,0,0,0.45)}
-    .balanceBig{font-size:20px;font-weight:900}
-    .muted{color:var(--muted);font-size:13px}
-    .progress{height:8px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;margin-top:6px}
-    .progressFill{height:100%;background:linear-gradient(90deg,var(--gold1),var(--gold2));width:0%}
+  .tasksWrap{padding:8px;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent);max-height:380px;overflow:auto}
+  .btnGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  @media(max-width:1000px){.btnGrid{grid-template-columns:repeat(3,1fr)}}
+  .taskBtn{padding:10px;border-radius:10px;border:none;cursor:pointer;font-weight:900;min-height:56px;color:#051018;box-shadow:0 8px 20px rgba(0,0,0,0.28);transition:transform .08s,box-shadow .08s}
+  .taskBtn:active{transform:translateY(2px)}
+  .taskBtn.anim { animation: danceFast .8s infinite ease-in-out; }
+  @keyframes danceFast { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
 
-    /* tasks grid (fast scroll container) */
-    .tasksWrap{padding:8px;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent);max-height:380px;overflow:auto;scroll-behavior:smooth}
-    .btnGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-    @media(max-width:1000px){.btnGrid{grid-template-columns:repeat(3,1fr)}}
-    .taskBtn{padding:10px;border-radius:10px;border:none;cursor:pointer;font-weight:900;min-height:56px;color:#051018;box-shadow:0 8px 20px rgba(0,0,0,0.28);transition:transform .08s,box-shadow .08s}
-    .taskBtn:active{transform:translateY(2px)}
-    /* faster dance */
-    .taskBtn.anim { animation: danceFast .8s infinite ease-in-out; }
-    @keyframes danceFast { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
+  .gamesGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+  @media(max-width:1100px){.gamesGrid{grid-template-columns:repeat(2,1fr)}}
+  .gameCard{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);min-height:160px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden}
+  .playNow{padding:8px 14px;border-radius:999px;border:none;cursor:pointer;font-weight:900;color:#051018;background:linear-gradient(90deg,#ff00cc,#3333ff);box-shadow:0 12px 40px rgba(124,58,237,0.14);transition:transform .08s}
+  .playNow:hover{transform:translateY(-4px);box-shadow:0 22px 70px rgba(124,58,237,0.22)}
 
-    /* games quickly responsive */
-    .gamesGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
-    @media(max-width:1100px){.gamesGrid{grid-template-columns:repeat(2,1fr)}}
-    .gameCard{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);min-height:160px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden}
-    .playNow{padding:8px 14px;border-radius:999px;border:none;cursor:pointer;font-weight:900;color:#051018;background:linear-gradient(90deg,#ff00cc,#3333ff);box-shadow:0 12px 40px rgba(124,58,237,0.14);transition:transform .08s}
-    .playNow:hover{transform:translateY(-4px);box-shadow:0 22px 70px rgba(124,58,237,0.22)}
+  .buyBox{position:fixed;left:50%;transform:translateX(-50%);bottom:12px;z-index:9999;background:linear-gradient(180deg,#071225,#0b0f1a);padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 60px rgba(0,0,0,0.5);max-width:1100px;width:calc(100% - 36px)}
+  .buyHeader{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .buyTitle{font-weight:900;color:var(--gold1)}
+  .buyToggle{cursor:pointer;padding:6px 8px;border-radius:8px;background:linear-gradient(90deg,#0f1724,#081028);border:1px solid rgba(255,255,255,0.03)}
+  .buyDetails{display:none;margin-top:8px;color:var(--muted);font-size:13px}
+  .buyCTA{margin-top:8px;padding:8px 14px;border-radius:8px;border:none;background:linear-gradient(90deg,#34d399,#60a5fa);font-weight:900;color:#021018;cursor:pointer}
 
-    .buyBox{position:fixed;left:50%;transform:translateX(-50%);bottom:12px;z-index:9999;background:linear-gradient(180deg,#071225,#0b0f1a);padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 60px rgba(0,0,0,0.5);max-width:1100px;width:calc(100% - 36px)}
-    .buyHeader{display:flex;align-items:center;justify-content:space-between;gap:8px}
-    .buyTitle{font-weight:900;color:var(--gold1)}
-    .buyToggle{cursor:pointer;padding:6px 8px;border-radius:8px;background:linear-gradient(90deg,#0f1724,#081028);border:1px solid rgba(255,255,255,0.03)}
-    .buyDetails{display:none;margin-top:8px;color:var(--muted);font-size:13px}
-    .buyCTA{margin-top:8px;padding:8px 14px;border-radius:8px;border:none;background:linear-gradient(90deg,#34d399,#60a5fa);font-weight:900;color:#021018;cursor:pointer}
+  .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:12px;border-radius:10px;z-index:200000;min-width:300px;display:none;color:#e6eef6}
+  .modal.show{display:block}
+  .closeX{position:absolute;right:10px;top:6px;background:transparent;border:none;color:var(--muted);font-size:18px;cursor:pointer}
+  .input{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#e6eef6;margin-top:8px}
 
-    .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:12px;border-radius:10px;z-index:200000;min-width:300px;display:none;color:#e6eef6}
-    .modal.show{display:block}
-    .closeX{position:absolute;right:10px;top:6px;background:transparent;border:none;color:var(--muted);font-size:18px;cursor:pointer}
-    .input{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#e6eef6;margin-top:8px}
+  .refBtn{padding:8px 12px;border-radius:8px;border:none;background:linear-gradient(90deg,var(--neon-2),var(--neon-1));color:#021018;font-weight:800;cursor:pointer}
+  .refCopy{padding:8px 12px;border-radius:8px;border:none;background:linear-gradient(90deg,#ffd54a,#ffb84d);color:#021018;font-weight:800;cursor:pointer}
 
-    .smallMuted{color:var(--muted);font-size:13px}
-    .sparkle{position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff;transform:translate(-50%,-50%) scale(0);animation:spk .6s linear}
-    @keyframes spk{0%{transform:translate(-50%,-50%) scale(0)}50%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}
-    }
-  </style>
+  .smallMuted{color:var(--muted);font-size:13px}
+  .sparkle{position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff;transform:translate(-50%,-50%) scale(0);animation:spk .6s linear}
+  @keyframes spk{0%{transform:translate(-50%,-50%) scale(0)}50%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}
+  }
+</style>
 </head>
 <body>
 
@@ -82,8 +81,9 @@
         <div class="title">Galaxy Jackpot — ∞× Legendary++</div>
         <div class="subtitle">Play • Watch Ads • Earn USDT</div>
       </div>
-      <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
-        <div class="smallMuted">Ads Watched: <span id="adsBadge">0</span></div>
+
+      <div class="controls" role="region" aria-label="controls">
+        <div class="smallMuted">Ads Watched: <strong id="adsBadge">0</strong></div>
       </div>
     </header>
 
@@ -115,11 +115,11 @@
         <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
           <div style="display:flex;gap:8px;align-items:center">
             <input id="refLink" class="input" readonly aria-label="Referral link" style="flex:1;background:rgba(255,255,255,0.02);color:var(--text)">
-            <button id="copyRef" class="playNow" style="padding:8px 10px;background:linear-gradient(90deg,var(--neon-2),var(--neon-1));">Copy</button>
+            <!-- Attractive Refer Button (NEW) -->
+            <button id="openRefInfo" class="refBtn" title="Earn by sharing">Refer & Earn</button>
           </div>
           <div style="display:flex;gap:8px;margin-top:6px">
             <button id="btnMood" class="playNow" style="flex:1">Toggle Mood</button>
-            <!-- Reset removed intentionally -->
           </div>
         </div>
       </div>
@@ -208,6 +208,7 @@
     <div style="height:80px"></div>
   </main>
 
+  <!-- Buy -->
   <div class="buyBox" id="buyBox">
     <div class="buyHeader">
       <div class="buyTitle">Buy Now — Galaxy Jackpot Full Script — $100</div>
@@ -224,6 +225,7 @@
     </div>
   </div>
 
+  <!-- Withdraw modal -->
   <div class="modal" id="withdrawModal" aria-hidden="true">
     <button class="closeX" id="closeWithdraw">✕</button>
     <h3>Withdraw Request</h3>
@@ -239,24 +241,42 @@
     <div class="smallMuted" style="margin-top:8px">Please wait 1 minute — 48 hours for processing.</div>
   </div>
 
+  <!-- Referrals modal (list) -->
   <div class="modal" id="refModal" aria-hidden="true" style="min-width:320px">
     <button class="closeX" id="closeRef">✕</button>
     <h3>My Referrals</h3>
     <div id="refList" style="max-height:300px;overflow:auto;margin-top:8px;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02)"></div>
   </div>
 
+  <!-- New Refer Info modal (attractive + copy) -->
+  <div class="modal" id="refInfoModal" aria-hidden="true" style="min-width:420px">
+    <button class="closeX" id="closeRefInfo">✕</button>
+    <h3>💸 Earn With Galaxy Jackpot!</h3>
+    <p class="smallMuted" style="margin-top:6px">
+      Share your referral link. When someone joins via your link they receive signup bonus and you earn <strong>0.005 USDT</strong> plus <strong>5% commission</strong> on their ad rewards.
+    </p>
+    <div style="margin-top:10px">
+      <input id="refInfoLink" class="input" readonly style="background:rgba(255,255,255,0.02)"/>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <button id="copyRefFull" class="refCopy">Copy Link + Message</button>
+      <button id="copyLinkOnly" class="refBtn">Copy Link Only</button>
+    </div>
+    <p class="smallMuted" style="margin-top:8px">Share on socials, chat or telegram — every signup counts!</p>
+  </div>
+
 <script>
 /* ===========================
-   CONFIG (fast)
+   CONFIG
    =========================== */
 const CONFIG = {
   REWARD_PER_AD: 0.0005,
   ADS_PER_LEVEL: 100,
   LEVEL_BASE_BONUS: 0.01,
   MIN_WITHDRAW: 2,
-  MONETAG_FN: 'show_10125761', // if monetag function exists
+  MONETAG_FN: 'show_10125761', // Monetag function name (if included)
   ADSTRA_SMARTLINK: 'https://www.effectivegatecpm.com/za35wfvxct?key=33d9ac55094c983709eac1a9fd20c4b5',
-  GAS_URL: '' // keep if you have GAS URL
+  GAS_URL: '' // put your GAS endpoint if you want server logging
 };
 
 /* ===========================
@@ -268,7 +288,7 @@ let state = JSON.parse(localStorage.getItem('gj_state_v2') || '{}');
 if(!state.uid){ state = { uid:UID, balance:0.000000, adsWatched:0, level:0, referrals:[], refEarned:0 }; localStorage.setItem('gj_state_v2', JSON.stringify(state)); }
 function persist(){ localStorage.setItem('gj_state_v2', JSON.stringify(state)); renderUI(); }
 
-/* Render UI fast */
+/* Render UI */
 function renderUI(){
   document.getElementById('balance').innerText = 'USDT ' + (state.balance||0).toFixed(6);
   document.getElementById('avail').innerText = 'Available: USDT ' + (state.balance||0).toFixed(6);
@@ -278,41 +298,45 @@ function renderUI(){
   const pct = Math.min(100, Math.floor(((state.adsWatched||0) % CONFIG.ADS_PER_LEVEL)/CONFIG.ADS_PER_LEVEL*100));
   document.getElementById('xpFill').style.width = pct + '%';
   document.getElementById('refLink').value = `${location.origin}${location.pathname}?start=ref_${UID}`;
+  document.getElementById('refInfoLink').value = `${location.origin}${location.pathname}?start=ref_${UID}`;
 }
 renderUI();
 
-/* Quick toast */
+/* small toast */
 function toast(text, time=1200){
   const el = document.createElement('div'); el.innerText = text;
   el.style.cssText = 'position:fixed;left:50%;top:18%;transform:translateX(-50%);background:linear-gradient(90deg,#fff,#ffd54a);color:#031018;padding:8px 12px;border-radius:8px;font-weight:900;z-index:99999';
-  document.body.appendChild(el);
-  setTimeout(()=> el.remove(), time);
+  document.body.appendChild(el); setTimeout(()=> el.remove(), time);
 }
 
 /* ===========================
-   Ads integration (fast simulation)
+   Ads integration (simulated + Monetag/Adstra support)
    =========================== */
 async function showRewardedAd(){
-  if(CONFIG.MONETAG_FN && typeof window[CONFIG.MONETAG_FN] === 'function'){
-    try { await window[CONFIG.MONETAG_FN](); return true; } catch(e){ console.warn('Monetag failed',e); }
-  }
-  // fallback: open smartlink and confirm
+  // Prefer Monetag function if available
+  try{
+    if(CONFIG.MONETAG_FN && typeof window[CONFIG.MONETAG_FN] === 'function'){
+      await window[CONFIG.MONETAG_FN]();
+      return true;
+    }
+  }catch(e){ console.warn('Monetag call failed', e); }
+  // fallback: open smartlink and ask user to confirm
   window.open(CONFIG.ADSTRA_SMARTLINK + '&ref=' + encodeURIComponent(UID), '_blank');
   return confirm('Ad opened in new tab. After watching the ad, press OK to claim reward.');
 }
 
-/* crediting function (fast) */
+/* crediting */
 function credit(amount, reason='Ad Reward'){
   state.balance = (state.balance || 0) + Number(amount);
   state.adsWatched = (state.adsWatched || 0) + 1;
-  // level up (fast)
+  // level up
   const prevLevel = state.level || 0;
   const newLevel = Math.floor(state.adsWatched / CONFIG.ADS_PER_LEVEL);
   if(newLevel > prevLevel){
     for(let L=prevLevel+1; L<=newLevel; L++){
       const bonus = CONFIG.LEVEL_BASE_BONUS * L;
       state.balance += bonus;
-      toast(`Level ${L} Bonus +${bonus.toFixed(6)} USDT`, 1400);
+      toast(`Level ${L} Bonus +${bonus.toFixed(6)} USDT`, 1600);
     }
     state.level = newLevel;
   }
@@ -321,10 +345,9 @@ function credit(amount, reason='Ad Reward'){
 }
 
 /* ===========================
-   Tasks generation (100) — faster animations
+   Tasks generation (100)
    =========================== */
 const taskGrid = document.getElementById('taskGrid');
-const colors = ['c0','c1','c2','c3','c4'];
 for(let i=1;i<=100;i++){
   const btn = document.createElement('button');
   btn.className = 'taskBtn anim';
@@ -332,9 +355,8 @@ for(let i=1;i<=100;i++){
   btn.style.background = ['#ffd54a','#7c3aed','#60a5fa','#fb7185','#a78bfa'][i % 5];
   btn.title = 'Watch an ad to earn';
   btn.addEventListener('click', async ()=>{
-    // fast ad: 1.8s sim or real monetag
     let ok = false;
-    try { ok = await showRewardedAd(); } catch(e){ ok=false; }
+    try{ ok = await showRewardedAd(); }catch(e){ ok = false; }
     if(ok) credit(CONFIG.REWARD_PER_AD, `Task ${i}`);
     else alert('No reward (ad not completed)');
   });
@@ -342,9 +364,9 @@ for(let i=1;i<=100;i++){
 }
 
 /* ===========================
-   Games (faster timings)
+   Games (fast)
    =========================== */
-/* Wheel — much faster spin */
+/* Wheel */
 document.getElementById('spinBtn').addEventListener('click', async ()=>{
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
   const wheel = document.getElementById('wheel');
@@ -354,26 +376,20 @@ document.getElementById('spinBtn').addEventListener('click', async ()=>{
   wheel.style.transition = 'transform 2.0s cubic-bezier(.25,.8,.25,1)';
   wheel.style.transform = `rotate(${deg}deg)`;
   setTimeout(()=>{
-    wheel.style.transition = '';
-    wheel.style.transform = `rotate(${deg%360}deg)`;
+    wheel.style.transition = ''; wheel.style.transform = `rotate(${deg%360}deg)`;
     const win = (sector%4===0) || Math.random() < 0.2;
     if(win){ state.balance += 0.02; toast('Spin Bonus +0.02 USDT',1200); }
     credit(CONFIG.REWARD_PER_AD, 'Spin Reward');
   },2100);
 });
 
-/* Slot — faster reels */
+/* Slot */
 const symbols = ['7','🍒','⭐','🍋','💎','🔔'];
 async function spinSlot(){
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
   const s1 = document.getElementById('s1'), s2 = document.getElementById('s2'), s3 = document.getElementById('s3');
   const rounds = 10;
-  for(let i=0;i<rounds;i++){
-    await new Promise(r=>setTimeout(r,30 + i*10));
-    s1.innerText = symbols[Math.floor(Math.random()*symbols.length)];
-    s2.innerText = symbols[Math.floor(Math.random()*symbols.length)];
-    s3.innerText = symbols[Math.floor(Math.random()*symbols.length)];
-  }
+  for(let i=0;i<rounds;i++){ await new Promise(r=>setTimeout(r,30 + i*10)); s1.innerText = symbols[Math.floor(Math.random()*symbols.length)]; s2.innerText = symbols[Math.floor(Math.random()*symbols.length)]; s3.innerText = symbols[Math.floor(Math.random()*symbols.length)]; }
   const final = [s1.innerText,s2.innerText,s3.innerText];
   const jackpot = final[0]===final[1] && final[1]===final[2];
   const smallWin = final[0]===final[1] || final[1]===final[2] || final[0]===final[2];
@@ -383,20 +399,18 @@ async function spinSlot(){
 }
 document.getElementById('slotPlay').addEventListener('click', spinSlot);
 
-/* Dice faster */
+/* Dice */
 document.getElementById('dicePlay').addEventListener('click', async ()=>{
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
   const faceEl = document.getElementById('diceFace');
   faceEl.style.transform = 'rotate(540deg) scale(.95)'; faceEl.style.transition = 'transform .6s';
-  await new Promise(r=>setTimeout(r,640));
-  faceEl.style.transform = '';
-  const val = Math.floor(Math.random()*6)+1;
-  faceEl.innerText = val;
+  await new Promise(r=>setTimeout(r,640)); faceEl.style.transform = '';
+  const val = Math.floor(Math.random()*6)+1; faceEl.innerText = val;
   if(val >= 5){ state.balance += 0.015; toast('Dice Win +0.015 USDT',1000); }
   credit(CONFIG.REWARD_PER_AD, 'Dice Reward');
 });
 
-/* Coin quick */
+/* Coin */
 async function coin(choice){
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
   const c = document.getElementById('coinAnim'); c.style.transform='rotateY(540deg)'; c.style.transition='transform .7s';
@@ -409,7 +423,7 @@ async function coin(choice){
 document.getElementById('coinHead').addEventListener('click', ()=> coin('head'));
 document.getElementById('coinTail').addEventListener('click', ()=> coin('tail'));
 
-/* Lucky Box quick */
+/* Lucky Box */
 document.querySelectorAll('.boxBtn').forEach(b => b.addEventListener('click', async ()=>{
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
   const p = Math.random();
@@ -419,7 +433,7 @@ document.querySelectorAll('.boxBtn').forEach(b => b.addEventListener('click', as
   credit(CONFIG.REWARD_PER_AD, 'Box Reward');
 }));
 
-/* RPS fast */
+/* RPS */
 ['rpsRock','rpsPaper','rpsScissors'].forEach(id => {
   document.getElementById(id).addEventListener('click', async ()=>{
     const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
@@ -432,7 +446,7 @@ document.querySelectorAll('.boxBtn').forEach(b => b.addEventListener('click', as
   });
 });
 
-/* Tile fast */
+/* Tile */
 document.querySelectorAll('#tileBoard .tile').forEach(t => t.addEventListener('click', async ()=>{
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
   t.style.transform='scale(.95)'; await new Promise(r=>setTimeout(r,120)); t.style.transform='';
@@ -443,7 +457,7 @@ document.querySelectorAll('#tileBoard .tile').forEach(t => t.addEventListener('c
 }));
 
 /* ===========================
-   Withdraw handling (fast)
+   Withdraw handling
    =========================== */
 document.getElementById('btnWithdrawOpen').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.add('show'));
 document.getElementById('closeWithdraw').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.remove('show'));
@@ -458,7 +472,6 @@ document.getElementById('submitWithdraw').addEventListener('click', async ()=>{
   const list = JSON.parse(localStorage.getItem('gj_withdraws') || '[]'); list.push(req); localStorage.setItem('gj_withdraws', JSON.stringify(list));
   document.getElementById('withdrawModal').classList.remove('show');
   toast('Withdraw submitted. Admin will process (1min - 48h).',1400);
-
   try{
     if(CONFIG.GAS_URL && CONFIG.GAS_URL.indexOf('YOUR_GAS_ID') === -1){
       await fetch(CONFIG.GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'withdraw', ...req }) });
@@ -467,7 +480,7 @@ document.getElementById('submitWithdraw').addEventListener('click', async ()=>{
 });
 
 /* ===========================
-   Referral system (fast)
+   Referral list & info modals & copy functions
    =========================== */
 document.getElementById('copyRef').addEventListener('click', ()=>{
   const link = document.getElementById('refLink').value;
@@ -486,6 +499,24 @@ function openRefModal(){
   }
   document.getElementById('refModal').classList.add('show');
 }
+
+/* Refer Info modal open/close & copy */
+document.getElementById('openRefInfo').addEventListener('click', ()=>{
+  document.getElementById('refInfoModal').classList.add('show');
+  document.getElementById('refInfoModal').setAttribute('aria-hidden','false');
+});
+document.getElementById('closeRefInfo').addEventListener('click', ()=> document.getElementById('refInfoModal').classList.remove('show'));
+
+document.getElementById('copyLinkOnly').addEventListener('click', ()=>{
+  const link = document.getElementById('refInfoLink').value;
+  navigator.clipboard?.writeText(link).then(()=> toast('Referral link copied',1200)).catch(()=> prompt('Copy link', link));
+});
+
+document.getElementById('copyRefFull').addEventListener('click', ()=>{
+  const link = document.getElementById('refInfoLink').value;
+  const message = `Join Galaxy Jackpot and earn! Use my link: ${link}\n\nWhen you join you get signup bonus. I earn 0.005 USDT + 5% commission on your ad rewards.`;
+  navigator.clipboard?.writeText(message).then(()=> toast('Link + message copied',1400)).catch(()=> prompt('Copy message', message));
+});
 
 /* detect incoming referral */
 (function handleIncomingRef(){
@@ -508,13 +539,10 @@ function openRefModal(){
 })();
 
 /* ===========================
-   Buy toggle, mood & sparkle
+   buy toggle, mood & sparkle
    =========================== */
 document.getElementById('buyToggle').addEventListener('click', ()=>{
-  const d = document.getElementById('buyDetails');
-  const open = d.style.display === 'block';
-  d.style.display = open ? 'none' : 'block';
-  document.getElementById('buyToggle').innerText = open ? '➡️' : '❌';
+  const d = document.getElementById('buyDetails'); const open = d.style.display === 'block'; d.style.display = open ? 'none' : 'block'; document.getElementById('buyToggle').innerText = open ? '➡️' : '❌';
 });
 document.getElementById('buyNowBtn').addEventListener('click', ()=> window.open('mailto:termuxethicalhackingbd@gmail.com?subject=Buy Galaxy Jackpot&body=I want to buy the project', '_blank'));
 
@@ -530,62 +558,31 @@ function applyMood(m){
   else { document.body.style.background = 'linear-gradient(180deg,var(--bg-1),var(--bg-2))'; document.body.style.color = '#eaf2ff'; document.getElementById('vpnBanner').style.opacity = '1'; }
 }
 
-/* sparkle effects (fast) */
-function sparkleAt(el){
-  const rect = el.getBoundingClientRect();
-  const x = rect.left + rect.width * Math.random();
-  const y = rect.top + rect.height * Math.random();
-  const s = document.createElement('div'); s.className = 'sparkle';
-  s.style.left = x + 'px'; s.style.top = y + 'px';
-  document.body.appendChild(s); setTimeout(()=> s.remove(),600);
-}
-document.querySelectorAll('.playNow, .taskBtn, .refBtn, .buyCTA, .boxBtn').forEach(btn=>{
-  btn.addEventListener('mouseenter', ()=> sparkleAt(btn));
-});
+/* sparkle effects */
+function sparkleAt(el){ const rect = el.getBoundingClientRect(); const x = rect.left + rect.width * Math.random(); const y = rect.top + rect.height * Math.random(); const s = document.createElement('div'); s.className = 'sparkle'; s.style.left = x + 'px'; s.style.top = y + 'px'; document.body.appendChild(s); setTimeout(()=> s.remove(),600); }
+document.querySelectorAll('.playNow, .taskBtn, .refBtn, .buyCTA, .boxBtn').forEach(btn=>{ btn.addEventListener('mouseenter', ()=> sparkleAt(btn)); });
 
-/* Persist often */
+/* Persist */
 setInterval(()=> persist(), 1200);
 
-/* Welcome banner (fast) */
-(function showWelcome(){
-  const el = document.getElementById('welcomeBanner');
-  el.innerText = `Welcome ${UID} — Enjoy Galaxy Jackpot!`;
-  el.style.opacity = '1';
-  setTimeout(()=> el.style.opacity = '0', 3500);
-})();
+/* Welcome banner */
+(function showWelcome(){ const el = document.getElementById('welcomeBanner'); el.innerText = `Welcome ${UID} — Enjoy Galaxy Jackpot!`; el.style.opacity = '1'; setTimeout(()=> el.style.opacity = '0', 3500); })();
 
-/* ===========================
-   Ad reward watch button (fast simulation)
-   =========================== */
+/* Ad Watch Button quick simulation & update Ads badge */
 const adBtn = document.getElementById('btnWatchAd');
 const adsCountEl = document.getElementById('adsBadge');
 adBtn.addEventListener('click', ()=>{
-  adBtn.disabled = true;
-  adBtn.innerText = '🎥 Watching Ad...';
-  // fast simulated ad time -> 1800ms
-  setTimeout(()=>{
-    credit(CONFIG.REWARD_PER_AD, 'Ad Watch');
-    adBtn.innerText = '✅ Ad Watched! +0.0005';
-    setTimeout(()=>{ adBtn.innerText = '🎬 Watch Ad'; adBtn.disabled = false; }, 1400);
-  }, 1800);
+  adBtn.disabled = true; adBtn.innerText = '🎥 Watching Ad...';
+  setTimeout(()=>{ credit(CONFIG.REWARD_PER_AD, 'Ad Watch'); adBtn.innerText = '✅ Ad Watched! +0.0005'; setTimeout(()=>{ adBtn.innerText = '🎬 Watch Ad'; adBtn.disabled = false; }, 1400); }, 1800);
 });
 
-/* ===========================
-   FAST SCROLL BOOST for tasksWrap
-   =========================== */
-(function fastScrollBoost(){
-  const container = document.getElementById('tasksWrap');
-  if(!container) return;
-  // Multiply wheel delta to speed up scroll
-  container.addEventListener('wheel', (e)=>{
-    e.preventDefault();
-    const multiplier = 6; // speed factor — increase to make it even faster
-    container.scrollBy({ top: e.deltaY * multiplier, behavior: 'auto' });
-  }, { passive:false });
-})();
+/* FAST SCROLL BOOST */
+(function fastScrollBoost(){ const container = document.getElementById('tasksWrap'); if(!container) return; container.addEventListener('wheel', (e)=>{ e.preventDefault(); const multiplier = 6; container.scrollBy({ top: e.deltaY * multiplier, behavior: 'auto' }); }, { passive:false }); })();
 
-/* Initial render call already called earlier in code flow */
+/* Initial render */
 renderUI();
 </script>
+
+<footer style="text-align:center;padding:18px;color:var(--muted);font-size:13px">Creator: MD RAHAT — Powered by ChatGPT-5</footer>
 </body>
 </html>
