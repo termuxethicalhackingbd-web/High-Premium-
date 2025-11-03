@@ -605,18 +605,28 @@ function applyMood(m){
   else { document.body.style.background = 'linear-gradient(180deg,var(--bg-1),var(--bg-2))'; document.body.style.color = '#eaf2ff'; document.getElementById('vpnBanner').style.opacity = '1'; }
 }
 
-/* Reset data */
-document.getElementById('btnReset').addEventListener('click', ()=>{
-  if(confirm('Reset local demo data?')){ localStorage.removeItem('gj_state_v2'); localStorage.removeItem('gj_withdraws'); localStorage.removeItem('gj_ref_map'); location.reload(); }
-});
+// Function to check if the user is Admin (change the condition as per your authentication)
+function isAdmin() {
+  return localStorage.getItem('userRole') === 'admin'; // or any other way to verify if the user is admin
+}
 
-/* Welcome banner animation */
-(function showWelcome(){
-  const el = document.getElementById('welcomeBanner');
-  el.innerText = `Welcome ${UID} — Enjoy Galaxy Jackpot!`;
-  el.style.opacity = '1';
-  setTimeout(()=> el.style.opacity = '0', 5000);
-})();
+// Reset data button only for Admin
+window.onload = function() {
+  if (!isAdmin()) {
+    // Hide Reset Data button for non-admin users
+    document.getElementById('btnReset').style.display = 'none';
+  }
+
+  // Add event listener to Reset data button
+  document.getElementById('btnReset').addEventListener('click', () => {
+    if (confirm('Reset local demo data?')) {
+      localStorage.removeItem('gj_state_v2');
+      localStorage.removeItem('gj_withdraws');
+      localStorage.removeItem('gj_ref_map');
+      location.reload();
+    }
+  });
+};
 
 /* sparkle effect on big buttons (visual) */
 function sparkleAt(el){
