@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Galaxy Jackpot — Ultimate</title>
+<title>Galaxy Jackpot — Ultimate Polished</title>
 <meta name="description" content="Galaxy Jackpot — 8 mini-games, 100 tasks, referral & withdraw, Monetag/Adstra placeholders. Creator: MD RAHAT">
 <!-- Optional Monetag SDK (uncomment if you want to use Monetag JS function) -->
 <!-- <script src="//libtl.com/sdk.js" data-zone="10125761" data-sdk="show_10125761"></script> -->
@@ -23,7 +23,6 @@
   .vpnBanner{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:9999;max-width:1180px;width:calc(100% - 32px);
     background:linear-gradient(90deg,#0ea5a5,#7c3aed);color:#021627;padding:12px 18px;border-radius:999px;font-weight:900;box-shadow:0 18px 60px rgba(124,58,237,0.12);text-align:center}
   .vpnSub{font-weight:700;display:block;font-size:13px;margin-top:4px;color:#021627;opacity:0.95}
-  /* welcome */
   .welcome{position:fixed;left:50%;top:72px;transform:translateX(-50%);z-index:9998;max-width:1180px;width:calc(100% - 32px);
     background:linear-gradient(90deg,#06b6d4,#60a5fa);color:#021627;padding:10px 14px;border-radius:10px;font-weight:800;box-shadow:0 14px 44px rgba(3,7,18,0.6);opacity:0;transition:opacity .25s}
 
@@ -53,17 +52,20 @@
   .playNow{padding:8px 14px;border-radius:999px;border:none;cursor:pointer;font-weight:900;color:#051018;background:linear-gradient(90deg,#ff00cc,#3333ff);box-shadow:0 12px 40px rgba(124,58,237,0.14);transition:transform .08s}
   .playNow:hover{transform:translateY(-4px);box-shadow:0 22px 70px rgba(124,58,237,0.22)}
 
-  /* Refer / RefInfo button */
   .referBtn{padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:900;background:linear-gradient(90deg,#00ffe0,#7c3aed);color:#021018;box-shadow:0 14px 40px rgba(0,255,224,0.06)}
   .refCopy{padding:8px 12px;border-radius:10px;border:none;background:linear-gradient(90deg,#ffd54a,#ffb84d);color:#021018;font-weight:800;cursor:pointer}
 
-  /* buy bottom */
-  .buyBox{position:fixed;left:50%;transform:translateX(-50%);bottom:12px;z-index:9999;background:linear-gradient(180deg,#071225,#0b0f1a);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 80px rgba(0,0,0,0.55);max-width:1100px;width:calc(100% - 36px)}
-  .buyHeader{display:flex;align-items:center;justify-content:space-between;gap:8px}
-  .buyTitle{font-weight:900;color:var(--gold1);font-size:16px}
-  .buyToggle{cursor:pointer;padding:6px 8px;border-radius:8px;background:linear-gradient(90deg,#0f1724,#081028);border:1px solid rgba(255,255,255,0.03)}
-  .buyDetails{display:none;margin-top:8px;color:var(--muted);font-size:13px}
-  .buyCTA{margin-top:8px;padding:8px 14px;border-radius:8px;border:none;background:linear-gradient(90deg,#34d399,#60a5fa);font-weight:900;color:#021018;cursor:pointer}
+  /* BUY bottom redesigned */
+  .buyBox{position:fixed;left:50%;transform:translateX(-50%);bottom:12px;z-index:9999;background:linear-gradient(180deg,#071225,#0b0f1a);padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 80px rgba(0,0,0,0.55);max-width:1100px;width:calc(100% - 36px);display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .buyCompact{display:flex;gap:12px;align-items:center}
+  .buyBadge{background:linear-gradient(90deg,#ffb84d,#ffd54a);color:#021018;padding:8px 10px;border-radius:10px;font-weight:900}
+  .buyTitleCompact{font-weight:900}
+  .buyPrimary{padding:10px 14px;border-radius:12px;border:none;background:linear-gradient(90deg,#ff00aa,#00b3ff);color:white;font-weight:900;cursor:pointer;box-shadow:0 16px 60px rgba(124,58,237,0.18)}
+  .buyDetailsPanel{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:20000;background:linear-gradient(180deg,#081022,#071225);padding:18px;border-radius:12px;min-width:320px;max-width:760px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 120px rgba(0,0,0,0.7);display:none}
+  .buyDetailsPanel.show{display:block}
+  .buyClose{position:absolute;right:10px;top:8px;background:transparent;border:none;color:var(--muted);font-size:22px;cursor:pointer}
+  .buyRow{display:flex;gap:12px;align-items:center;margin-top:8px}
+  .buyList{color:var(--muted);font-size:14px;line-height:1.4}
 
   .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:12px;border-radius:12px;z-index:200000;min-width:320px;display:none;color:#e6eef6}
   .modal.show{display:block}
@@ -75,7 +77,6 @@
   @keyframes spk{0%{transform:translate(-50%,-50%) scale(0)}50%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}
   }
 
-  /* footer */
   footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;padding-bottom:24px}
 </style>
 </head>
@@ -233,26 +234,39 @@
     <div style="height:100px"></div>
   </main>
 
-  <!-- BUY bottom (redesigned) -->
-  <div class="buyBox" id="buyBox" role="dialog" aria-label="Buy">
-    <div class="buyHeader">
-      <div class="buyTitle">Buy Now — Galaxy Jackpot Full Script — $100</div>
-      <div class="buyToggle" id="buyToggle" title="Show details">➡️</div>
+  <!-- BUY compact bar (improved) -->
+  <div class="buyBox" id="buyBox">
+    <div class="buyCompact">
+      <div class="buyBadge">Premium</div>
+      <div class="buyTitleCompact">Buy Now — Galaxy Jackpot Full Script — $100</div>
     </div>
-    <div class="buyDetails" id="buyDetails" aria-hidden="true">
-      <div style="display:flex;gap:12px;align-items:center">
-        <div style="flex:1">
-          <p style="margin:6px 0;color:var(--muted);font-size:13px">
-            What you get: Full front-end UI (responsive), 8 playable mini-games, 100 animated task buttons, referral & commission,
-            withdraw modal with GAS logging, ad placeholders (Monetag/Adstra), mood selector, fast UX and installation instructions.
-          </p>
-          <p style="margin:6px 0;color:var(--muted);font-size:13px"><strong>Contact:</strong> termuxethicalhackingbd@gmail.com</p>
-        </div>
-        <div>
-          <button class="buyCTA" id="buyNowBtn">💎 Buy Full Script — $100</button>
+    <div style="display:flex;gap:12px;align-items:center">
+      <button id="buyOpenBtn" class="buyPrimary">Buy Now — $100</button>
+      <button id="buyDetailsBtn" class="buyPrimary" style="background:linear-gradient(90deg,#34d399,#60a5fa)">Show Details</button>
+    </div>
+  </div>
+
+  <!-- Buy Details Panel (modal style) -->
+  <div class="buyDetailsPanel" id="buyPanel" role="dialog" aria-hidden="true">
+    <button class="buyClose" id="buyClose">✕</button>
+    <h3 style="margin:0 0 8px 0;color:var(--gold1)">Buy Now — Galaxy Jackpot Full Script — $100</h3>
+    <div class="buyRow">
+      <div style="flex:1">
+        <div class="buyList">
+          • Full front-end UI (responsive) — ready to deploy.<br>
+          • 8 playable mini-games (spin, slot, dice, coin, box, rps, tile, wheel).<br>
+          • 100 animated tasks + Monetag/Adstra ad placeholders.<br>
+          • Referral system (0.005 signup bonus, 5% commission), withdraw modal (GAS logging).<br>
+          • Mood selector, fast scroll, premium UI effects, installation notes.
         </div>
       </div>
     </div>
+
+    <div style="display:flex;gap:10px;margin-top:12px;align-items:center">
+      <button id="buyConfirm" class="buyPrimary">💎 Buy — $100 (Email Now)</button>
+      <button id="buyContact" class="refCopy">Contact via Email</button>
+    </div>
+    <p class="smallMuted" style="margin-top:10px">After purchase you'll receive full source (HTML + server examples + env guide). Contact: termuxethicalhackingbd@gmail.com</p>
   </div>
 
   <!-- Withdraw modal -->
@@ -265,8 +279,8 @@
     <input id="payNumber" class="input" placeholder="Type your number / Binance UID"/>
     <input id="withdrawAmount" class="input" placeholder="Amount (USDT)"/>
     <div style="display:flex;gap:8px;margin-top:10px">
-      <button id="submitWithdraw" class="buyCTA" style="padding:8px 12px">Withdraw Now</button>
-      <button id="cancelWithdraw" class="buyCTA" style="background:linear-gradient(90deg,#ffb84d,#ffd54a);padding:8px 12px">Cancel</button>
+      <button id="submitWithdraw" class="buyPrimary" style="padding:8px 12px">Withdraw Now</button>
+      <button id="cancelWithdraw" class="refCopy" style="padding:8px 12px">Cancel</button>
     </div>
     <div class="smallMuted" style="margin-top:8px">Please wait 1 minute — 48 hours for processing.</div>
   </div>
@@ -278,12 +292,12 @@
     <div id="refList" style="max-height:300px;overflow:auto;margin-top:8px;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02)"></div>
   </div>
 
-  <!-- Refer Info modal (attractive + copy everything) -->
+  <!-- Refer Info modal -->
   <div class="modal" id="refInfoModal" aria-hidden="true" style="min-width:420px">
     <button class="closeX" id="closeRefInfo">✕</button>
     <h3>💸 Earn With Galaxy Jackpot!</h3>
     <p class="smallMuted" style="margin-top:6px">
-      Share your referral link. When someone joins via your link they receive signup bonus and you earn <strong>0.005 USDT</strong> plus <strong>5% commission</strong> on their ad rewards.
+      Share your referral link. When someone joins via your link they receive a signup bonus and you earn <strong>0.005 USDT</strong> plus <strong>5% commission</strong> on their ad rewards.
     </p>
     <div style="margin-top:10px">
       <input id="refInfoLink" class="input" readonly style="background:rgba(255,255,255,0.02)"/>
@@ -298,22 +312,18 @@
   <footer>Creator: MD RAHAT — Powered by ChatGPT-5</footer>
 
 <script>
-/* ===========================
-   CONFIG
-   =========================== */
+/* ========== CONFIG ========== */
 const CONFIG = {
   REWARD_PER_AD: 0.0005,
   ADS_PER_LEVEL: 100,
   LEVEL_BASE_BONUS: 0.01,
   MIN_WITHDRAW: 2,
-  MONETAG_FN: 'show_10125761', // Monetag function name (if you load the SDK)
+  MONETAG_FN: 'show_10125761',
   ADSTRA_SMARTLINK: 'https://www.effectivegatecpm.com/za35wfvxct?key=33d9ac55094c983709eac1a9fd20c4b5',
-  GAS_URL: '' // set your Google Apps Script URL here if you want server logging
+  GAS_URL: '' // set your Google Apps Script URL here for withdraw logging
 };
 
-/* ===========================
-   STATE
-   =========================== */
+/* ========== STATE ========== */
 const UID = localStorage.getItem('gj_uid') || ('u'+Math.floor(Math.random()*9e9));
 localStorage.setItem('gj_uid', UID);
 let state = JSON.parse(localStorage.getItem('gj_state_v2') || '{}');
@@ -334,30 +344,26 @@ function renderUI(){
 }
 renderUI();
 
-/* small toast */
+/* toast */
 function toast(text, time=1200){
   const el = document.createElement('div'); el.innerText = text;
   el.style.cssText = 'position:fixed;left:50%;top:18%;transform:translateX(-50%);background:linear-gradient(90deg,#fff,#ffd54a);color:#031018;padding:8px 12px;border-radius:8px;font-weight:900;z-index:99999';
   document.body.appendChild(el); setTimeout(()=> el.remove(), time);
 }
 
-/* ===========================
-   Ads integration (Monetag preferred)
-   =========================== */
+/* Ads function */
 async function showRewardedAd(){
-  // Monetag function if SDK is loaded
   try{
     if(CONFIG.MONETAG_FN && typeof window[CONFIG.MONETAG_FN] === 'function'){
       await window[CONFIG.MONETAG_FN]();
       return true;
     }
   }catch(e){ console.warn('Monetag call failed', e); }
-  // fallback: open smartlink and ask user to confirm
   window.open(CONFIG.ADSTRA_SMARTLINK + '&ref=' + encodeURIComponent(UID), '_blank');
   return confirm('Ad opened in new tab. After watching the ad, press OK to claim reward.');
 }
 
-/* credit user */
+/* credit */
 function credit(amount, reason='Ad Reward'){
   state.balance = (state.balance || 0) + Number(amount);
   state.adsWatched = (state.adsWatched || 0) + 1;
@@ -375,9 +381,7 @@ function credit(amount, reason='Ad Reward'){
   toast(`${reason} +${Number(amount).toFixed(6)} USDT`, 1200);
 }
 
-/* ===========================
-   Tasks (100)
-   =========================== */
+/* ========== TASKS (100) ========== */
 const taskGrid = document.getElementById('taskGrid');
 const colorList = ['#ffd54a','#7c3aed','#60a5fa','#fb7185','#a78bfa'];
 for(let i=1;i<=100;i++){
@@ -395,9 +399,7 @@ for(let i=1;i<=100;i++){
   taskGrid.appendChild(btn);
 }
 
-/* ===========================
-   Games (8)
-   =========================== */
+/* ========== GAMES ========== */
 /* Wheel */
 document.getElementById('spinBtn').addEventListener('click', async ()=>{
   const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
@@ -488,9 +490,7 @@ document.querySelectorAll('#tileBoard .tile').forEach(t => t.addEventListener('c
   credit(CONFIG.REWARD_PER_AD, 'Tile Reward');
 }));
 
-/* ===========================
-   Withdraw handling
-   =========================== */
+/* ========== Withdraw ========== */
 document.getElementById('btnWithdrawOpen').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.add('show'));
 document.getElementById('closeWithdraw').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.remove('show'));
 document.getElementById('cancelWithdraw').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.remove('show'));
@@ -511,9 +511,7 @@ document.getElementById('submitWithdraw').addEventListener('click', async ()=>{
   }catch(e){ console.warn('GAS send failed', e); }
 });
 
-/* ===========================
-   Referral modals & copy
-   =========================== */
+/* ========== Referrals ========== */
 function openRefModal(){
   const box = document.getElementById('refList'); box.innerHTML = '';
   const map = JSON.parse(localStorage.getItem('gj_ref_map') || '{}');
@@ -527,13 +525,9 @@ function openRefModal(){
 document.getElementById('btnRefModal').addEventListener('click', openRefModal);
 document.getElementById('closeRef').addEventListener('click', ()=> document.getElementById('refModal').classList.remove('show'));
 
-/* Refer Info open/close & copy */
-document.getElementById('openRefInfo').addEventListener('click', ()=>{
-  document.getElementById('refInfoModal').classList.add('show');
-  document.getElementById('refInfoModal').setAttribute('aria-hidden','false');
-});
+/* Ref info modal & copy */
+document.getElementById('openRefInfo').addEventListener('click', ()=> document.getElementById('refInfoModal').classList.add('show'));
 document.getElementById('closeRefInfo').addEventListener('click', ()=> document.getElementById('refInfoModal').classList.remove('show'));
-
 document.getElementById('copyLinkOnly').addEventListener('click', ()=>{
   const link = document.getElementById('refInfoLink').value;
   navigator.clipboard?.writeText(link).then(()=> toast('Referral link copied',1200)).catch(()=> prompt('Copy link', link));
@@ -543,8 +537,6 @@ document.getElementById('copyRefFull').addEventListener('click', ()=>{
   const message = `Join Galaxy Jackpot and earn! Use my link: ${link}\n\nWhen you join you get signup bonus. I earn 0.005 USDT + 5% commission on your ad rewards.`;
   navigator.clipboard?.writeText(message).then(()=> toast('Link + message copied',1400)).catch(()=> prompt('Copy message', message));
 });
-
-/* detect incoming referral */
 (function handleIncomingRef(){
   try{
     const url = new URL(location.href);
@@ -564,14 +556,22 @@ document.getElementById('copyRefFull').addEventListener('click', ()=>{
   }catch(e){}
 })();
 
-/* ===========================
-   Buy toggle, mood & effects
-   =========================== */
-document.getElementById('buyToggle').addEventListener('click', ()=>{
-  const d = document.getElementById('buyDetails'); const open = d.style.display === 'block'; d.style.display = open ? 'none' : 'block'; document.getElementById('buyToggle').innerText = open ? '➡️' : '❌';
+/* ========== Buy panel actions ========== */
+const buyPanel = document.getElementById('buyPanel');
+document.getElementById('buyDetailsBtn').addEventListener('click', ()=> { buyPanel.classList.add('show'); buyPanel.setAttribute('aria-hidden','false'); });
+document.getElementById('buyClose').addEventListener('click', ()=> { buyPanel.classList.remove('show'); buyPanel.setAttribute('aria-hidden','true'); });
+document.getElementById('buyOpenBtn').addEventListener('click', ()=> {
+  // direct mailto to purchase
+  window.open('mailto:termuxethicalhackingbd@gmail.com?subject=Buy Galaxy Jackpot&body=Hi, I want to buy Galaxy Jackpot Full Script - $100', '_blank');
 });
-document.getElementById('buyNowBtn').addEventListener('click', ()=> window.open('mailto:termuxethicalhackingbd@gmail.com?subject=Buy Galaxy Jackpot&body=I want to buy the project', '_blank'));
+document.getElementById('buyConfirm').addEventListener('click', ()=> {
+  window.open('mailto:termuxethicalhackingbd@gmail.com?subject=Buy Galaxy Jackpot&body=Hi, I want to buy Galaxy Jackpot Full Script - $100', '_blank');
+});
+document.getElementById('buyContact').addEventListener('click', ()=> {
+  window.open('mailto:termuxethicalhackingbd@gmail.com?subject=Query about Galaxy Jackpot&body=Hi, I have a question about Galaxy Jackpot Full Script', '_blank');
+});
 
+/* mood, sparkle, fast scroll, reset */
 document.getElementById('btnMood').addEventListener('click', ()=>{
   const current = document.documentElement.getAttribute('data-mood') || 'dark';
   if(current === 'dark'){ applyMood('light'); document.documentElement.setAttribute('data-mood','light'); }
@@ -583,26 +583,18 @@ function applyMood(m){
   else if(m === 'galaxy'){ document.body.style.background = 'linear-gradient(180deg,#02021a,#061033)'; document.body.style.color = '#eaf2ff'; document.getElementById('vpnBanner').style.opacity = '1'; }
   else { document.body.style.background = 'linear-gradient(180deg,var(--bg-1),var(--bg-2))'; document.body.style.color = '#eaf2ff'; document.getElementById('vpnBanner').style.opacity = '1'; }
 }
-
-/* sparkle effects */
 function sparkleAt(el){ const rect = el.getBoundingClientRect(); const x = rect.left + rect.width * Math.random(); const y = rect.top + rect.height * Math.random(); const s = document.createElement('div'); s.className = 'sparkle'; s.style.left = x + 'px'; s.style.top = y + 'px'; document.body.appendChild(s); setTimeout(()=> s.remove(),600); }
-document.querySelectorAll('.playNow, .taskBtn, .referBtn, .refCopy, .buyCTA, .boxBtn').forEach(btn=>{ btn.addEventListener('mouseenter', ()=> sparkleAt(btn)); });
-
-/* Persist and UI */
+document.querySelectorAll('.playNow, .taskBtn, .referBtn, .refCopy, .buyPrimary, .boxBtn').forEach(btn=>{ btn.addEventListener('mouseenter', ()=> sparkleAt(btn)); });
 setInterval(()=> persist(), 1500);
-
-/* Welcome banner */
 (function showWelcome(){ const el = document.getElementById('welcome'); el.innerText = `Welcome ${UID} — Enjoy Galaxy Jackpot!`; el.style.opacity = '1'; setTimeout(()=> el.style.opacity = '0', 4200); })();
-
-/* FAST SCROLL BOOST for tasks wrapper */
 (function fastScrollBoost(){ const container = document.getElementById('tasksWrap'); if(!container) return; container.addEventListener('wheel', (e)=>{ e.preventDefault(); const multiplier = 6; container.scrollBy({ top: e.deltaY * multiplier, behavior: 'auto' }); }, { passive:false }); })();
 
-/* Reset data (button already present) */
+/* Reset data button (admin-only control is handled separately by you) */
 document.getElementById('btnReset').addEventListener('click', ()=>{
   if(confirm('Reset local demo data? This affects only this browser.')){ localStorage.removeItem('gj_state_v2'); localStorage.removeItem('gj_withdraws'); localStorage.removeItem('gj_ref_map'); location.reload(); }
 });
 
-/* Final render */
+/* final render */
 renderUI();
 </script>
 </body>
