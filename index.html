@@ -1,450 +1,533 @@
-<!--
-  FINAL index.html for Galaxy Jackpot
-  -------------------------
-  IMPORTANT:
-  - Replace CONFIG.GAS_URL, CONFIG.MONETAG_FN, CONFIG.ADSTRA_SMARTLINK below with your real values.
-  - To enable real withdraw logging: set GAS_URL to your Google Apps Script POST URL (or your server API).
-  - Monetag SDK: if you use Monetag, include its <script> in <head> or set CONFIG.MONETAG_FN to the function name the SDK exposes.
-  - This file is frontend-only. For production you should add a small server (api/notify) to forward withdraws to Telegram & secure logging.
--->
+
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Galaxy Jackpot — Final • Creator: MD RAHAT</title>
-  <meta name="description" content="Galaxy Jackpot — 8 games, 100 tasks, referral, withdraw, ad placeholders." />
-  <!-- Monetag SDK (optional) -->
-  <!-- <script src="//libtl.com/sdk.js" data-zone="10125761" data-sdk="show_10125761"></script> -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Galaxy Jackpot — FINAL • Creator: MD RAHAT</title>
+<meta name="description" content="Galaxy Jackpot — 8 realistic games, 100 tasks, referral, withdraw, ads placeholders." />
+<!-- Monetag SDK placeholder (optional) -->
+<!-- <script src="//libtl.com/sdk.js" data-zone="10125761" data-sdk="show_10125761"></script> -->
 
-  <style>
-    :root{
-      --bg1:#06060b; --bg2:#081228; --muted:#9aa4b2; --accent1:#7c3aed; --accent2:#34d399;
-      --gold1:#ffd54a; --gold2:#ffb84d; --glass:rgba(255,255,255,0.03);
-      --text:#eaf2ff;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%;font-family:Inter,system-ui,Roboto,Arial;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--text);-webkit-font-smoothing:antialiased}
-    .wrap{max-width:1180px;margin:96px auto;padding:18px}
-    #vpnTop{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:9999;width:calc(100% - 40px);max-width:1180px;padding:10px 16px;border-radius:999px;background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#021627;font-weight:800;box-shadow:0 28px 80px rgba(124,58,237,0.12);pointer-events:none;animation:vpnPulse 6s ease-in-out infinite}
-    @keyframes vpnPulse{0%{transform:translateX(-52%)}50%{transform:translateX(-48%)}100%{transform:translateX(-52%)}}
+<style>
+:root{
+  --bg1:#05030a; --bg2:#071225; --muted:#9aa4b2;
+  --gold1:#ffd54a; --gold2:#ffb84d; --accent1:#7c3aed; --accent2:#34d399;
+  --glass:rgba(255,255,255,0.03); --text:#eaf2ff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:Inter,system-ui,Roboto,Arial;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--text);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:96px auto;padding:18px;position:relative}
 
-    .topBar{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--gold1),var(--gold2));display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018}
-    .titleBlock{font-weight:900}
-    .subtitle{color:var(--muted);font-size:13px}
+/* VPN banner */
+#vpnTop{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:99999;width:calc(100% - 40px);max-width:1180px;padding:10px 16px;border-radius:999px;background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#021627;font-weight:800;font-size:14px;box-shadow:0 28px 80px rgba(124,58,237,0.12);pointer-events:none;animation:vpnPulse 6s ease-in-out infinite}
+@keyframes vpnPulse{0%{transform:translateX(-52%)}50%{transform:translateX(-48%)}100%{transform:translateX(-52%)}}
 
-    .controls{margin-left:auto;display:flex;gap:12px;align-items:center}
-    .trogol{width:54px;height:30px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));display:flex;padding:4px;cursor:pointer;align-items:center}
-    .trogol .dot{width:22px;height:22px;border-radius:50%;background:#fff;transition:all .18s}
-    .adsCounter{background:linear-gradient(90deg,#60a5fa,#7c3aed);color:#021627;padding:8px 12px;border-radius:10px;font-weight:900}
+/* header */
+.topBar{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--gold1),var(--gold2));display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018}
+.titleBlock{font-weight:900}
+.subtitle{color:var(--muted);font-size:13px}
 
-    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 12px 40px rgba(0,0,0,0.45);margin-bottom:12px}
-    .balanceBig{font-size:20px;font-weight:900}
-    .smallMuted{color:var(--muted);font-size:13px}
-    .progressBar{height:8px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;margin-top:8px}
-    .progressFill{height:100%;background:linear-gradient(90deg,var(--gold1),var(--gold2));width:0%}
+/* controls */
+.controls{margin-left:auto;display:flex;gap:12px;align-items:center}
+.trogol{width:54px;height:30px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));display:flex;padding:4px;cursor:pointer;align-items:center}
+.trogol .dot{width:22px;height:22px;border-radius:50%;background:#fff;transition:all .18s;box-shadow:0 6px 18px rgba(0,0,0,0.35)}
+.trogol.on{box-shadow:0 18px 60px rgba(124,58,237,0.12)}
+.adsCounter{background:linear-gradient(90deg,#60a5fa,#7c3aed);color:#021627;padding:8px 12px;border-radius:10px;font-weight:900}
 
-    .tasksWrap{padding:10px;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent);max-height:420px;overflow:auto}
-    .btnGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-    @media(max-width:1000px){.btnGrid{grid-template-columns:repeat(3,1fr)}}
-    .taskBtn{padding:12px;border-radius:10px;border:none;cursor:pointer;font-weight:900;min-height:58px;color:#051018;box-shadow:0 8px 26px rgba(0,0,0,0.25);transition:transform .18s}
-    .taskBtn:active{transform:translateY(2px)}
-    .c0{background:linear-gradient(90deg,#ffd54a,#ffb84d)}
-    .c1{background:linear-gradient(90deg,#7c3aed,#34d399);color:#fff}
-    .c2{background:linear-gradient(90deg,#60a5fa,#7c3aed);color:#fff}
-    .c3{background:linear-gradient(90deg,#fb7185,#f97316);color:#fff}
-    .c4{background:linear-gradient(90deg,#a78bfa,#f472b6);color:#fff}
-    .taskBtn.trogol{box-shadow:0 18px 80px rgba(124,58,237,0.18);transform:translateY(-6px) scale(1.03)}
+/* cards */
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 12px 40px rgba(0,0,0,0.45);margin-bottom:12px}
+.balanceBig{font-size:20px;font-weight:900}
+.smallMuted{color:var(--muted);font-size:13px}
+.progressBar{height:8px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;margin-top:8px}
+.progressFill{height:100%;background:linear-gradient(90deg,var(--gold1),var(--gold2));width:0%}
 
-    .gamesGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
-    @media(max-width:1100px){.gamesGrid{grid-template-columns:repeat(2,1fr)}}
-    .gameCard{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);min-height:180px;display:flex;flex-direction:column;justify-content:center;align-items:center}
-    .gameTitle{font-weight:900;margin-bottom:10px}
+/* tasks grid */
+.tasksWrap{padding:10px;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent);max-height:420px;overflow:auto}
+.btnGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+@media(max-width:1000px){.btnGrid{grid-template-columns:repeat(3,1fr)}}
+.taskBtn{padding:12px;border-radius:10px;border:none;cursor:pointer;font-weight:900;min-height:58px;color:#051018;box-shadow:0 8px 26px rgba(0,0,0,0.25);transition:transform .18s}
+.taskBtn:active{transform:translateY(2px)}
+.c0{background:linear-gradient(90deg,#ffd54a,#ffb84d)}
+.c1{background:linear-gradient(90deg,#7c3aed,#34d399);color:#fff}
+.c2{background:linear-gradient(90deg,#60a5fa,#7c3aed);color:#fff}
+.c3{background:linear-gradient(90deg,#fb7185,#f97316);color:#fff}
+.c4{background:linear-gradient(90deg,#a78bfa,#f472b6);color:#fff}
+.taskBtn.trogol{box-shadow:0 18px 80px rgba(124,58,237,0.18);transform:translateY(-6px) scale(1.03)}
 
-    .playButton{padding:10px 18px;border-radius:999px;border:none;cursor:pointer;font-weight:900;color:#051018;background:linear-gradient(90deg,#ff00cc,#3333ff);box-shadow:0 18px 60px rgba(124,58,237,0.14);transition:transform .12s, box-shadow .12s}
-    .playButton:hover{transform:translateY(-4px);box-shadow:0 28px 90px rgba(124,58,237,0.22)}
+.gamesGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+@media(max-width:1100px){.gamesGrid{grid-template-columns:repeat(2,1fr)}}
+.gameCard{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);min-height:180px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.gameTitle{font-weight:900;margin-bottom:10px}
+.playButton{padding:10px 18px;border-radius:999px;border:none;cursor:pointer;font-weight:900;color:#051018;background:linear-gradient(90deg,#ff00cc,#3333ff);box-shadow:0 18px 60px rgba(124,58,237,0.14);transition:transform .12s, box-shadow .12s}
+.playButton:hover{transform:translateY(-4px);box-shadow:0 28px 90px rgba(124,58,237,0.22)}
 
-    .buyBox{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:9999;background:linear-gradient(180deg,#0b0b12,#0f1220);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 30px 80px rgba(0,0,0,0.5);max-width:920px}
-    .buyHeader{display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .buyHeaderLeft{font-weight:900;color:var(--gold1)}
-    .buyArrow{cursor:pointer;font-size:18px;padding:6px;border-radius:8px;background:linear-gradient(90deg,#111827,#0b1220);border:1px solid rgba(255,255,255,0.03)}
-    .buyDetails{display:none;margin-top:10px;color:var(--muted);font-size:14px;line-height:1.6}
-    .buyCTA{margin-top:8px;padding:10px 16px;border-radius:10px;border:none;background:linear-gradient(90deg,#34d399,#60a5fa);font-weight:900;cursor:pointer}
+/* buy box bottom */
+.buyBox{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:9999;background:linear-gradient(180deg,#0b0b12,#0f1220);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 30px 80px rgba(0,0,0,0.5);max-width:920px}
+.buyHeader{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.buyHeaderLeft{font-weight:900;color:var(--gold1)}
+.buyArrow{cursor:pointer;font-size:18px;padding:6px;border-radius:8px;background:linear-gradient(90deg,#111827,#0b1220);border:1px solid rgba(255,255,255,0.03)}
+.buyDetails{display:none;margin-top:10px;color:var(--muted);font-size:14px;line-height:1.6}
+.buyCTA{margin-top:8px;padding:10px 16px;border-radius:10px;border:none;background:linear-gradient(90deg,#34d399,#60a5fa);font-weight:900;cursor:pointer}
 
-    .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:18px;border-radius:12px;z-index:200000;min-width:320px;display:none;color:#e6eef6}
-    .modal.show{display:block}
-    .closeX{position:absolute;right:12px;top:8px;background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer}
-    .input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#e6eef6;margin-top:8px}
-  </style>
+/* modal */
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:18px;border-radius:12px;z-index:200000;min-width:320px;display:none;color:#e6eef6}
+.modal.show{display:block}
+.closeX{position:absolute;right:12px;top:8px;background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer}
+.input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#e6eef6;margin-top:8px}
+
+/* creator */
+.creatorName{font-size:14px;color:#00e0ff;text-shadow:0 0 12px rgba(0,255,255,0.12);font-weight:900;margin-left:8px}
+
+/* sparkle */
+.sparkle {position:absolute; pointer-events:none; width:8px;height:8px;border-radius:50%; background:rgba(255,255,255,0.9); box-shadow:0 0 10px rgba(255,255,255,0.9); transform:translate(-50%,-50%) scale(0); animation:spk .6s linear}
+@keyframes spk{0%{transform:translate(-50%,-50%) scale(0)}50%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}}
+</style>
 </head>
-
 <body>
-  <div id="vpnTop">🌎 Connect VPN (USA / Canada / Australia) for better rewards!</div>
 
-  <div class="wrap" role="main">
-    <div class="topBar">
-      <div class="logo">GJ</div>
-      <div class="titleBlock">
-        <div style="font-weight:900">Galaxy Jackpot — ∞× Legendary++</div>
-        <div class="subtitle">Play • Watch Ads • Earn USDT</div>
-      </div>
+<div id="vpnTop" aria-live="polite">🌎 Connect VPN (USA / Canada / Australia) for better rewards!</div>
 
-      <div class="controls">
-        <div style="display:flex;flex-direction:column;align-items:flex-end">
-          <div style="font-size:12px;color:var(--muted)">Trogol</div>
-          <div id="trogolToggle" class="trogol" role="switch" tabindex="0" aria-checked="false"><div class="dot"></div></div>
-        </div>
-        <div id="adsCounter" class="adsCounter">Ads: 0</div>
-      </div>
+<div class="wrap" role="main">
+  <div class="topBar" role="banner">
+    <div class="logo">GJ</div>
+    <div class="titleBlock">
+      <div style="font-size:18px">Galaxy Jackpot — ∞× Legendary++</div>
+      <div class="subtitle">Play • Watch Ads • Earn USDT</div>
     </div>
 
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div>
-          <div class="smallMuted">Current Balance</div>
-          <div class="balanceBig" id="balance">USDT 0.015000</div>
-          <div class="smallMuted" id="avail">Available: USDT 0.015000</div>
-          <div class="progressBar"><div id="xpFill" class="progressFill" style="width:0%"></div></div>
-          <div style="margin-top:8px">
-            <span class="smallMuted">Level <strong id="levelTag">0</strong></span>
-            <span class="smallMuted" id="xpInfo" style="margin-left:8px">XP 0</span>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
-          <button id="openReferList" class="playButton" style="background:linear-gradient(90deg,var(--gold1),var(--gold2));color:#051018">My Referrals</button>
-          <div class="smallMuted">Referral: <strong>0.005 USDT</strong> • Commission: <strong>5%</strong></div>
-        </div>
+    <div class="controls" role="toolbar" aria-label="Controls">
+      <div style="display:flex;flex-direction:column;align-items:flex-end">
+        <div style="font-size:12px;color:var(--muted)">Trogol</div>
+        <div id="trogolToggle" class="trogol" role="switch" tabindex="0" aria-checked="false"><div class="dot"></div></div>
+      </div>
+      <div id="adsCounter" class="adsCounter">Ads: 0</div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;margin-left:8px">
+        <div style="font-size:12px;color:var(--muted)">Creator</div>
+        <div class="creatorName">MD RAHAT</div>
       </div>
     </div>
+  </div>
 
-    <div class="card">
-      <div style="font-weight:900">Tasks — Tap to watch ad & earn</div>
-      <div class="tasksWrap" style="margin-top:12px">
-        <div class="btnGrid" id="taskGrid"></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div style="font-weight:900">Mini Games</div>
-        <div class="smallMuted">Play a game → watch ad → earn</div>
-      </div>
-      <div class="gamesGrid" id="gamesGrid" style="margin-top:12px">
-        <!-- Wheel -->
-        <div class="gameCard" id="gameWheel">
-          <div class="gameTitle">🎡 Spin Wheel</div>
-          <div id="wheel" style="width:140px;height:140px;border-radius:50%;margin:8px auto;background:conic-gradient(#f59e0b,#f97316,#60a5fa,#7c3aed);display:flex;align-items:center;justify-content:center;position:relative"><div style="font-weight:900;color:#051018">SPIN</div></div>
-          <button class="playButton" id="spinBtn">Play</button>
-          <div id="rWheel" class="smallMuted" style="margin-top:8px"></div>
-        </div>
-
-        <!-- Slot -->
-        <div class="gameCard" id="gameSlot">
-          <div class="gameTitle">🎰 Slot</div>
-          <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;font-weight:900;font-size:22px">
-            <div id="s1" style="width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(255,255,255,0.02)">7</div>
-            <div id="s2" style="width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(255,255,255,0.02)">7</div>
-            <div id="s3" style="width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(255,255,255,0.02)">7</div>
-          </div>
-          <button class="playButton" id="slotPlay">Play</button>
-          <div id="rSlot" class="smallMuted"></div>
-        </div>
-
-        <!-- Dice -->
-        <div class="gameCard" id="gameDice">
-          <div class="gameTitle">🎲 Dice Roll</div>
-          <div id="diceFace" style="font-size:28px;font-weight:900;margin:12px;background:linear-gradient(90deg,#fff,#e6e6e6);color:#051018;border-radius:8px;padding:8px;width:80px">-</div>
-          <button class="playButton" id="dicePlay">Roll</button>
-          <div id="rDice" class="smallMuted"></div>
-        </div>
-
-        <!-- Coin -->
-        <div class="gameCard" id="gameCoin">
-          <div class="gameTitle">🪙 Coin Flip</div>
-          <div id="coinAnim" style="width:74px;height:74px;border-radius:50%;background:linear-gradient(90deg,#ffd54a,#ffb84d);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;margin:8px">◐</div>
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <button class="playButton" id="coinHead">Head</button><button class="playButton" id="coinTail">Tail</button>
-          </div>
-          <div id="rCoin" class="smallMuted"></div>
-        </div>
-
-        <!-- Lucky Box -->
-        <div class="gameCard" id="gameBox">
-          <div class="gameTitle">🎁 Lucky Box</div>
-          <div id="boxIcon" style="width:80px;height:80px;border-radius:12px;background:linear-gradient(90deg,#f97316,#fb7185);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;margin:8px">BOX</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px">
-            <button class="playButton boxBtn" data-box="1">Open</button>
-          </div>
-          <div id="rBox" class="smallMuted"></div>
-        </div>
-
-        <!-- RPS -->
-        <div class="gameCard" id="gameRPS">
-          <div class="gameTitle">✊✌️✋ Rock Paper Scissors</div>
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <button class="playButton" id="rpsRock">Rock</button><button class="playButton" id="rpsPaper">Paper</button><button class="playButton" id="rpsScissors">Scissors</button>
-          </div>
-          <div id="rRPS" class="smallMuted"></div>
-        </div>
-
-        <!-- Tile -->
-        <div class="gameCard" id="gameTile">
-          <div class="gameTitle">🔳 Tile Match</div>
-          <div id="tileBoard" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px;width:100%">
-            <div class="tile playButton" data-idx="0">?</div><div class="tile playButton" data-idx="1">?</div><div class="tile playButton" data-idx="2">?</div>
-            <div class="tile playButton" data-idx="3">?</div><div class="tile playButton" data-idx="4">?</div><div class="tile playButton" data-idx="5">?</div>
-          </div>
-          <div id="rTile" class="smallMuted" style="margin-top:8px"></div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- buy box -->
-    <div class="buyBox" id="buyBox">
-      <div class="buyHeader">
-        <div class="buyHeaderLeft">Buy Now — Galaxy Jackpot Full Script — $100</div>
-        <div class="buyArrow" id="buyArrow">➡️</div>
-      </div>
-      <div class="buyDetails" id="buyDetails">
+  <!-- balance card -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div class="smallMuted">Current Balance</div>
+        <div class="balanceBig" id="balance">USDT 0.015000</div>
+        <div class="smallMuted" id="avail">Available: USDT 0.015000</div>
+        <div class="progressBar"><div id="xpFill" class="progressFill" style="width:0%"></div></div>
         <div style="margin-top:8px">
-          What you get: Full front-end UI (responsive), 8 playable mini-games with animations, 100 animated task buttons, referral & commission system, withdraw modal with GAS logging, ad placeholders for Monetag/Adstra, mood selector, trogol effects, fast scroll UX, and installation instructions. Perfect for resell or white-label. Contact: termuxethicalhackingbd@gmail.com
-        </div>
-        <div style="margin-top:10px">
-          <button class="buyCTA" id="buyNowBtn">Buy Full Script — $100</button>
+          <span class="smallMuted">Level <strong id="levelTag">0</strong></span>
+          <span class="smallMuted" id="xpInfo" style="margin-left:8px">XP 0</span>
         </div>
       </div>
-    </div>
 
-    <!-- withdraw modal -->
-    <div id="withdrawModal" class="modal" aria-hidden="true">
-      <button class="closeX" id="closeWithdraw">✕</button>
-      <h3>Withdraw Request</h3>
-      <div class="smallMuted">Minimum: 2 USDT</div>
-      <label class="smallMuted" style="margin-top:10px">Payment Method</label>
-      <select id="payMethod" class="input">
-        <option value="bkash">bKash</option>
-        <option value="nagad">Nagad</option>
-        <option value="binance">Binance</option>
-      </select>
-      <input id="payNumber" class="input" placeholder="Type your number / Binance UID" />
-      <input id="withdrawAmount" class="input" placeholder="Amount (USDT)" />
-      <div style="margin-top:10px;display:flex;gap:8px">
-        <button id="submitWithdraw" class="buyCTA">Withdraw Now</button>
-        <button id="cancelWithdraw" class="buyCTA" style="background:linear-gradient(90deg,#ffb84d,#ffd54a)">Cancel</button>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+        <button id="openReferList" class="playButton" style="background:linear-gradient(90deg,var(--gold1),var(--gold2));color:#051018">My Referrals</button>
+        <div class="smallMuted">Referral bonus: <strong>0.005 USDT</strong> • Commission: <strong>5%</strong></div>
       </div>
-      <div class="smallMuted" style="margin-top:8px">Please wait 1 minute — 48 hours for processing.</div>
+    </div>
+  </div>
+
+  <!-- tasks -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="font-weight:900">Tasks</div>
+      <div class="smallMuted">Tap a task → watch ad → earn +0.0005 USDT</div>
+    </div>
+    <div class="tasksWrap" style="margin-top:12px">
+      <div class="btnGrid" id="taskGrid"></div>
+    </div>
+  </div>
+
+  <!-- games -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="font-weight:900">Mini Games</div>
+      <div class="smallMuted">Play & watch ad to earn</div>
     </div>
 
-  </div> <!-- wrap -->
+    <div class="gamesGrid" id="gamesGrid" style="margin-top:12px">
+      <!-- Wheel -->
+      <div class="gameCard" id="gameWheel">
+        <div class="gameTitle">🎡 Spin Wheel</div>
+        <div id="wheel" style="width:140px;height:140px;border-radius:50%;margin:8px auto;background:conic-gradient(#f59e0b,#f97316,#60a5fa,#7c3aed);display:flex;align-items:center;justify-content:center;position:relative"><div style="font-weight:900;color:#051018">SPIN</div></div>
+        <button class="playButton" id="spinBtn">Play Now</button>
+        <div id="rWheel" class="smallMuted" style="margin-top:8px"></div>
+      </div>
 
-  <script>
-    /* =========================
-       CONFIG - replace after upload
-       ========================= */
-    const CONFIG = {
-      TEST_MODE: false,
-      REWARD_PER_AD: 0.0005,
-      ADS_PER_LEVEL: 100,
-      LEVEL_BASE_BONUS: 0.01,
-      MIN_WITHDRAW: 2,
-      MONETAG_FN: 'show_10125761', // if Monetag exposes this function
-      ADSTRA_SMARTLINK: 'https://www.effectivegatecpm.com/za35wfvxct?key=33d9ac55094c983709eac1a9fd20c4b5',
-      GAS_URL: 'https://script.google.com/macros/s/YOUR_GAS_ID/exec', // <-- replace with your GAS URL
-      BASE_URL: location.origin
-    };
+      <!-- Slot -->
+      <div class="gameCard" id="gameSlot">
+        <div class="gameTitle">🎰 Slot</div>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;font-weight:900;font-size:22px">
+          <div id="s1" style="width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(255,255,255,0.02)">7</div>
+          <div id="s2" style="width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(255,255,255,0.02)">7</div>
+          <div id="s3" style="width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(255,255,255,0.02)">7</div>
+        </div>
+        <button class="playButton" id="slotPlay">Play Now</button>
+        <div id="rSlot" class="smallMuted"></div>
+      </div>
 
-    /* =========================
-       STATE & UI
-       ========================= */
-    const UID = localStorage.getItem('gj_user_id') || ('u'+Math.floor(Math.random()*9e9));
-    localStorage.setItem('gj_user_id', UID);
-    let state = JSON.parse(localStorage.getItem('gj_state_final') || '{}');
-    if(!state.uid){ state = { uid:UID, balance:0.015, adsWatched:0, level:0, referrals:[], refEarned:0 }; saveState(); }
-    function saveState(){ localStorage.setItem('gj_state_final', JSON.stringify(state)); updateUI(); updateAdsCounter(); }
-    function updateUI(){
-      document.getElementById('balance').innerText = 'USDT ' + (state.balance||0).toFixed(6);
-      document.getElementById('avail').innerText = 'Available: USDT ' + (state.balance||0).toFixed(6);
-      document.getElementById('levelTag').innerText = (state.level||0);
-      document.getElementById('xpInfo').innerText = 'XP ' + (state.adsWatched||0);
-      const p = Math.min(100, Math.floor(((state.adsWatched||0) % CONFIG.ADS_PER_LEVEL) / CONFIG.ADS_PER_LEVEL * 100));
-      document.getElementById('xpFill').style.width = p + '%';
+      <!-- Dice -->
+      <div class="gameCard" id="gameDice">
+        <div class="gameTitle">🎲 Dice Roll</div>
+        <div id="diceFace" style="font-size:28px;font-weight:900;margin:12px;background:linear-gradient(90deg,#fff,#e6e6e6);color:#051018;border-radius:8px;padding:8px;width:80px">-</div>
+        <button class="playButton" id="dicePlay">Roll Now</button>
+        <div id="rDice" class="smallMuted"></div>
+      </div>
+
+      <!-- Coin -->
+      <div class="gameCard" id="gameCoin">
+        <div class="gameTitle">🪙 Coin Flip</div>
+        <div id="coinAnim" style="width:74px;height:74px;border-radius:50%;background:linear-gradient(90deg,#ffd54a,#ffb84d);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;margin:8px">◐</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="playButton" id="coinHead">Head</button><button class="playButton" id="coinTail">Tail</button>
+        </div>
+        <div id="rCoin" class="smallMuted"></div>
+      </div>
+
+      <!-- Lucky Box -->
+      <div class="gameCard" id="gameBox">
+        <div class="gameTitle">🎁 Lucky Box</div>
+        <div id="boxIcon" style="width:80px;height:80px;border-radius:12px;background:linear-gradient(90deg,#f97316,#fb7185);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;margin:8px">BOX</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px">
+          <button class="playButton boxBtn" data-box="1">Open</button>
+        </div>
+        <div id="rBox" class="smallMuted"></div>
+      </div>
+
+      <!-- RPS -->
+      <div class="gameCard" id="gameRPS">
+        <div class="gameTitle">✊✌️✋ Rock Paper Scissors</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="playButton" id="rpsRock">Rock</button><button class="playButton" id="rpsPaper">Paper</button><button class="playButton" id="rpsScissors">Scissors</button>
+        </div>
+        <div id="rRPS" class="smallMuted"></div>
+      </div>
+
+      <!-- Tile (match) -->
+      <div class="gameCard" id="gameTile">
+        <div class="gameTitle">🔳 Tile Match</div>
+        <div id="tileBoard" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px;width:100%">
+          <div class="tile playButton" data-idx="0">?</div><div class="tile playButton" data-idx="1">?</div><div class="tile playButton" data-idx="2">?</div>
+          <div class="tile playButton" data-idx="3">?</div><div class="tile playButton" data-idx="4">?</div><div class="tile playButton" data-idx="5">?</div>
+        </div>
+        <div id="rTile" class="smallMuted" style="margin-top:8px"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- buy box bottom -->
+  <div class="buyBox" id="buyBox">
+    <div class="buyHeader">
+      <div class="buyHeaderLeft">Buy Now — Galaxy Jackpot Full Script — $100</div>
+      <div class="buyArrow" id="buyArrow">➡️</div>
+    </div>
+    <div class="buyDetails" id="buyDetails">
+      <div style="margin-top:8px">
+        What you get: Full front-end UI (responsive), 8 playable mini-games with animations, 100 animated task buttons, referral & commission system, withdraw modal with GAS logging, ad placeholders for Monetag/Adstra, mood selector, trogol effects, fast scroll UX, and installation instructions. Perfect for resell or white-label. Contact: termuxethicalhackingbd@gmail.com
+      </div>
+      <div style="margin-top:10px">
+        <button class="buyCTA" id="buyNowBtn">Buy Full Script — $100</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- withdraw modal -->
+  <div id="withdrawModal" class="modal" aria-hidden="true">
+    <button class="closeX" id="closeWithdraw">✕</button>
+    <h3>Withdraw Request</h3>
+    <div class="smallMuted">Minimum: 2 USDT</div>
+    <label class="smallMuted" style="margin-top:10px">Payment Method</label>
+    <select id="payMethod" class="input">
+      <option value="bkash">bKash</option>
+      <option value="nagad">Nagad</option>
+      <option value="binance">Binance</option>
+    </select>
+    <input id="payNumber" class="input" placeholder="Type your number / Binance UID" />
+    <input id="withdrawAmount" class="input" placeholder="Amount (USDT)" />
+    <div style="margin-top:10px;display:flex;gap:8px">
+      <button id="submitWithdraw" class="buyCTA">Withdraw Now</button>
+      <button id="cancelWithdraw" class="buyCTA" style="background:linear-gradient(90deg,#ffb84d,#ffd54a)">Cancel</button>
+    </div>
+    <div class="smallMuted" style="margin-top:8px">Please wait 1 minute — 48 hours for processing.</div>
+  </div>
+
+  <!-- refer modal -->
+  <div id="referModal" class="modal" style="min-width:360px;display:none">
+    <button class="closeX" id="closeReferBtn">✕</button>
+    <h3>My Referrals</h3>
+    <div id="referList" style="max-height:300px;overflow:auto;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);margin-top:8px"></div>
+  </div>
+
+</div> <!-- wrap -->
+
+<script>
+/* =========================
+   CONFIG - replace these after upload
+   ========================= */
+const CONFIG = {
+  TEST_MODE: false,
+  REWARD_PER_AD: 0.0005,
+  ADS_PER_LEVEL: 100,
+  LEVEL_BASE_BONUS: 0.01,
+  MIN_WITHDRAW: 2,
+  MONETAG_FN: 'show_10125761', // if Monetag exposes this function
+  ADSTRA_SMARTLINK: 'https://www.effectivegatecpm.com/za35wfvxct?key=33d9ac55094c983709eac1a9fd20c4b5',
+  GAS_URL: 'https://script.google.com/macros/s/YOUR_GAS_ID/exec', // <-- replace with your GAS URL
+  BASE_URL: location.origin
+};
+
+/* =========================
+   STATE + UTIL
+   ========================= */
+const UID = localStorage.getItem('gj_user_id') || ('u'+Math.floor(Math.random()*9e9));
+localStorage.setItem('gj_user_id', UID);
+
+let state = JSON.parse(localStorage.getItem('gj_state_final') || '{}');
+if(!state.uid){ state = { uid:UID, balance:0.015, adsWatched:0, level:0, referrals:[], refEarned:0 }; saveState(); }
+
+function saveState(){ localStorage.setItem('gj_state_final', JSON.stringify(state)); updateUI(); updateAdsCounter(); }
+function updateUI(){
+  document.getElementById('balance').innerText = 'USDT ' + (state.balance||0).toFixed(6);
+  document.getElementById('avail').innerText = 'Available: USDT ' + (state.balance||0).toFixed(6);
+  document.getElementById('levelTag').innerText = (state.level||0);
+  document.getElementById('xpInfo').innerText = 'XP ' + (state.adsWatched||0);
+  const p = Math.min(100, Math.floor(((state.adsWatched||0) % CONFIG.ADS_PER_LEVEL) / CONFIG.ADS_PER_LEVEL * 100));
+  document.getElementById('xpFill').style.width = p + '%';
+}
+function updateAdsCounter(){ document.getElementById('adsCounter').innerText = 'Ads: ' + (state.adsWatched||0); }
+
+/* small popup */
+function showPopup(text, ms=1600){
+  const el = document.createElement('div'); el.style.position='fixed'; el.style.left='50%'; el.style.top='18%'; el.style.transform='translateX(-50%)'; el.style.padding='12px 18px'; el.style.borderRadius='10px';
+  el.style.background='linear-gradient(90deg,#fff,#ffd54a)'; el.style.color='#051018'; el.style.fontWeight=900; el.style.zIndex=99999; el.innerText = text;
+  document.body.appendChild(el); setTimeout(()=> el.remove(), ms);
+}
+function showReward(amount, title){
+  showPopup(`${title} — +${amount.toFixed(6)} USDT`, 2000);
+}
+
+/* =========================
+   Ads flow
+   ========================= */
+async function showRewardedAd(){
+  if(CONFIG.TEST_MODE) return confirm('Test mode: OK = simulate ad seen (reward)');
+  try{
+    if(typeof window[CONFIG.MONETAG_FN] === 'function'){ await window[CONFIG.MONETAG_FN](); return true; }
+  }catch(e){ console.warn('Monetag error', e); }
+  // fallback: open ad smartlink
+  window.open(CONFIG.ADSTRA_SMARTLINK + '&ref=' + encodeURIComponent(UID), '_blank');
+  return confirm('Ad opened in new tab. After watching, press OK to claim reward.');
+}
+
+function grantReward(reason='Ad Reward'){
+  state.balance = (state.balance || 0) + CONFIG.REWARD_PER_AD;
+  state.adsWatched = (state.adsWatched || 0) + 1;
+  const prev = state.level || 0;
+  const next = Math.floor(state.adsWatched / CONFIG.ADS_PER_LEVEL);
+  if(next > prev){
+    for(let L=prev+1; L<=next; L++){
+      const bonus = CONFIG.LEVEL_BASE_BONUS * L;
+      state.balance = (state.balance || 0) + bonus;
+      showReward(bonus, `Level ${L} Bonus`);
     }
-    function updateAdsCounter(){ document.getElementById('adsCounter').innerText = 'Ads: ' + (state.adsWatched||0); }
+    state.level = next;
+  }
+  saveState();
+  showReward(CONFIG.REWARD_PER_AD, reason);
+}
 
-    function showPopup(text, ms=1800){
-      const el = document.createElement('div'); el.style.position='fixed'; el.style.left='50%'; el.style.top='18%'; el.style.transform='translateX(-50%)'; el.style.padding='12px 18px'; el.style.borderRadius='10px';
-      el.style.background='linear-gradient(90deg,#fff,#ffd54a)'; el.style.color='#051018'; el.style.fontWeight=900; el.style.zIndex=99999; el.innerText = text;
-      document.body.appendChild(el); setTimeout(()=> el.remove(), ms);
-    }
+/* =========================
+   TASKS (100)
+   ========================= */
+const taskGrid = document.getElementById('taskGrid');
+const colorClasses = ['c0','c1','c2','c3','c4'];
+for(let i=1;i<=100;i++){
+  const b = document.createElement('button');
+  b.className = 'taskBtn ' + colorClasses[i % colorClasses.length];
+  b.innerText = `Task ${i}`;
+  b.dataset.task = `task${i}`;
+  b.addEventListener('click', async ()=> {
+    const ok = await showRewardedAd();
+    if(ok){ grantReward('Task Reward'); } else { alert('No reward (ad skipped).'); }
+  });
+  taskGrid.appendChild(b);
+}
 
-    /* Reward popup simplified */
-    function showReward(amount, title){
-      showPopup(`${title} — +${amount.toFixed(6)} USDT`, 2000);
-    }
+/* =========================
+   GAMES implement
+   ========================= */
+// Wheel
+document.getElementById('spinBtn').addEventListener('click', async ()=>{
+  const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
+  const wheel = document.getElementById('wheel');
+  const spins = Math.floor(Math.random()*6)+8;
+  const sector = Math.floor(Math.random()*8);
+  const deg = spins*360 + sector*(360/8) + Math.floor(Math.random()*20);
+  wheel.style.transition = 'transform 4s cubic-bezier(.25,.8,.25,1)';
+  wheel.style.transform = `rotate(${deg}deg)`;
+  setTimeout(()=>{ wheel.style.transition=''; wheel.style.transform=`rotate(${deg%360}deg)`; const win = sector%4===0 || Math.random() < 0.18; if(win){ state.balance=(state.balance||0)+0.03; showReward(0.03,'Spin Bonus'); } grantReward('Spin Reward'); },4200);
+});
 
-    /* =========================
-       Ads flow (simple)
-       ========================= */
-    async function showRewardedAd(){
-      if(CONFIG.TEST_MODE){ return confirm('Test mode: OK = simulate ad seen (reward)'); }
-      try{
-        // if Monetag function exists, call it
-        if(typeof window[CONFIG.MONETAG_FN] === 'function'){ await window[CONFIG.MONETAG_FN](); return true; }
-      }catch(e){ console.warn('Monetag error', e); }
-      // fallback: open smartlink
-      window.open(CONFIG.ADSTRA_SMARTLINK + '&ref=' + encodeURIComponent(UID), '_blank');
-      return confirm('Ad opened in new tab. After watching, press OK to claim reward.');
-    }
+// Slot
+const slotSymbols = ['7','🍒','⭐','🍋','💎','🔔'];
+document.getElementById('slotPlay').addEventListener('click', async ()=>{
+  const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
+  const s1 = document.getElementById('s1'), s2 = document.getElementById('s2'), s3 = document.getElementById('s3');
+  const rounds = 18;
+  for(let i=0;i<rounds;i++){ await new Promise(r=>setTimeout(r,50 + i*6)); s1.innerText = slotSymbols[Math.floor(Math.random()*slotSymbols.length)]; s2.innerText = slotSymbols[Math.floor(Math.random()*slotSymbols.length)]; s3.innerText = slotSymbols[Math.floor(Math.random()*slotSymbols.length)]; }
+  const final = [s1.innerText,s2.innerText,s3.innerText];
+  const jackpot = final[0]===final[1] && final[1]===final[2];
+  const smallWin = final[0]===final[1] || final[1]===final[2] || final[0]===final[2];
+  if(jackpot){ state.balance=(state.balance||0)+0.08; showReward(0.08,'JACKPOT'); } else if(smallWin){ state.balance=(state.balance||0)+0.03; showReward(0.03,'Small Win'); }
+  grantReward('Slot Reward');
+});
 
-    function grantReward(reason='Ad Reward'){
-      state.balance = (state.balance||0) + CONFIG.REWARD_PER_AD;
-      state.adsWatched = (state.adsWatched||0) + 1;
-      // level check
-      const prev = state.level || 0;
-      const next = Math.floor(state.adsWatched / CONFIG.ADS_PER_LEVEL);
-      if(next > prev){
-        for(let L=prev+1; L<=next; L++){
-          const bonus = CONFIG.LEVEL_BASE_BONUS * L;
-          state.balance = (state.balance||0) + bonus;
-          showReward(bonus, `Level ${L} Bonus`);
-        }
-        state.level = next;
+// Dice
+document.getElementById('dicePlay').addEventListener('click', async ()=>{
+  const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
+  const faceEl = document.getElementById('diceFace'); faceEl.style.transition='transform .8s'; faceEl.style.transform='rotate(720deg) scale(.95)';
+  await new Promise(r=>setTimeout(r,820)); faceEl.style.transform=''; const face = Math.floor(Math.random()*6)+1; faceEl.innerText = face;
+  if(face>=5){ state.balance=(state.balance||0)+0.02; showReward(0.02,'Dice Win'); } grantReward('Dice Reward');
+});
+
+// Coin
+async function coinFlip(choice){ const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; } const c = document.getElementById('coinAnim'); c.style.transition='transform .9s'; c.style.transform='rotateY(720deg)'; await new Promise(r=>setTimeout(r,920)); c.style.transform=''; const res = Math.random()<0.5 ? 'head' : 'tail'; document.getElementById('rCoin').innerText = `Result: ${res.toUpperCase()}`; if(res===choice){ state.balance=(state.balance||0)+0.01; showReward(0.01,'Coin Win'); } grantReward('Coin Reward'); }
+document.getElementById('coinHead').addEventListener('click', ()=> coinFlip('head'));
+document.getElementById('coinTail').addEventListener('click', ()=> coinFlip('tail'));
+
+// Lucky Box
+document.querySelectorAll('.boxBtn').forEach(btn=> btn.addEventListener('click', async ()=>{
+  const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
+  const box = document.getElementById('boxIcon'); box.style.transform='translateY(-8px) rotate(-8deg)'; await new Promise(r=>setTimeout(r,500)); box.style.transform='';
+  const p=Math.random();
+  if(p<0.35){ state.balance=(state.balance||0)+0.02; showReward(0.02,'Box Win'); } else if(p<0.7){ state.balance=(state.balance||0)+0.01; showReward(0.01,'Box Win'); } else { document.getElementById('rBox').innerText='No prize'; }
+  grantReward('Box Reward');
+}));
+
+// RPS
+['rpsRock','rpsPaper','rpsScissors'].forEach(id=> document.getElementById(id).addEventListener('click', async ()=>{
+  const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
+  const choices=['rock','paper','scissors']; const comp = choices[Math.floor(Math.random()*3)]; const me = id==='rpsRock'?'rock':id==='rpsPaper'?'paper':'scissors';
+  const outcome = (me===comp)?'Draw':((me==='rock'&&comp==='scissors')||(me==='paper'&&comp==='rock')||(me==='scissors'&&comp==='paper')?'You Win':'You Lose');
+  document.getElementById('rRPS').innerText = `${outcome} (CPU: ${comp})`; if(outcome==='You Win'){ state.balance=(state.balance||0)+0.01; showReward(0.01,'RPS Win'); }
+  grantReward('RPS Reward');
+}));
+
+// Tile buttons
+document.querySelectorAll('#tileBoard .tile').forEach(t => t.addEventListener('click', async ()=>{
+  const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
+  t.style.transform='scale(.95)'; await new Promise(r=>setTimeout(r,160)); t.style.transform='';
+  const win = Math.random()<0.4; if(win){ state.balance=(state.balance||0)+0.02; showReward(0.02,'Tile Win'); document.getElementById('rTile').innerText='Tile Match Win'; } else { document.getElementById('rTile').innerText='Try again'; }
+  grantReward('Tile Reward');
+}));
+
+/* =========================
+   Withdraw (GAS POST)
+   ========================= */
+document.getElementById('submitWithdraw').addEventListener('click', async ()=>{
+  const method = document.getElementById('payMethod').value;
+  const input = document.getElementById('payNumber').value.trim();
+  const amount = parseFloat(document.getElementById('withdrawAmount').value);
+  if(!input || isNaN(amount) || amount < CONFIG.MIN_WITHDRAW){ alert('Invalid withdraw: minimum ' + CONFIG.MIN_WITHDRAW + ' USDT'); return; }
+  const req = { id:'wd_'+Date.now(), user:UID, method, input, amount, status:'Pending', time:new Date().toISOString() };
+  const arr = JSON.parse(localStorage.getItem('gj_withdraws')||'[]'); arr.push(req); localStorage.setItem('gj_withdraws', JSON.stringify(arr));
+  document.getElementById('withdrawModal').classList.remove('show');
+  alert('Withdraw submitted. Admin will process.');
+  // send to GAS / server for logging (replace CONFIG.GAS_URL)
+  try{ await fetch(CONFIG.GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'withdraw', ...req }) }); }catch(e){ console.warn('GAS failed', e); }
+});
+
+/* open withdraw: we allow opening via keyboard shortcut or page control if needed */
+document.addEventListener('keydown', (e)=>{ if(e.key==='w'){ document.getElementById('withdrawModal').classList.add('show'); } });
+document.getElementById('closeWithdraw').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.remove('show'));
+document.getElementById('cancelWithdraw').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.remove('show'));
+
+/* =========================
+   Buy details toggle
+   ========================= */
+const buyArrow = document.getElementById('buyArrow'), buyDetails = document.getElementById('buyDetails');
+buyArrow.addEventListener('click', ()=> { const open = buyDetails.style.display === 'block'; buyDetails.style.display = open ? 'none' : 'block'; buyArrow.innerText = open ? '➡️' : '❌'; });
+
+/* =========================
+   Referral logic
+   ========================= */
+document.getElementById('openReferList').addEventListener('click', openReferModal);
+document.getElementById('closeReferBtn').addEventListener('click', ()=> document.getElementById('referModal').style.display='none');
+
+function openReferModal(){
+  const box = document.getElementById('referList'); box.innerHTML = '';
+  const map = JSON.parse(localStorage.getItem('gj_referrals_map') || '{}');
+  const arr = map[UID] || [];
+  if(arr.length === 0){ box.innerHTML = '<div style="color:#9aa4b2">No referrals yet</div>'; }
+  else { arr.forEach((r, idx)=>{ const d = document.createElement('div'); d.style.padding='8px'; d.style.borderBottom='1px solid rgba(255,255,255,0.02)'; d.innerHTML = `<div style="font-weight:900">${idx+1}. ${r.id}</div><div style="color:#9aa4b2">${r.time}</div>`; box.appendChild(d); }); }
+  document.getElementById('referModal').style.display='block';
+}
+
+// detect referral in URL like ?start=ref_<id>
+(function handleReferralOnLoad(){
+  try{
+    const url = new URL(location.href);
+    const start = url.searchParams.get('start') || '';
+    if(start && start.startsWith('ref_')){
+      const refId = start.slice(4);
+      const map = JSON.parse(localStorage.getItem('gj_referrals_map') || '{}');
+      map[refId] = map[refId] || [];
+      map[refId].push({ id: UID, time: new Date().toLocaleString() });
+      localStorage.setItem('gj_referrals_map', JSON.stringify(map));
+      if(refId !== UID){
+        const credits = JSON.parse(localStorage.getItem('gj_ref_credits') || '{}');
+        credits[refId] = (credits[refId]||0) + 0.005;
+        localStorage.setItem('gj_ref_credits', JSON.stringify(credits));
+        state.refEarned = (state.refEarned || 0) + 0.005;
+        saveState();
+        showPopup('Referral credited +0.005 USDT', 1800);
       }
-      saveState();
-      showReward(CONFIG.REWARD_PER_AD, reason);
     }
+  }catch(e){}
+})();
 
-    /* =========================
-       TASKS (100)
-       ========================= */
-    const taskGrid = document.getElementById('taskGrid');
-    const colorClasses = ['c0','c1','c2','c3','c4'];
-    for(let i=1;i<=100;i++){
-      const b = document.createElement('button');
-      b.className = 'taskBtn ' + colorClasses[i % colorClasses.length];
-      b.innerText = `Task ${i}`;
-      b.dataset.task = `task${i}`;
-      b.addEventListener('click', async ()=> {
-        // throttle simple
-        const ok = await showRewardedAd();
-        if(ok){ grantReward('Task Reward'); } else { alert('No reward (ad skipped).'); }
-      });
-      taskGrid.appendChild(b);
-    }
+/* =========================
+   Trogol (mood) & sparkles
+   ========================= */
+const tro = document.getElementById('trogolToggle'); tro.addEventListener('click', toggleTrogol);
+tro.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') toggleTrogol(); });
+function toggleTrogol(){
+  const on = tro.getAttribute('data-on') === '1';
+  if(on){ tro.setAttribute('data-on','0'); tro.classList.remove('on'); tro.querySelector('.dot').style.marginLeft='0'; showPopup('Trogol OFF'); } else { tro.setAttribute('data-on','1'); tro.classList.add('on'); tro.querySelector('.dot').style.marginLeft='28px'; showPopup('Trogol ON'); }
+}
 
-    /* =========================
-       GAMES (play actions)
-       ========================= */
-    // Wheel
-    document.getElementById('spinBtn').addEventListener('click', async ()=>{
-      const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
-      const wheel = document.getElementById('wheel'); const spins = Math.floor(Math.random()*6)+8; const sector = Math.floor(Math.random()*8);
-      const deg = spins*360 + sector*(360/8) + Math.floor(Math.random()*20);
-      wheel.style.transition = 'transform 4s cubic-bezier(.25,.8,.25,1)'; wheel.style.transform = `rotate(${deg}deg)`;
-      setTimeout(()=>{ wheel.style.transition=''; wheel.style.transform = `rotate(${deg%360}deg)`; const win = sector%4===0 || Math.random() < 0.18; if(win){ state.balance=(state.balance||0)+0.03; showReward(0.03,'Spin Bonus'); } grantReward('Spin Reward'); },4200);
-    });
+/* mood switch helper (dark/light/galaxy) via buy arrow double-click for demo */
+let moods = ['dark','light','galaxy']; let mi = 0;
+function applyMood(m){
+  if(m==='dark'){ document.body.style.background='linear-gradient(180deg,#05030a,#071225)'; document.body.style.color='var(--text)'; }
+  else if(m==='light'){ document.body.style.background='linear-gradient(180deg,#f6f9ff,#e6f0ff)'; document.body.style.color='#04203b'; }
+  else { document.body.style.background='linear-gradient(180deg,#0b1020,#071533)'; document.body.style.color='var(--text)'; }
+}
+function cycleMood(){ mi=(mi+1)%moods.length; applyMood(moods[mi]); showPopup('Mood: '+moods[mi]); }
+document.getElementById('buyBox').addEventListener('dblclick', cycleMood);
 
-    // Slot
-    const slotSymbols = ['7','🍒','⭐','🍋','💎','🔔'];
-    document.getElementById('slotPlay').addEventListener('click', async ()=>{
-      const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
-      const s1 = document.getElementById('s1'), s2 = document.getElementById('s2'), s3 = document.getElementById('s3');
-      const rounds = 18; for(let i=0;i<rounds;i++){ await new Promise(r=>setTimeout(r,50 + i*6)); s1.innerText = slotSymbols[Math.floor(Math.random()*slotSymbols.length)]; s2.innerText = slotSymbols[Math.floor(Math.random()*slotSymbols.length)]; s3.innerText = slotSymbols[Math.floor(Math.random()*slotSymbols.length)]; }
-      const final = [s1.innerText,s2.innerText,s3.innerText]; const jackpot = final[0]===final[1] && final[1]===final[2]; const smallWin = final[0]===final[1] || final[1]===final[2] || final[0]===final[2];
-      if(jackpot){ state.balance=(state.balance||0)+0.08; showReward(0.08,'JACKPOT'); } else if(smallWin){ state.balance=(state.balance||0)+0.03; showReward(0.03,'Small Win'); }
-      grantReward('Slot Reward');
-    });
+/* =========================
+   Startup
+   ========================= */
+function init(){ updateUI(); updateAdsCounter(); showPopup('Welcome '+UID,1200); }
+init();
 
-    // Dice
-    document.getElementById('dicePlay').addEventListener('click', async ()=>{
-      const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
-      const faceEl = document.getElementById('diceFace'); faceEl.style.transition='transform .8s'; faceEl.style.transform='rotate(720deg) scale(.95)';
-      await new Promise(r=>setTimeout(r,820)); faceEl.style.transform=''; const face = Math.floor(Math.random()*6)+1; faceEl.innerText = face;
-      if(face>=5){ state.balance=(state.balance||0)+0.02; showReward(0.02,'Dice Win'); } grantReward('Dice Reward');
-    });
+/* =========================
+   helper to save UI updates
+   ========================= */
+function updateAdsCounter(){ document.getElementById('adsCounter').innerText = 'Ads: ' + (state.adsWatched||0); }
+function saveState(){ localStorage.setItem('gj_state_final', JSON.stringify(state)); updateUI(); updateAdsCounter(); }
+saveState();
 
-    // Coin
-    async function coinFlip(choice){ const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; } const c = document.getElementById('coinAnim'); c.style.transition='transform .9s'; c.style.transform='rotateY(720deg)'; await new Promise(r=>setTimeout(r,920)); c.style.transform=''; const res = Math.random()<0.5 ? 'head' : 'tail'; document.getElementById('rCoin').innerText = `Result: ${res.toUpperCase()}`; if(res===choice){ state.balance=(state.balance||0)+0.01; showReward(0.01,'Coin Win'); } grantReward('Coin Reward'); }
-    document.getElementById('coinHead').addEventListener('click', ()=> coinFlip('head'));
-    document.getElementById('coinTail').addEventListener('click', ()=> coinFlip('tail'));
+/* =========================
+   End
+   ========================= */
+</script>
 
-    // Lucky Box
-    document.querySelectorAll('.boxBtn').forEach(btn=> btn.addEventListener('click', async ()=>{
-      const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
-      const box = document.getElementById('boxIcon'); box.style.transform='translateY(-8px) rotate(-8deg)'; await new Promise(r=>setTimeout(r,500)); box.style.transform=''; const p=Math.random();
-      if(p<0.35){ state.balance=(state.balance||0)+0.02; showReward(0.02,'Box Win'); } else if(p<0.7){ state.balance=(state.balance||0)+0.01; showReward(0.01,'Box Win'); } else { document.getElementById('rBox').innerText='No prize'; }
-      grantReward('Box Reward');
-    }));
-
-    // RPS
-    ['rpsRock','rpsPaper','rpsScissors'].forEach(id=> document.getElementById(id).addEventListener('click', async ()=>{
-      const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
-      const choices=['rock','paper','scissors']; const comp = choices[Math.floor(Math.random()*3)]; const me = id==='rpsRock'?'rock':id==='rpsPaper'?'paper':'scissors';
-      const outcome = (me===comp)?'Draw':((me==='rock'&&comp==='scissors')||(me==='paper'&&comp==='rock')||(me==='scissors'&&comp==='paper')?'You Win':'You Lose');
-      document.getElementById('rRPS').innerText = `${outcome} (CPU: ${comp})`; if(outcome==='You Win'){ state.balance=(state.balance||0)+0.01; showReward(0.01,'RPS Win'); }
-      grantReward('RPS Reward');
-    }));
-
-    // Tile Buttons
-    document.querySelectorAll('#tileBoard .tile').forEach(t => t.addEventListener('click', async ()=>{
-      const ok = await showRewardedAd(); if(!ok){ alert('No reward'); return; }
-      t.style.transform='scale(.95)'; await new Promise(r=>setTimeout(r,160)); t.style.transform='';
-      const win = Math.random()<0.4; if(win){ state.balance=(state.balance||0)+0.02; showReward(0.02,'Tile Win'); document.getElementById('rTile').innerText='Tile Match Win'; } else { document.getElementById('rTile').innerText='Try again'; }
-      grantReward('Tile Reward');
-    }));
-
-    /* =========================
-       Withdraw modal submit -> GAS (frontend)
-       ========================= */
-    document.getElementById('submitWithdraw').addEventListener('click', async ()=>{
-      const method = document.getElementById('payMethod').value;
-      const input = document.getElementById('payNumber').value.trim();
-      const amount = parseFloat(document.getElementById('withdrawAmount').value);
-      if(!input || isNaN(amount) || amount < CONFIG.MIN_WITHDRAW){ alert('Invalid withdraw: minimum ' + CONFIG.MIN_WITHDRAW + ' USDT'); return; }
-      const req = { id:'wd_'+Date.now(), user:UID, method, input, amount, status:'Pending', time:new Date().toISOString() };
-      // local store
-      const arr = JSON.parse(localStorage.getItem('gj_withdraws')||'[]'); arr.push(req); localStorage.setItem('gj_withdraws', JSON.stringify(arr));
-      document.getElementById('withdrawModal').classList.remove('show');
-      alert('Withdraw submitted. Admin will process.'); 
-      // POST to GAS for sheet logging (replace CONFIG.GAS_URL with your real one)
-      try{ await fetch(CONFIG.GAS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'withdraw', ...req }) }); }catch(e){ console.warn('GAS failed', e); }
-    });
-
-    document.getElementById('cancelWithdraw').addEventListener('click', ()=> document.getElementById('withdrawModal').classList.remove('show'));
-    // open/close logic can be added to a button if you want
-
-    /* =========================
-       Buy details toggle
-       ========================= */
-    const buyArrow = document.getElementById('buyArrow'), buyDetails = document.getElementById('buyDetails');
-    buyArrow.addEventListener('click', ()=> {
-      const open = buyDetails.style.display === 'block';
-      buyDetails.style.display = open ? 'none' : 'block';
-      buyArrow.innerText = open ? '➡️' : '❌';
-    });
-
-    /* =========================
-       Trogol visual
-       ========================= */
-    const tro = document.getElementById('trogolToggle'); tro.addEventListener('click', ()=> {
-      const on = tro.getAttribute('data-on') === '1';
-      if(on){ tro.setAttribute('data-on','0'); tro.querySelector('.dot').style.marginLeft='0'; showPopup('Trogol OFF'); } else { tro.setAttribute('data-on','1'); tro.querySelector('.dot').style.marginLeft='28px'; showPopup('Trogol ON'); }
-    });
-
-    /* =========================
-       Startup state
-       ========================= */
-    function init(){ updateUI(); updateAdsCounter(); showPopup('Welcome '+UID, 1400); }
-    init();
-
-    /* =========================
-       Quick test helper (you can remove)
-       ========================= */
-    // For debugging: open withdraw modal if needed
-    // document.getElementById('openWithdraw')?.addEventListener('click', ()=> document.getElementById('withdrawModal').classList.add('show'));
-
-  </script>
 </body>
 </html>
