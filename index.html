@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Galaxy Jackpot — Ultimate</title>
 <meta name="description" content="Galaxy Jackpot — 8 mini-games, 100 tasks, referral & withdraw, Monetag/Adstra placeholders. Creator: MD RAHAT">
+<!-- Optional Monetag SDK (uncomment if you want to use Monetag JS function) -->
+<!-- <script src="//libtl.com/sdk.js" data-zone="10125761" data-sdk="show_10125761"></script> -->
 <style>
   :root{
     --bg-1:#03040a; --bg-2:#071329; --card:#0e1724;
@@ -16,30 +18,33 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{height:100%;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:var(--text);-webkit-font-smoothing:antialiased}
-  .app{max-width:1200px;margin:56px auto;padding:18px;position:relative}
-  .floatingBanner{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:9999;max-width:1160px;width:calc(100% - 40px);
-    background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#021627;padding:10px 16px;border-radius:999px;font-weight:900;box-shadow:0 16px 44px rgba(124,58,237,0.12);pointer-events:none;opacity:0.98}
-  .welcomeBanner{position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:9998;max-width:1160px;width:calc(100% - 40px);
-    background:linear-gradient(90deg,#0ea5a5,#3b82f6);color:#021627;padding:8px 12px;border-radius:10px;font-weight:800;box-shadow:0 14px 40px rgba(3,7,18,0.6);opacity:0;transition:opacity .25s}
+  .app{max-width:1200px;margin:64px auto;padding:20px;position:relative}
+  /* VPN banner */
+  .vpnBanner{position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:9999;max-width:1180px;width:calc(100% - 32px);
+    background:linear-gradient(90deg,#0ea5a5,#7c3aed);color:#021627;padding:12px 18px;border-radius:999px;font-weight:900;box-shadow:0 18px 60px rgba(124,58,237,0.12);text-align:center}
+  .vpnSub{font-weight:700;display:block;font-size:13px;margin-top:4px;color:#021627;opacity:0.95}
+  /* welcome */
+  .welcome{position:fixed;left:50%;top:72px;transform:translateX(-50%);z-index:9998;max-width:1180px;width:calc(100% - 32px);
+    background:linear-gradient(90deg,#06b6d4,#60a5fa);color:#021627;padding:10px 14px;border-radius:10px;font-weight:800;box-shadow:0 14px 44px rgba(3,7,18,0.6);opacity:0;transition:opacity .25s}
 
   .header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-  .logo{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold1),var(--gold2));font-weight:900;color:#051018;font-size:20px;box-shadow:0 8px 30px rgba(124,77,255,0.06)}
-  .title{font-size:18px;font-weight:900}
+  .logo{width:68px;height:68px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold1),var(--gold2));font-weight:900;color:#051018;font-size:20px;box-shadow:0 10px 40px rgba(124,77,255,0.06)}
+  .title{font-size:20px;font-weight:900}
   .subtitle{color:var(--muted);font-size:13px}
-  .controls{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .controls{margin-left:auto;display:flex;align-items:center;gap:10px}
 
-  .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(0,0,0,0.45)}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 40px rgba(0,0,0,0.45)}
   .balanceBig{font-size:20px;font-weight:900}
   .muted{color:var(--muted);font-size:13px}
   .progress{height:8px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;margin-top:6px}
   .progressFill{height:100%;background:linear-gradient(90deg,var(--gold1),var(--gold2));width:0%}
 
-  .tasksWrap{padding:8px;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent);max-height:380px;overflow:auto}
+  .tasksWrap{padding:8px;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent);max-height:420px;overflow:auto}
   .btnGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
   @media(max-width:1000px){.btnGrid{grid-template-columns:repeat(3,1fr)}}
-  .taskBtn{padding:10px;border-radius:10px;border:none;cursor:pointer;font-weight:900;min-height:56px;color:#051018;box-shadow:0 8px 20px rgba(0,0,0,0.28);transition:transform .08s,box-shadow .08s}
+  .taskBtn{padding:10px;border-radius:10px;border:none;cursor:pointer;font-weight:900;min-height:60px;color:#051018;box-shadow:0 10px 30px rgba(0,0,0,0.28);transition:transform .08s,box-shadow .08s}
   .taskBtn:active{transform:translateY(2px)}
-  .taskBtn.anim { animation: danceFast .8s infinite ease-in-out; }
+  .taskBtn.anim { animation: danceFast .9s infinite ease-in-out; }
   @keyframes danceFast { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
 
   .gamesGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
@@ -48,31 +53,42 @@
   .playNow{padding:8px 14px;border-radius:999px;border:none;cursor:pointer;font-weight:900;color:#051018;background:linear-gradient(90deg,#ff00cc,#3333ff);box-shadow:0 12px 40px rgba(124,58,237,0.14);transition:transform .08s}
   .playNow:hover{transform:translateY(-4px);box-shadow:0 22px 70px rgba(124,58,237,0.22)}
 
-  .buyBox{position:fixed;left:50%;transform:translateX(-50%);bottom:12px;z-index:9999;background:linear-gradient(180deg,#071225,#0b0f1a);padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 60px rgba(0,0,0,0.5);max-width:1100px;width:calc(100% - 36px)}
+  /* Refer / RefInfo button */
+  .referBtn{padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:900;background:linear-gradient(90deg,#00ffe0,#7c3aed);color:#021018;box-shadow:0 14px 40px rgba(0,255,224,0.06)}
+  .refCopy{padding:8px 12px;border-radius:10px;border:none;background:linear-gradient(90deg,#ffd54a,#ffb84d);color:#021018;font-weight:800;cursor:pointer}
+
+  /* buy bottom */
+  .buyBox{position:fixed;left:50%;transform:translateX(-50%);bottom:12px;z-index:9999;background:linear-gradient(180deg,#071225,#0b0f1a);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 80px rgba(0,0,0,0.55);max-width:1100px;width:calc(100% - 36px)}
   .buyHeader{display:flex;align-items:center;justify-content:space-between;gap:8px}
-  .buyTitle{font-weight:900;color:var(--gold1)}
+  .buyTitle{font-weight:900;color:var(--gold1);font-size:16px}
   .buyToggle{cursor:pointer;padding:6px 8px;border-radius:8px;background:linear-gradient(90deg,#0f1724,#081028);border:1px solid rgba(255,255,255,0.03)}
   .buyDetails{display:none;margin-top:8px;color:var(--muted);font-size:13px}
   .buyCTA{margin-top:8px;padding:8px 14px;border-radius:8px;border:none;background:linear-gradient(90deg,#34d399,#60a5fa);font-weight:900;color:#021018;cursor:pointer}
 
-  .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:12px;border-radius:10px;z-index:200000;min-width:300px;display:none;color:#e6eef6}
+  .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#071225;padding:12px;border-radius:12px;z-index:200000;min-width:320px;display:none;color:#e6eef6}
   .modal.show{display:block}
-  .closeX{position:absolute;right:10px;top:6px;background:transparent;border:none;color:var(--muted);font-size:18px;cursor:pointer}
-  .input{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#e6eef6;margin-top:8px}
-
-  .refBtn{padding:8px 12px;border-radius:8px;border:none;background:linear-gradient(90deg,var(--neon-2),var(--neon-1));color:#021018;font-weight:800;cursor:pointer}
-  .refCopy{padding:8px 12px;border-radius:8px;border:none;background:linear-gradient(90deg,#ffd54a,#ffb84d);color:#021018;font-weight:800;cursor:pointer}
+  .closeX{position:absolute;right:12px;top:8px;background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer}
+  .input{width:100%;padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#e6eef6;margin-top:8px}
 
   .smallMuted{color:var(--muted);font-size:13px}
   .sparkle{position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff;transform:translate(-50%,-50%) scale(0);animation:spk .6s linear}
   @keyframes spk{0%{transform:translate(-50%,-50%) scale(0)}50%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}
   }
+
+  /* footer */
+  footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;padding-bottom:24px}
 </style>
 </head>
 <body>
 
-  <div class="floatingBanner" id="vpnBanner">🌐 Connect VPN (USA / Canada / Australia) for higher rewards!</div>
-  <div class="welcomeBanner" id="welcomeBanner" aria-live="polite"></div>
+  <!-- VPN banner -->
+  <div class="vpnBanner" id="vpnBanner">
+    🌐 Connect VPN (USA / Canada / Australia) for higher rewards!
+    <span class="vpnSub">Tip: connect to USA for best payout rates and ad availability.</span>
+  </div>
+
+  <!-- Welcome -->
+  <div class="welcome" id="welcome" aria-live="polite"></div>
 
   <main class="app" role="main" aria-labelledby="appTitle">
     <header class="header" id="appTitle">
@@ -81,13 +97,13 @@
         <div class="title">Galaxy Jackpot — ∞× Legendary++</div>
         <div class="subtitle">Play • Watch Ads • Earn USDT</div>
       </div>
-
       <div class="controls" role="region" aria-label="controls">
         <div class="smallMuted">Ads Watched: <strong id="adsBadge">0</strong></div>
       </div>
     </header>
 
-    <div style="display:grid;grid-template-columns:1fr 340px;gap:12px;margin-bottom:12px">
+    <!-- top area -->
+    <div style="display:grid;grid-template-columns:1fr 360px;gap:12px;margin-bottom:12px">
       <div class="card" aria-live="polite">
         <div style="display:flex;justify-content:space-between;align-items:center">
           <div>
@@ -112,19 +128,20 @@
           <div class="smallMuted">Invite • Withdraw • Settings</div>
         </div>
 
-        <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:10px">
           <div style="display:flex;gap:8px;align-items:center">
             <input id="refLink" class="input" readonly aria-label="Referral link" style="flex:1;background:rgba(255,255,255,0.02);color:var(--text)">
-            <!-- Attractive Refer Button (NEW) -->
-            <button id="openRefInfo" class="refBtn" title="Earn by sharing">Refer & Earn</button>
+            <button id="openRefInfo" class="referBtn" title="Earn by sharing">Refer & Earn</button>
           </div>
-          <div style="display:flex;gap:8px;margin-top:6px">
+          <div style="display:flex;gap:8px">
             <button id="btnMood" class="playNow" style="flex:1">Toggle Mood</button>
+            <button id="btnReset" class="playNow" style="background:linear-gradient(90deg,#fb7185,#f97316);padding:8px 10px">Reset Data</button>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- tasks -->
     <section class="card">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div style="font-weight:900">100 Tasks</div>
@@ -135,6 +152,7 @@
       </div>
     </section>
 
+    <!-- games -->
     <section class="card" style="margin-top:12px">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div style="font-weight:900">8 Mini Games</div>
@@ -142,6 +160,7 @@
       </div>
 
       <div class="gamesGrid" id="gamesGrid" style="margin-top:10px">
+        <!-- Wheel -->
         <div class="gameCard" id="gameWheel">
           <div class="gameTitle">🎡 Spin Wheel</div>
           <div id="wheel" style="width:120px;height:120px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:conic-gradient(#f59e0b,#f97316,#60a5fa,#7c3aed);font-weight:900;color:#051018">SPIN</div>
@@ -149,6 +168,7 @@
           <div id="rWheel" class="smallMuted" style="margin-top:6px"></div>
         </div>
 
+        <!-- Slot -->
         <div class="gameCard" id="gameSlot">
           <div class="gameTitle">🎰 Slot</div>
           <div style="display:flex;gap:6px;justify-content:center;margin-top:8px;font-weight:900;font-size:20px">
@@ -160,6 +180,7 @@
           <div id="rSlot" class="smallMuted"></div>
         </div>
 
+        <!-- Dice -->
         <div class="gameCard" id="gameDice">
           <div class="gameTitle">🎲 Dice Roll</div>
           <div id="diceFace" style="font-size:26px;font-weight:900;margin:12px;background:linear-gradient(90deg,#ffffff,#e6e6e6);color:#051018;border-radius:8px;padding:6px;width:80px;text-align:center">-</div>
@@ -167,6 +188,7 @@
           <div id="rDice" class="smallMuted"></div>
         </div>
 
+        <!-- Coin -->
         <div class="gameCard" id="gameCoin">
           <div class="gameTitle">🪙 Coin Flip</div>
           <div id="coinAnim" style="width:68px;height:68px;border-radius:50%;background:linear-gradient(90deg,#ffd54a,#ffb84d);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;margin:8px">◐</div>
@@ -176,6 +198,7 @@
           <div id="rCoin" class="smallMuted"></div>
         </div>
 
+        <!-- Lucky Box -->
         <div class="gameCard" id="gameBox">
           <div class="gameTitle">🎁 Lucky Box</div>
           <div id="boxIcon" style="width:72px;height:72px;border-radius:10px;background:linear-gradient(90deg,#f97316,#fb7185);display:flex;align-items:center;justify-content:center;font-weight:900;color:#051018;margin:8px">BOX</div>
@@ -185,6 +208,7 @@
           <div id="rBox" class="smallMuted"></div>
         </div>
 
+        <!-- RPS -->
         <div class="gameCard" id="gameRPS">
           <div class="gameTitle">✊✌️✋ Rock Paper Scissors</div>
           <div style="display:flex;gap:8px;margin-top:8px">
@@ -193,6 +217,7 @@
           <div id="rRPS" class="smallMuted"></div>
         </div>
 
+        <!-- Tile -->
         <div class="gameCard" id="gameTile">
           <div class="gameTitle">🔳 Tile Match</div>
           <div id="tileBoard" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;width:100%">
@@ -205,23 +230,28 @@
       </div>
     </section>
 
-    <div style="height:80px"></div>
+    <div style="height:100px"></div>
   </main>
 
-  <!-- Buy -->
-  <div class="buyBox" id="buyBox">
+  <!-- BUY bottom (redesigned) -->
+  <div class="buyBox" id="buyBox" role="dialog" aria-label="Buy">
     <div class="buyHeader">
       <div class="buyTitle">Buy Now — Galaxy Jackpot Full Script — $100</div>
-      <div class="buyToggle" id="buyToggle">➡️</div>
+      <div class="buyToggle" id="buyToggle" title="Show details">➡️</div>
     </div>
     <div class="buyDetails" id="buyDetails" aria-hidden="true">
-      <p style="margin:6px 0;color:var(--muted);font-size:13px">
-        What you get: Full front-end UI (responsive), 8 playable mini-games with animations, 100 animated task buttons,
-        referral & commission system, withdraw modal with GAS logging, ad placeholders for Monetag/Adstra, mood selector,
-        trogol effects, fast scroll UX, and installation instructions.
-      </p>
-      <p style="margin:6px 0;color:var(--muted);font-size:13px"><b>Contact:</b> termuxethicalhackingbd@gmail.com</p>
-      <button class="buyCTA" id="buyNowBtn" style="padding:8px 12px">💎 Buy Full Script — $100</button>
+      <div style="display:flex;gap:12px;align-items:center">
+        <div style="flex:1">
+          <p style="margin:6px 0;color:var(--muted);font-size:13px">
+            What you get: Full front-end UI (responsive), 8 playable mini-games, 100 animated task buttons, referral & commission,
+            withdraw modal with GAS logging, ad placeholders (Monetag/Adstra), mood selector, fast UX and installation instructions.
+          </p>
+          <p style="margin:6px 0;color:var(--muted);font-size:13px"><strong>Contact:</strong> termuxethicalhackingbd@gmail.com</p>
+        </div>
+        <div>
+          <button class="buyCTA" id="buyNowBtn">💎 Buy Full Script — $100</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -241,14 +271,14 @@
     <div class="smallMuted" style="margin-top:8px">Please wait 1 minute — 48 hours for processing.</div>
   </div>
 
-  <!-- Referrals modal (list) -->
+  <!-- Referrals modal -->
   <div class="modal" id="refModal" aria-hidden="true" style="min-width:320px">
     <button class="closeX" id="closeRef">✕</button>
     <h3>My Referrals</h3>
     <div id="refList" style="max-height:300px;overflow:auto;margin-top:8px;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02)"></div>
   </div>
 
-  <!-- New Refer Info modal (attractive + copy) -->
+  <!-- Refer Info modal (attractive + copy everything) -->
   <div class="modal" id="refInfoModal" aria-hidden="true" style="min-width:420px">
     <button class="closeX" id="closeRefInfo">✕</button>
     <h3>💸 Earn With Galaxy Jackpot!</h3>
@@ -260,10 +290,12 @@
     </div>
     <div style="display:flex;gap:8px;margin-top:10px">
       <button id="copyRefFull" class="refCopy">Copy Link + Message</button>
-      <button id="copyLinkOnly" class="refBtn">Copy Link Only</button>
+      <button id="copyLinkOnly" class="referBtn">Copy Link Only</button>
     </div>
-    <p class="smallMuted" style="margin-top:8px">Share on socials, chat or telegram — every signup counts!</p>
+    <p class="smallMuted" style="margin-top:8px">Share on socials or Telegram — every signup counts!</p>
   </div>
+
+  <footer>Creator: MD RAHAT — Powered by ChatGPT-5</footer>
 
 <script>
 /* ===========================
@@ -274,9 +306,9 @@ const CONFIG = {
   ADS_PER_LEVEL: 100,
   LEVEL_BASE_BONUS: 0.01,
   MIN_WITHDRAW: 2,
-  MONETAG_FN: 'show_10125761', // Monetag function name (if included)
+  MONETAG_FN: 'show_10125761', // Monetag function name (if you load the SDK)
   ADSTRA_SMARTLINK: 'https://www.effectivegatecpm.com/za35wfvxct?key=33d9ac55094c983709eac1a9fd20c4b5',
-  GAS_URL: '' // put your GAS endpoint if you want server logging
+  GAS_URL: '' // set your Google Apps Script URL here if you want server logging
 };
 
 /* ===========================
@@ -310,10 +342,10 @@ function toast(text, time=1200){
 }
 
 /* ===========================
-   Ads integration (simulated + Monetag/Adstra support)
+   Ads integration (Monetag preferred)
    =========================== */
 async function showRewardedAd(){
-  // Prefer Monetag function if available
+  // Monetag function if SDK is loaded
   try{
     if(CONFIG.MONETAG_FN && typeof window[CONFIG.MONETAG_FN] === 'function'){
       await window[CONFIG.MONETAG_FN]();
@@ -325,11 +357,10 @@ async function showRewardedAd(){
   return confirm('Ad opened in new tab. After watching the ad, press OK to claim reward.');
 }
 
-/* crediting */
+/* credit user */
 function credit(amount, reason='Ad Reward'){
   state.balance = (state.balance || 0) + Number(amount);
   state.adsWatched = (state.adsWatched || 0) + 1;
-  // level up
   const prevLevel = state.level || 0;
   const newLevel = Math.floor(state.adsWatched / CONFIG.ADS_PER_LEVEL);
   if(newLevel > prevLevel){
@@ -345,14 +376,15 @@ function credit(amount, reason='Ad Reward'){
 }
 
 /* ===========================
-   Tasks generation (100)
+   Tasks (100)
    =========================== */
 const taskGrid = document.getElementById('taskGrid');
+const colorList = ['#ffd54a','#7c3aed','#60a5fa','#fb7185','#a78bfa'];
 for(let i=1;i<=100;i++){
   const btn = document.createElement('button');
   btn.className = 'taskBtn anim';
   btn.innerText = `Task ${i}`;
-  btn.style.background = ['#ffd54a','#7c3aed','#60a5fa','#fb7185','#a78bfa'][i % 5];
+  btn.style.background = colorList[i % colorList.length];
   btn.title = 'Watch an ad to earn';
   btn.addEventListener('click', async ()=>{
     let ok = false;
@@ -364,7 +396,7 @@ for(let i=1;i<=100;i++){
 }
 
 /* ===========================
-   Games (fast)
+   Games (8)
    =========================== */
 /* Wheel */
 document.getElementById('spinBtn').addEventListener('click', async ()=>{
@@ -480,15 +512,8 @@ document.getElementById('submitWithdraw').addEventListener('click', async ()=>{
 });
 
 /* ===========================
-   Referral list & info modals & copy functions
+   Referral modals & copy
    =========================== */
-document.getElementById('copyRef').addEventListener('click', ()=>{
-  const link = document.getElementById('refLink').value;
-  navigator.clipboard?.writeText(link).then(()=> toast('Referral link copied',1200)).catch(()=> { prompt('Copy referral link', link); });
-});
-document.getElementById('btnRefModal').addEventListener('click', openRefModal);
-document.getElementById('closeRef').addEventListener('click', ()=> document.getElementById('refModal').classList.remove('show'));
-
 function openRefModal(){
   const box = document.getElementById('refList'); box.innerHTML = '';
   const map = JSON.parse(localStorage.getItem('gj_ref_map') || '{}');
@@ -499,8 +524,10 @@ function openRefModal(){
   }
   document.getElementById('refModal').classList.add('show');
 }
+document.getElementById('btnRefModal').addEventListener('click', openRefModal);
+document.getElementById('closeRef').addEventListener('click', ()=> document.getElementById('refModal').classList.remove('show'));
 
-/* Refer Info modal open/close & copy */
+/* Refer Info open/close & copy */
 document.getElementById('openRefInfo').addEventListener('click', ()=>{
   document.getElementById('refInfoModal').classList.add('show');
   document.getElementById('refInfoModal').setAttribute('aria-hidden','false');
@@ -511,7 +538,6 @@ document.getElementById('copyLinkOnly').addEventListener('click', ()=>{
   const link = document.getElementById('refInfoLink').value;
   navigator.clipboard?.writeText(link).then(()=> toast('Referral link copied',1200)).catch(()=> prompt('Copy link', link));
 });
-
 document.getElementById('copyRefFull').addEventListener('click', ()=>{
   const link = document.getElementById('refInfoLink').value;
   const message = `Join Galaxy Jackpot and earn! Use my link: ${link}\n\nWhen you join you get signup bonus. I earn 0.005 USDT + 5% commission on your ad rewards.`;
@@ -539,7 +565,7 @@ document.getElementById('copyRefFull').addEventListener('click', ()=>{
 })();
 
 /* ===========================
-   buy toggle, mood & sparkle
+   Buy toggle, mood & effects
    =========================== */
 document.getElementById('buyToggle').addEventListener('click', ()=>{
   const d = document.getElementById('buyDetails'); const open = d.style.display === 'block'; d.style.display = open ? 'none' : 'block'; document.getElementById('buyToggle').innerText = open ? '➡️' : '❌';
@@ -553,36 +579,31 @@ document.getElementById('btnMood').addEventListener('click', ()=>{
   else { applyMood('dark'); document.documentElement.setAttribute('data-mood','dark'); }
 });
 function applyMood(m){
-  if(m === 'light'){ document.body.style.background = 'linear-gradient(180deg,#f6fbff,#eef6ff)'; document.body.style.color = '#04111a'; document.getElementById('vpnBanner').style.opacity = '0.9'; }
+  if(m === 'light'){ document.body.style.background = 'linear-gradient(180deg,#f6fbff,#eef6ff)'; document.body.style.color = '#04111a'; document.getElementById('vpnBanner').style.opacity = '0.96'; }
   else if(m === 'galaxy'){ document.body.style.background = 'linear-gradient(180deg,#02021a,#061033)'; document.body.style.color = '#eaf2ff'; document.getElementById('vpnBanner').style.opacity = '1'; }
   else { document.body.style.background = 'linear-gradient(180deg,var(--bg-1),var(--bg-2))'; document.body.style.color = '#eaf2ff'; document.getElementById('vpnBanner').style.opacity = '1'; }
 }
 
 /* sparkle effects */
 function sparkleAt(el){ const rect = el.getBoundingClientRect(); const x = rect.left + rect.width * Math.random(); const y = rect.top + rect.height * Math.random(); const s = document.createElement('div'); s.className = 'sparkle'; s.style.left = x + 'px'; s.style.top = y + 'px'; document.body.appendChild(s); setTimeout(()=> s.remove(),600); }
-document.querySelectorAll('.playNow, .taskBtn, .refBtn, .buyCTA, .boxBtn').forEach(btn=>{ btn.addEventListener('mouseenter', ()=> sparkleAt(btn)); });
+document.querySelectorAll('.playNow, .taskBtn, .referBtn, .refCopy, .buyCTA, .boxBtn').forEach(btn=>{ btn.addEventListener('mouseenter', ()=> sparkleAt(btn)); });
 
-/* Persist */
-setInterval(()=> persist(), 1200);
+/* Persist and UI */
+setInterval(()=> persist(), 1500);
 
 /* Welcome banner */
-(function showWelcome(){ const el = document.getElementById('welcomeBanner'); el.innerText = `Welcome ${UID} — Enjoy Galaxy Jackpot!`; el.style.opacity = '1'; setTimeout(()=> el.style.opacity = '0', 3500); })();
+(function showWelcome(){ const el = document.getElementById('welcome'); el.innerText = `Welcome ${UID} — Enjoy Galaxy Jackpot!`; el.style.opacity = '1'; setTimeout(()=> el.style.opacity = '0', 4200); })();
 
-/* Ad Watch Button quick simulation & update Ads badge */
-const adBtn = document.getElementById('btnWatchAd');
-const adsCountEl = document.getElementById('adsBadge');
-adBtn.addEventListener('click', ()=>{
-  adBtn.disabled = true; adBtn.innerText = '🎥 Watching Ad...';
-  setTimeout(()=>{ credit(CONFIG.REWARD_PER_AD, 'Ad Watch'); adBtn.innerText = '✅ Ad Watched! +0.0005'; setTimeout(()=>{ adBtn.innerText = '🎬 Watch Ad'; adBtn.disabled = false; }, 1400); }, 1800);
-});
-
-/* FAST SCROLL BOOST */
+/* FAST SCROLL BOOST for tasks wrapper */
 (function fastScrollBoost(){ const container = document.getElementById('tasksWrap'); if(!container) return; container.addEventListener('wheel', (e)=>{ e.preventDefault(); const multiplier = 6; container.scrollBy({ top: e.deltaY * multiplier, behavior: 'auto' }); }, { passive:false }); })();
 
-/* Initial render */
+/* Reset data (button already present) */
+document.getElementById('btnReset').addEventListener('click', ()=>{
+  if(confirm('Reset local demo data? This affects only this browser.')){ localStorage.removeItem('gj_state_v2'); localStorage.removeItem('gj_withdraws'); localStorage.removeItem('gj_ref_map'); location.reload(); }
+});
+
+/* Final render */
 renderUI();
 </script>
-
-<footer style="text-align:center;padding:18px;color:var(--muted);font-size:13px">Creator: MD RAHAT — Powered by ChatGPT-5</footer>
 </body>
 </html>
